@@ -7,4 +7,4 @@ UMCS math faculty finder for Android.
 
 Requirements
 --------
-Android 2.3.3 Gingerbread
+Android 2.3.3 Gingerbread or above.
