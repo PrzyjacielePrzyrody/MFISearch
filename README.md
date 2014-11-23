@@ -3,8 +3,9 @@ MFISearch
 
 [![Stories in Ready](https://badge.waffle.io/PrzyjacielePrzyrody/MFISearch.png?label=ready&title=Ready)](http://waffle.io/PrzyjacielePrzyrody/MFISearch)
 
-UMCS math faculty finder for Android.
+--------
+UMCS math faculty finder app for Android 2.3.3 Gingerbread and above.
 
 Requirements
 --------
-Android 2.3.3 Gingerbread or above.
+Gradle 2.x
