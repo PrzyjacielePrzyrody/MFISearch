@@ -4,5 +4,19 @@
     <string name="app_name">MFISearch</string>
     <string name="hello_world">Test!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_plan">Plan</string>
+    <string name="look_bottom">Przeglądaj</string>
+    <string name="search_bottom">Wyszukaj</string>
+    <string name="soon_class">Pokaż najbliższe zajęcia</string>
+    <string name="soon_classes">Pokaż najbliższe zajęcia</string>
+    <string name="schedule">Plan zajęć</string>
+    <string name="map">Plan wydziału</string>
+    <string name="title_activity_show_soon_class">ShowSoonClass</string>
+    <string name="title_activity_schedule">Schedule</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_exams">ExamsActivity</string>
+    <string name="see_schedule">Przeglądaj plan zajęć</string>
+    <string name="edit_schedule">Edytuj plan zajęć</string>
+    <string name="add_schedule">Dodaj plan zajęć</string>
 
 </resources>
