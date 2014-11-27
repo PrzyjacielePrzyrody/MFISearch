@@ -33,6 +33,7 @@
     <string name="search_room">Szukaj</string>
     <string name="view_map">Przeglądaj plan</string>
     <string name="search_on_map">Szukaj</string>
+    <string name="choose_lev">Wybierz piętro</string>
 
     <string-array name="levels">
         <item>0</item>
