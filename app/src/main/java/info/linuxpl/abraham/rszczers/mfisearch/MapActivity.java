@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import static info.linuxpl.abraham.rszczers.mfisearch.R.id.tabHost;
 
@@ -33,6 +37,24 @@ public class MapActivity extends ActionBarActivity {
         find.setIndicator(getString(R.string.view_map));
 
         tabhost.addTab(find);
+
+        Spinner lev= (Spinner) findViewById(R.id.choose_level);
+        final String[] levels= getResources().getStringArray(R.array.levels);
+        ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, levels);
+        lev.setAdapter(adapter);
+
+        lev.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int index= parent.getSelectedItemPosition(); // index zwraca wybraną pozycje
+                Toast.makeText(getBaseContext(), "Piętro "+levels[index], Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
