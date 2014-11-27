@@ -61,6 +61,22 @@
             android:name="info.linuxpl.abraham.rszczers.mfisearch.AddExamActivity"
             android:label="@string/title_activity_add_exam" >
         </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.ViewMapActivity"
+            android:label="@string/title_activity_view_map" >
+        </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.EditScheduleActivity"
+            android:label="@string/title_activity_edit_schedule" >
+        </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.AddScheduleActivity"
+            android:label="@string/title_activity_add_schedule" >
+        </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.FindOnMapActivity"
+            android:label="@string/title_activity_find_on_map" >
+        </activity>
     </application>
 
 </manifest>

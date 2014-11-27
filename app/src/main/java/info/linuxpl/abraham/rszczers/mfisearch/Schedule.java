@@ -1,9 +1,12 @@
 package info.linuxpl.abraham.rszczers.mfisearch;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class Schedule extends ActionBarActivity {
@@ -12,6 +15,33 @@ public class Schedule extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
+
+        Button check_schedule= (Button) findViewById(R.id.see_schedule_button);
+        check_schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_sched= new Intent(Schedule.this, ViewScheduleActivity.class);
+                startActivity(change_to_sched);
+            }
+        });
+
+        Button edit_schedul= (Button) findViewById(R.id.edit_schedule_button);
+        edit_schedul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_edit_schedule= new Intent(Schedule.this, EditScheduleActivity.class);
+                startActivity(change_to_edit_schedule);
+            }
+        });
+
+        Button add_schedule=(Button) findViewById(R.id.add_schedule_button);
+        add_schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_add_schedule= new Intent(Schedule.this, AddScheduleActivity.class);
+                startActivity(change_to_add_schedule);
+            }
+        });
     }
 
 

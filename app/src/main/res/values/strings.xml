@@ -26,5 +26,11 @@
     <string name="title_activity_check_exam">CheckExamActivity</string>
     <string name="title_activity_edit_exam">EditExamActivity</string>
     <string name="title_activity_add_exam">AddExamActivity</string>
+    <string name="title_activity_view_map">ViewMapActivity</string>
+    <string name="title_activity_edit_schedule">EditScheduleActivity</string>
+    <string name="title_activity_add_schedule">AddScheduleActivity</string>
+    <string name="title_activity_find_on_map">FindOnMapActivity</string>
+    <string name="search_room">Szukaj</string>
+    <string name="view_map">Przeglądaj plan</string>
 
 </resources>
