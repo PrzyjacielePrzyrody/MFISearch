@@ -31,6 +31,7 @@ public class MapActivity extends ActionBarActivity {
         find=tabhost.newTabSpec("View");
         find.setContent(R.id.tab2);
         find.setIndicator(getString(R.string.view_map));
+
         tabhost.addTab(find);
 
     }
