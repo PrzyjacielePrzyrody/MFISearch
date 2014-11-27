@@ -32,5 +32,6 @@
     <string name="title_activity_find_on_map">FindOnMapActivity</string>
     <string name="search_room">Szukaj</string>
     <string name="view_map">Przeglądaj plan</string>
+    <string name="search_on_map">Szukaj</string>
 
 </resources>
