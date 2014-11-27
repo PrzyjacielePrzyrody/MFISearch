@@ -20,8 +20,11 @@
     <string name="add_schedule">Dodaj plan zajęć</string>
     <string name="title_activity_view_schedule_actity">ViewScheduleActity</string>
     <string name="title_activity_view_schedule">ViewScheduleActivity</string>
-    <string name="check_exam">check_exam</string>
-    <string name="edit_exam">edit_exam</string>
-    <string name="add_exam">add_exam</string>
+    <string name="check_exam">Przeglądaj egzaminy</string>
+    <string name="edit_exam">Edytuje egzamin</string>
+    <string name="add_exam">Dodaj egzamin</string>
+    <string name="title_activity_check_exam">CheckExamActivity</string>
+    <string name="title_activity_edit_exam">EditExamActivity</string>
+    <string name="title_activity_add_exam">AddExamActivity</string>
 
 </resources>

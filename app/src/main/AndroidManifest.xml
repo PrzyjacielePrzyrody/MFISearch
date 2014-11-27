@@ -49,6 +49,18 @@
             android:name="info.linuxpl.abraham.rszczers.mfisearch.ViewScheduleActivity"
             android:label="@string/title_activity_view_schedule" >
         </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.CheckExamActivity"
+            android:label="@string/title_activity_check_exam" >
+        </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.EditExamActivity"
+            android:label="@string/title_activity_edit_exam" >
+        </activity>
+        <activity
+            android:name="info.linuxpl.abraham.rszczers.mfisearch.AddExamActivity"
+            android:label="@string/title_activity_add_exam" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,9 +1,12 @@
 package info.linuxpl.abraham.rszczers.mfisearch;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class ExamsActivity extends ActionBarActivity {
@@ -12,6 +15,34 @@ public class ExamsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams);
+
+        Button check_exams= (Button) findViewById(R.id.check_exam_button);
+        check_exams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_check= new Intent(ExamsActivity.this, CheckExamActivity.class);
+                startActivity(change_to_check);
+            }
+        });
+
+        Button edit_exam= (Button) findViewById(R.id.edit_exam_button);
+        edit_exam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_edit_exam= new Intent(ExamsActivity.this, EditExamActivity.class);
+                startActivity(change_to_edit_exam);
+            }
+        });
+
+        Button add_exam= (Button) findViewById(R.id.add_exam_butoon);
+        add_exam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_add_exam= new Intent(ExamsActivity.this, AddExamActivity.class);
+                startActivity(change_to_add_exam);
+            }
+        });
+
     }
 
 
