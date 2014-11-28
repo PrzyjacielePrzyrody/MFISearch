@@ -35,7 +35,8 @@
         </activity>
         <activity
             android:name="info.linuxpl.abraham.rszczers.mfisearch.MapActivity"
-            android:label="@string/title_activity_map" >
+            android:label="@string/title_activity_map"
+            >
         </activity>
         <activity
             android:name="info.linuxpl.abraham.rszczers.mfisearch.ExamsActivity"

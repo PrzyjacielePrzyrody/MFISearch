@@ -6,18 +6,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.ExamsActivity">
 
-    <TextView android:text="Exams" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
-
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:stretchColumns="*">
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:layout_marginTop="100dp">
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <Button
                 android:layout_width="match_parent"
@@ -28,7 +25,7 @@
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <Button
                 android:layout_width="wrap_content"
@@ -39,7 +36,7 @@
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <Button
                 android:layout_width="wrap_content"
