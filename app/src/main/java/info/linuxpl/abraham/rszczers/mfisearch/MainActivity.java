@@ -1,9 +1,12 @@
 package info.linuxpl.abraham.rszczers.mfisearch;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +15,42 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
+        soon_class.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_soon= new Intent(MainActivity.this, ShowSoonClass.class);
+                startActivity(change_to_soon);
+            }
+        });
+
+        Button schedule= (Button) findViewById(R.id.schedule_bottom);
+        schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_schedule= new Intent(MainActivity.this, Schedule.class);
+                startActivity(change_to_schedule);
+            }
+        });
+
+        Button map= (Button) findViewById(R.id.map_button);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_map= new Intent(MainActivity.this, MapActivity.class);
+                startActivity(change_to_map);
+            }
+        });
+
+        Button exams= (Button) findViewById(R.id.exam_button);
+        exams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_exam= new Intent(MainActivity.this, ExamsActivity.class);
+                startActivity(change_to_exam);
+            }
+        });
     }
 
 
