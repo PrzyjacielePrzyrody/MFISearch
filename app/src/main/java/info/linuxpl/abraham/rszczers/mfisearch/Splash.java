@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 /**
- * Created by r on 23.11.14.
+ * Splash.java
+ *
+ * @author Rafał Szczerski
+ *        <rafal.szczerski(at)gmail.com>
  */
+
 public class Splash extends Activity  {
     @Override
     protected void onPause() {
