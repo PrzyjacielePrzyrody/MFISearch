@@ -1,24 +1,26 @@
-package info.linuxpl.abraham.rszczers.mfisearch;
+package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import info.linuxpl.abraham.rszczers.mfisearch.R;
 
-public class AddScheduleActivity extends ActionBarActivity {
+
+public class AddExamActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_schedule);
+        setContentView(R.layout.activity_add_exam);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_schedule, menu);
+        getMenuInflater().inflate(R.menu.menu_add_exam, menu);
         return true;
     }
 

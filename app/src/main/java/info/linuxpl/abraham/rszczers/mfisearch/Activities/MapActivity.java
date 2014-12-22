@@ -1,4 +1,4 @@
-package info.linuxpl.abraham.rszczers.mfisearch;
+package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 import static info.linuxpl.abraham.rszczers.mfisearch.R.id.tabHost;
 

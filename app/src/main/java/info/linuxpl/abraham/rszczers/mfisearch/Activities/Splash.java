@@ -1,8 +1,10 @@
-package info.linuxpl.abraham.rszczers.mfisearch;
+package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 /**
  * Splash.java
