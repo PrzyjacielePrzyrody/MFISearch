@@ -6,5 +6,5 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  * @author Rafał Szczerski
  *         <rafal.szczerski(at)gmail.com>
  */
-public class ExamPlaned {
+public class ExamPlaned implements DatabaseHelper {
 }

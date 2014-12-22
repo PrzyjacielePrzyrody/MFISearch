@@ -8,7 +8,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  * @author Rafał Szczerski
  *         <rafal.szczerski(at)gmail.com>
  */
-public abstract class PlanedActivity {
+public abstract class PlanedActivity implements DatabaseHelper {
     abstract void add();
     abstract void remove();
     abstract void edit();

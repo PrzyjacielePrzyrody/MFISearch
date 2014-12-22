@@ -1,5 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
+import android.graphics.Bitmap;
+
 /**
  * MFISearch
  *
@@ -7,4 +9,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  *         <rafal.szczerski(at)gmail.com>
  */
 public class Level {
+    Bitmap blueprint;
+    void markOn() {
+    };
 }

@@ -9,5 +9,4 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 public interface Faculty <T, E> {
     T find(E pattern);
-
 }
