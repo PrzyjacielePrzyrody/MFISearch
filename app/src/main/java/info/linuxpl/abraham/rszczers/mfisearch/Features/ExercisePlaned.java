@@ -6,5 +6,24 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  * @author Rafał Szczerski
  *         <rafal.szczerski(at)gmail.com>
  */
-public class ExercisePlaned implements DatabaseHelper {
+public class ExercisePlaned extends PlanedActivity {
+    @Override
+    void add() {
+
+    }
+
+    @Override
+    void remove() {
+
+    }
+
+    @Override
+    void edit() {
+
+    }
+
+    @Override
+    void read() {
+
+    }
 }
