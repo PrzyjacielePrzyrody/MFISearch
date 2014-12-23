@@ -7,7 +7,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  *         <rafal.szczerski(at)gmail.com>
  */
 public class ActivityFactory {
-    public PlanedActivity get(String type, int id, String date, Classroom room, int duration, String instructor,
+    public PlanedActivity make(String type, int id, String date, Classroom room, int duration, String instructor,
                               String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
