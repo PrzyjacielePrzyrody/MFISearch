@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public class Classroom{
     private int id;
     private String name;
-    private float[] coords;
-    private Level level;
+    private int[] coords;
+    private int level;
 }

@@ -16,6 +16,7 @@ public abstract class PlanedActivity {
      * period – a date in format MM-DD if is repeated periodically
      * room – a classroom corresponding to the activity
      * duration – duration of the activity expressed in format HH:MM
+     * howLong – how long activity gonna last
      * instructor – an instructor's name
      * description – place for user's description and notes
      */
@@ -25,6 +26,7 @@ public abstract class PlanedActivity {
     protected String period;
     protected Classroom room;
     protected String duration;
+    protected String howLong;
     protected String instructor;
     protected String description;
 
