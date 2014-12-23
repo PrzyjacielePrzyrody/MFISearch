@@ -26,8 +26,4 @@ public class ExamPlaned extends PlanedActivity {
 
     }
 
-    @Override
-    void read() {
-
-    }
 }

@@ -8,17 +8,18 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  */
 
 
-/**
- * @param id unique id read from db
- * @param date date of activity read from db, YYYY-MM-DD HH:MM:SS.SSS format
- * @param period also date in format if repeated periodically
- * @param room classroom corresponding to activity
- * @param duration duration expressed in format HH:MM
- * @param instructor instructor's name
- * @param description place for user's description and notes
- *
- */
+
 public abstract class PlanedActivity {
+    /**
+     * id  – unique id read from the db
+     * date – a date of the activity read from the db, YYYY-MM-DD HH:MM:SS.SSS format
+     * period – a date in format MM-DD if is repeated periodically
+     * room – a classroom corresponding to the activity
+     * duration – duration of the activity expressed in format HH:MM
+     * instructor – an instructor's name
+     * description – place for user's description and notes
+     */
+
     public int id;
     protected String date;
     protected String period;
@@ -27,8 +28,18 @@ public abstract class PlanedActivity {
     protected String instructor;
     protected String description;
 
+    /**
+     * implements adding the entity corresponding to the object to table
+     */
     abstract void add();
+
+    /**
+     * implements removing the entity corresponding to the object from the table
+     */
     abstract void remove();
+
+    /**
+     * implements editing the object and corresponding entity in table
+     */
     abstract void edit();
-    abstract void read();
 }
