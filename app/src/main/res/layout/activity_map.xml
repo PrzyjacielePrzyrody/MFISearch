@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.MapActivity"
+    android:id="@+id/mapAc"
+    android:padding="0dp">
+
+
+    <TabHost
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tabHost"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="bottom"></TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="5">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="@string/choose_lev"
+                            android:id="@+id/choose_lev_textView"
+                            android:textSize="15dp"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical|center_horizontal" />
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:id="@+id/choose_level"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical|center_horizontal" />
+                    </TableRow>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:weightSum="1">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3">
+
+                        <EditText android:layout_weight="3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="text|number"
+                            android:autoText="false"
+                            android:textSize="15dp"/>
+
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/search_on_map"
+                            android:id="@+id/search_on_map_button"
+                            android:layout_weight="1" />
+                    </TableRow>
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+</RelativeLayout>
