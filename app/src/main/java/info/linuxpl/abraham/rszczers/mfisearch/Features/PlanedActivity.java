@@ -16,7 +16,7 @@ public abstract class PlanedActivity {
      * period – a date in format MM-DD if is repeated periodically
      * room – a classroom corresponding to the activity
      * duration – duration of the activity expressed in format HH:MM
-     * howLong – how long activity gonna last in days
+     * howLong – how long the activity gonna last in days
      * instructor – an instructor's name
      * description – place for user's description and notes
      */
