@@ -9,7 +9,7 @@ import java.util.Date;
  *         <rafal.szczerski(at)gmail.com>
  */
 public class ExamPlaned extends PlanedActivity {
-
+    private final static String TABLE = "EXAMS";
 
     @Override
     void add() {
