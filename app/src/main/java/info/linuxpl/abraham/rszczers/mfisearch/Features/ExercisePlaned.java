@@ -10,9 +10,6 @@ import java.util.Date;
  */
 public class ExercisePlaned extends PlanedActivity {
 
-    public ExercisePlaned(Date startTime, int length, String instructor) {
-        super(startTime, length, instructor);
-    }
 
     @Override
     void add() {

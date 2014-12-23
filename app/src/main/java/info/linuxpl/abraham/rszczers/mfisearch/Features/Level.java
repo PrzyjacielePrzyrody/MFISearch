@@ -2,6 +2,9 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * MFISearch
  *
@@ -10,6 +13,10 @@ import android.graphics.Bitmap;
  */
 public class Level {
     Bitmap blueprint;
-    void markOn() {
-    };
+    List room = new ArrayList<Classroom>();
+
+    ActivityFactory activity = new ActivityFactory();
+
+    void markOn() {};
+    void read() {};
 }

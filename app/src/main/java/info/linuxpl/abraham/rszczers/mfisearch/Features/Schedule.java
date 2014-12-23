@@ -8,7 +8,6 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  */
 
 public class Schedule implements Faculty <PlanedActivity, String> {
-
     @Override
     public PlanedActivity find(String pattern) {
         return null;
