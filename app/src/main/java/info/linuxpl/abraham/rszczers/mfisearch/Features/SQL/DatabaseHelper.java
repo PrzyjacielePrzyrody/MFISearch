@@ -1,4 +1,4 @@
-package info.linuxpl.abraham.rszczers.mfisearch.SQL;
+package info.linuxpl.abraham.rszczers.mfisearch.Features.SQL;
 
 /**
  * MFISearch
