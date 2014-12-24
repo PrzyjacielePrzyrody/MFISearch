@@ -1,4 +1,4 @@
-package info.linuxpl.abraham.rszczers.mfisearch.Features;
+package info.linuxpl.abraham.rszczers.mfisearch.SQL;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
