@@ -9,10 +9,7 @@ import java.util.Date;
  *         <rafal.szczerski(at)gmail.com>
  */
 public class OtherPlaned extends PlanedActivity {
-
-    public OtherPlaned(Date startTime, int length, String instructor) {
-        super(startTime, length, instructor);
-    }
+    private final static String TABLE = "OTHERS";
 
     @Override
     void add() {
@@ -29,8 +26,4 @@ public class OtherPlaned extends PlanedActivity {
 
     }
 
-    @Override
-    void read() {
-
-    }
 }
