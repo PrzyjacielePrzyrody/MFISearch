@@ -12,17 +12,12 @@ public class OtherPlaned extends PlanedActivity {
     private final static String TABLE = "OTHERS";
 
     @Override
-    void add() {
-
+    public String getTable() {
+        return TABLE;
     }
 
     @Override
-    void remove() {
-
-    }
-
-    @Override
-    void edit() {
+    public void edit() {
 
     }
 
