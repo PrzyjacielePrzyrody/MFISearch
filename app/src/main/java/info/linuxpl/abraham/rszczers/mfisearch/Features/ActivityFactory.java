@@ -23,16 +23,20 @@ public class ActivityFactory {
         type = type.toUpperCase();
         if(type.equals("LECTURE")) {
             product = new LecturePlaned();
-            dbAdapter.addLecture(null);
+            dbAdapter.add(product);
+            product.setID(dbAdapter.getID(product));
         } else if(type.equals("EXERCISE")) {
             product = new ExercisePlaned();
-            dbAdapter.addExercise(null);
+            dbAdapter.add(product);
+            product.setID(dbAdapter.getID(product));
         } else if(type.equals("EXAM")) {
             product = new ExamPlaned();
-            dbAdapter.addExam(null);
+            dbAdapter.add(product);
+            product.setID(dbAdapter.getID(product));
         } else if(type.equals("OTHER")) {
             product = new OtherPlaned();
-            dbAdapter.addOther(null);
+            dbAdapter.add(product);
+            product.setID(dbAdapter.getID(product));
         }
         return product;
     }

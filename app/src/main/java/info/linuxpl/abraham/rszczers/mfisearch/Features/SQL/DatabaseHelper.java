@@ -97,7 +97,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
      * w tych metodach.
      * @param queryValues pary (nazwa_kolumny, wartość)
      */
-    public void putExam(HashMap<String, String> queryValues) {
+    public void put(String TABLE, HashMap<String, String> queryValues) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("date", queryValues.get("date"));
@@ -107,49 +107,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         values.put("howLong", queryValues.get("howLong"));
         values.put("instructor", queryValues.get("instructor"));
         values.put("description", queryValues.get("description"));
-        database.insert("EXAMS", null, values);
-        database.close();
-    }
-
-    public void putLecture(HashMap<String, String> queryValues) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("date", queryValues.get("date"));
-        values.put("period", queryValues.get("period"));
-        values.put("room", queryValues.get("room"));
-        values.put("duration", queryValues.get("duration"));
-        values.put("howLong", queryValues.get("howLong"));
-        values.put("instructor", queryValues.get("instructor"));
-        values.put("description", queryValues.get("description"));
-        database.insert("LECTURES", null, values);
-        database.close();
-    }
-
-    public void putExercise(HashMap<String, String> queryValues) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("date", queryValues.get("date"));
-        values.put("period", queryValues.get("period"));
-        values.put("room", queryValues.get("room"));
-        values.put("duration", queryValues.get("duration"));
-        values.put("howLong", queryValues.get("howLong"));
-        values.put("instructor", queryValues.get("instructor"));
-        values.put("description", queryValues.get("description"));
-        database.insert("EXERCISES", null, values);
-        database.close();
-    }
-
-    public void putOther(HashMap<String, String> queryValues) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("date", queryValues.get("date"));
-        values.put("period", queryValues.get("period"));
-        values.put("room", queryValues.get("room"));
-        values.put("duration", queryValues.get("duration"));
-        values.put("howLong", queryValues.get("howLong"));
-        values.put("instructor", queryValues.get("instructor"));
-        values.put("description", queryValues.get("description"));
-        database.insert("OTHER", null, values);
+        database.insert(TABLE, null, values);
         database.close();
     }
 
@@ -158,24 +116,9 @@ public class DatabaseHelper extends SQLiteAssetHelper {
      * @param id
      * @return true, jeśli sie udało, false – jeśli nie
      */
-    public boolean deleteExam(String id) {
+    public boolean delete(String TABLE, int id) {
         SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete("EXAMS", "_id" + "=" + id, null) > 0;
-    }
-
-    public boolean deleteLecture(String id) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete("LECTURES", "_id" + "=" + id, null) > 0;
-    }
-
-    public boolean deleteExercise(String id) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete("EXERCISES", "_id" + "=" + id, null) > 0;
-    }
-
-    public boolean deleteOther(String id) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete("OTHER", "_id" + "=" + id, null) > 0;
+        return database.delete(TABLE, "_id" + "=" + id, null) > 0;
     }
 
     /**

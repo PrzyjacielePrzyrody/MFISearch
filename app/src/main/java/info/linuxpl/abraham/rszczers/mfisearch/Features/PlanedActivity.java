@@ -11,6 +11,8 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 public abstract class PlanedActivity {
     /**
+     * Po stworzeniu obiektu tego typu powstanie też odpowiedni wpis w bazie danych.
+     *
      * id  – unique id read from the db
      * date – a date of the activity read from the db, YYYY-MM-DD HH:MM:SS.SSS format
      * period – a date in format MM-DD if is repeated periodically
@@ -29,19 +31,16 @@ public abstract class PlanedActivity {
     protected int howLong;
     protected String instructor;
     protected String description;
+    private static final String TABLE = null;
 
-    /**
-     * implements adding the entity corresponding to the object to table
-     */
-    abstract void add();
-
-    /**
-     * implements removing the entity corresponding to the object from the table
-     */
-    abstract void remove();
+    public abstract String getTable();
 
     /**
      * implements editing the object and corresponding entity in table
      */
-    abstract void edit();
+    public abstract void edit();
+
+    public void setID(int i) {
+        this.id = i;
+    }
 }

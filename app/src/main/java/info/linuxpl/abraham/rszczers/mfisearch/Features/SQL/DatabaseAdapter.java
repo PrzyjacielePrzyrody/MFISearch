@@ -11,6 +11,8 @@ import android.content.Context;
 
 import java.util.HashMap;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
+
 /**
  * Tutaj znajdą się wszystkie metody potrzebne do pobierania danych na potrzeby wyświetlania
  * tego w różnych elementach interfejsu użytkownika. Pakuj tutaj wszystko, co Ci przyjdzie do głowy,
@@ -23,29 +25,37 @@ public class DatabaseAdapter {
         this.mfidb = new DatabaseHelper(context);
     }
 
+    /** BARDZO WAŻNA FUNKCJA!
+     * W tej funkcji chodzi o to, że podczas tworzenia nowego obiektu klasy PlanedActivity
+     * nie jest od razu ustawiane pole id. Pole id obiektu MUSI odpowiadać wartości klucza głównego
+     * w tabeli. Dlatego po stworzeniu obiektu i dodaniu go do bazy trzeba przeczytać jego numer id
+     * w bazie i ustawić go w obiekcie. Do tego służy ta funkcja.
+     * @param product
+     * @return
+     */
+    public int getID(PlanedActivity product) {
+        int id=0;
+        return id;
+    }
 
     /**
-     * Argumenty formalne tych metod trzeba poprawić, żeby były przyjaźniejsze
-     * Pary <String, String> gryzą się trochę ze strukturą klas, którą mamy.
-     * Metody te używane są w klasie ActivityFactory. Zaraz po skonstruowaniu obiektu
-     * jest w niej dodawany wpis do bazy za ich pomocą.
-     * @param queryValues
+     * Dodaje do bazy dowolny obiekt PlanedActivity.
+     * Trzeba tutaj napisać jakis parser
+     * PlanedActivity -> HashMap; tam gdzie null powinien być HashMap
+     * @param product
      */
-    public void addLecture(HashMap<String, String> queryValues) {
-        mfidb.putLecture(queryValues);
+    public void add(PlanedActivity product) {
+        mfidb.put(product.getTable(), null);
     }
 
-    public void addExercise(HashMap<String, String> queryValues) {
-        mfidb.putExercise(queryValues);
+    /**
+     * Usuwa z wpis odpowiadający obiektowi PlanedActivity
+     * @param product
+     */
+    public void delete(PlanedActivity product) {
+        mfidb.delete(product.getTable(), product.id);
     }
 
-    public void addExam(HashMap<String, String> queryValues) {
-        mfidb.putExam(queryValues);
-    }
-
-    public void addOther(HashMap<String, String> queryValues) {
-        mfidb.putOther(queryValues);
-    }
 
     /**
      * Zwraca współrzędne sali o nazwie name
