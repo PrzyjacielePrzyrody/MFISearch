@@ -11,6 +11,7 @@ import java.util.Date;
 public class ExercisePlaned extends PlanedActivity {
     private final static String TABLE = "EXERCISES";
 
+
     @Override
     public String getTable() {
         return TABLE;
