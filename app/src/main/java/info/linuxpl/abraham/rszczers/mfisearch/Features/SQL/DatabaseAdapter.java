@@ -25,7 +25,7 @@ public class DatabaseAdapter {
         this.mfidb = new DatabaseHelper(context);
     }
 
-    /** BARDZO WAŻNA FUNKCJA!
+    /** DO UZUPEŁNIENIA – BARDZO WAŻNA FUNKCJA!
      * W tej funkcji chodzi o to, że podczas tworzenia nowego obiektu klasy PlanedActivity
      * nie jest od razu ustawiane pole id. Pole id obiektu MUSI odpowiadać wartości klucza głównego
      * w tabeli. Dlatego po stworzeniu obiektu i dodaniu go do bazy trzeba przeczytać jego numer id
@@ -38,7 +38,7 @@ public class DatabaseAdapter {
         return id;
     }
 
-    /**
+    /** DO UZUPEŁNIENIA
      * Dodaje do bazy dowolny obiekt PlanedActivity.
      * Trzeba tutaj napisać jakis parser
      * PlanedActivity -> HashMap; tam gdzie null powinien być HashMap
@@ -48,7 +48,7 @@ public class DatabaseAdapter {
         mfidb.put(product.getTable(), null);
     }
 
-    /**
+    /** DO UZUPEŁNIENIA
      * Usuwa z wpis odpowiadający obiektowi PlanedActivity
      * @param product
      */
@@ -57,7 +57,7 @@ public class DatabaseAdapter {
     }
 
 
-    /**
+    /** DO UZUPEŁNIENIA
      * Zwraca współrzędne sali o nazwie name
      * @param name
      * @return
@@ -68,7 +68,7 @@ public class DatabaseAdapter {
         return new int[]{X, Y};
     }
 
-    /**
+    /** DO UZUPEŁNIENIA
      * Zwraca pary (nazwa_pokoju, współrzędne) z całego piętra
      * @param i numer piętra z którego należy przeczytać pokoje
      * @return
