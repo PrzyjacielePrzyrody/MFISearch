@@ -23,6 +23,30 @@ public class DatabaseAdapter {
         this.mfidb = new DatabaseHelper(context);
     }
 
+
+    /**
+     * Argumenty formalne tych metod trzeba poprawić, żeby były przyjaźniejsze
+     * Pary <String, String> gryzą się trochę ze strukturą klas, którą mamy.
+     * Metody te używane są w klasie ActivityFactory. Zaraz po skonstruowaniu obiektu
+     * jest w niej dodawany wpis do bazy za ich pomocą.
+     * @param queryValues
+     */
+    public void addLecture(HashMap<String, String> queryValues) {
+        mfidb.putLecture(queryValues);
+    }
+
+    public void addExercise(HashMap<String, String> queryValues) {
+        mfidb.putExercise(queryValues);
+    }
+
+    public void addExam(HashMap<String, String> queryValues) {
+        mfidb.putExam(queryValues);
+    }
+
+    public void addOther(HashMap<String, String> queryValues) {
+        mfidb.putOther(queryValues);
+    }
+
     /**
      * Zwraca współrzędne sali o nazwie name
      * @param name
