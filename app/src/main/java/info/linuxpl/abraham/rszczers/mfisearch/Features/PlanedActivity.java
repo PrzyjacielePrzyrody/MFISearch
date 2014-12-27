@@ -40,6 +40,38 @@ public abstract class PlanedActivity {
      */
     public abstract void edit();
 
+    public String getDate(){
+        return this.date;
+    }
+
+    public String getPeriod() { return this.period;}
+
+    public Classroom getRoom() { return room; }
+
+    public String getDuration() { return duration; }
+
+    public String getDescription() { return description;}
+
+    public int getHowLong() {  return howLong;}
+
+    public String getInstructor() { return instructor; }
+
+    public void setDate(String date) { this.date = date; }
+
+    public void setPeriod(String period) { this.period = period;}
+
+    public void setRoom(Classroom room) {this.room = room;}
+
+    public void setDuration(String duration) {this.duration = duration;}
+
+    public void setDescription(String description) {this.description = description;}
+
+    public void setHowLong(int howLong) {this.howLong = howLong; }
+
+    public void setInstructor(String instructor) {this.instructor = instructor;}
+
+
+
     public void setID(int i) {
         this.id = i;
     }

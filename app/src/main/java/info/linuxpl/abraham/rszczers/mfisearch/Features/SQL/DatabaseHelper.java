@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -39,6 +40,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor c = qb.query(db, sqlSelect, null, null,
                 null, null, null);
         c.moveToFirst();
+        db.close(); //dodałam bo krzyczało
         return c;
     }
 
@@ -51,6 +53,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor c = qb.query(db, sqlSelect, null, null,
                 null, null, null);
         c.moveToFirst();
+        db.close(); //tu też krzyczało
         return c;
     }
 
@@ -63,6 +66,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor c = qb.query(db, sqlSelect, null, null,
                 null, null, null);
         c.moveToFirst();
+        db.close();
         return c;
     }
 
@@ -75,6 +79,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor c = qb.query(db, sqlSelect, null, null,
                 null, null, null);
         c.moveToFirst();
+        db.close();
         return c;
     }
 
@@ -87,6 +92,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor c = qb.query(db, sqlSelect, null, null,
                 null, null, null);
         c.moveToFirst();
+        db.close();
         return c;
     }
 
@@ -118,7 +124,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
      */
     public boolean delete(String TABLE, int id) {
         SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete(TABLE, "_id" + "=" + id, null) > 0;
+        return database.delete(TABLE, "_id"+"="+id, null)>0 ;
+
     }
 
     /**

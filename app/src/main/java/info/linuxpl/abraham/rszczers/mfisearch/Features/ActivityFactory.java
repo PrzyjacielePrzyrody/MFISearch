@@ -13,6 +13,8 @@ import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 public class ActivityFactory {
     DatabaseAdapter dbAdapter;
 
+    public ActivityFactory(){}
+
     public ActivityFactory(Context context) {
         dbAdapter = new DatabaseAdapter(context);
     }
@@ -32,22 +34,22 @@ public class ActivityFactory {
         PlanedActivity product = null;
         type = type.toUpperCase();
         if(type.equals("LECTURE")) {
-            product = new LecturePlaned();
+            product = new LecturePlaned(date,room, duration, instructor, description);
             dbAdapter.add(product);
             //ustawia pole id w obiekcie po nadaniu go w bazie.
             product.setID(dbAdapter.getID(product));
         } else if(type.equals("EXERCISE")) {
-            product = new ExercisePlaned();
+            product = new ExercisePlaned(date,room, duration, instructor, description);
             dbAdapter.add(product);
             //ustawia pole id w obiekcie po nadaniu go w bazie.
             product.setID(dbAdapter.getID(product));
         } else if(type.equals("EXAM")) {
-            product = new ExamPlaned();
+            product = new ExamPlaned(date,room, duration, instructor, description);
             dbAdapter.add(product);
             //ustawia pole id w obiekcie po nadaniu go w bazie.
             product.setID(dbAdapter.getID(product));
         } else if(type.equals("OTHER")) {
-            product = new OtherPlaned();
+            product = new OtherPlaned(date,room, duration, instructor, description);
             dbAdapter.add(product);
             //ustawia pole id w obiekcie po nadaniu go w bazie.
             product.setID(dbAdapter.getID(product));
