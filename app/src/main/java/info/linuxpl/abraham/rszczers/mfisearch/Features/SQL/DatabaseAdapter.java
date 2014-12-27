@@ -82,30 +82,46 @@ public class DatabaseAdapter {
     }
 
 
-    /** DO UZUPEŁNIENIA
+    /** DO SPRAWDZENIA
      * Zwraca współrzędne sali o nazwie name
      * @param name
      * @return
      */
     public int[] getXY(String name) {
-        int X = 0;
-        int Y = 0;
+        SQLiteDatabase db=mfidb.getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String table="ROOMS";
+        String where="name LIKE '"+name+"'";
+        String[] column={"coor_x", "coor_y"};
+        Cursor c=db.query(table, column, where, null, null, null, null, null );
+        c.moveToFirst();
+        int X = c.getInt(c.getColumnIndex("coor_x"));
+        int Y = c.getInt(c.getColumnIndex("coor_y"));
+        db.close();
         return new int[]{X, Y};
     }
 
-    /** DO UZUPEŁNIENIA
+    /** DO SPRAWDZENIA
      * Zwraca pary (nazwa_pokoju, współrzędne) z całego piętra
      * @param i numer piętra z którego należy przeczytać pokoje
      * @return
      */
     public HashMap<String, int[]> getLevelXY(int i) {
         HashMap output = new HashMap();
+        SQLiteDatabase db=mfidb.getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String table="ROOMS";
+        String where="level="+ i;
+        String[] column={"name", "coor_x", "coor_y"};
 
-        // w jakiejś pętli pakujemy wszystkie pary do hashmapy
-        output.put("nazwa_pokoju1", getXY("nazwa_pokoju1"));
-        output.put("nazwa_pokoju2", getXY("nazwa_pokoju2"));
-        //liczę, że tutaj pojawi się jakaś pętla…
-
+        Cursor c=db.query(table, column, where, null, null, null, null, null );
+        c.moveToFirst();
+        String name;
+        while(!c.isAfterLast()) {
+           name=c.getString(c.getColumnIndex("name"));
+            output.put(name, getXY(name));
+            c.moveToNext();
+        }
         return output;
     };
 

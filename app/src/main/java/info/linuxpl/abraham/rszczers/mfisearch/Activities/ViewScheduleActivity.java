@@ -27,7 +27,6 @@ public class ViewScheduleActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
-
     }
 
 
