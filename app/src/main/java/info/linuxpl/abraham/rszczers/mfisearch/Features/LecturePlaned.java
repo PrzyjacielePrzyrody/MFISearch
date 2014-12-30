@@ -1,7 +1,5 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
-import java.util.Date;
-
 /**
  * MFISearch
  *
