@@ -9,8 +9,9 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 public class OtherPlaned extends PlanedActivity {
     private final static String TABLE = "OTHERS";
 
-    public OtherPlaned(String date, Classroom room, int duration, String instructor,
+    public OtherPlaned(String date, String name, Classroom room, int duration, String instructor,
                       String description){
+        this.setName(name);
         this.setDate(date);
         this.setRoom(room);
         this.setDuration(""+duration);

@@ -10,7 +10,8 @@ public class LecturePlaned extends PlanedActivity {
     private final static String TABLE = "LECTURES";
 
 
-    public LecturePlaned(String date, Classroom room, int duration, String instructor, String description){
+    public LecturePlaned(String date, String name, Classroom room, int duration, String instructor, String description){
+        this.setName(name);
         this.setDate(date);
         this.setRoom(room);
         this.setDuration(""+duration);
