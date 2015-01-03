@@ -1,5 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
+import java.util.Comparator;
+
 /**
  * MFISearch
  *
@@ -14,6 +16,7 @@ public abstract class PlanedActivity {
      * Po stworzeniu obiektu tego typu powstanie też odpowiedni wpis w bazie danych.
      *
      * id  – unique id read from the db
+     * name – a name of the activity
      * date – a date of the activity read from the db, YYYY-MM-DD HH:MM:SS.SSS format
      * period – a date in format MM-DD if is repeated periodically
      * room – a classroom corresponding to the activity
@@ -24,6 +27,7 @@ public abstract class PlanedActivity {
      */
 
     public int id;
+    public String name;
     protected String date;
     protected String period;
     protected Classroom room;
@@ -40,6 +44,8 @@ public abstract class PlanedActivity {
      */
     public abstract void edit();
 
+    public String getName() { return name;}
+
     public String getDate(){
         return this.date;
     }
@@ -55,6 +61,8 @@ public abstract class PlanedActivity {
     public int getHowLong() {  return howLong;}
 
     public String getInstructor() { return instructor; }
+
+    public void setName(String name){ this.name=name;}
 
     public void setDate(String date) { this.date = date; }
 

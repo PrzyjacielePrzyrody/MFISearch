@@ -1,5 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
+import java.util.HashMap;
+
 /**
  * MFISearch
  *
@@ -12,4 +14,6 @@ public class Schedule implements Faculty <PlanedActivity, String> {
     public PlanedActivity find(String pattern) {
         return null;
     }
+
+
 }

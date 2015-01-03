@@ -27,8 +27,22 @@ public class ViewScheduleActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
-    }
 
+
+        TextView view=(TextView) findViewById(R.id.test);
+        DatabaseAdapter db= new DatabaseAdapter(this);
+        DatabaseHelper dh=new DatabaseHelper(this);
+        Classroom clas=db.getClassroom("1");
+        PlanedActivity pa1=new ActivityFactory(this).make("LECTURE", "2014-10-09 12:00:00", clas, 2, "Szczerski", "" )
+       /* Cursor c=dh.getLectures();
+        String tekst= "";
+        while(!c.isAfterLast()){
+            tekst=tekst+", "+c.getString(c.getColumnIndex("name"));
+            c.moveToNext();
+        }
+        view.setText(tekst);
+    }
+*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
