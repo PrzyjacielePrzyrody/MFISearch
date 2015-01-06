@@ -33,7 +33,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
         DatabaseAdapter db= new DatabaseAdapter(this);
         DatabaseHelper dh=new DatabaseHelper(this);
         Classroom clas=db.getClassroom("1");
-        PlanedActivity pa1=new ActivityFactory(this).make("LECTURE", "2014-10-09 12:00:00", clas, 2, "Szczerski", "" )
+        //PlanedActivity pa1=new ActivityFactory(this).make("LECTURE", "2014-10-09 12:00:00", clas, 2, "Szczerski", "" )
        /* Cursor c=dh.getLectures();
         String tekst= "";
         while(!c.isAfterLast()){
@@ -44,25 +44,25 @@ public class ViewScheduleActivity extends ActionBarActivity {
     }
 */
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_schedule, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_view_schedule, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
     }
 }
