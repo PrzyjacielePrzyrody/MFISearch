@@ -1,20 +1,19 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
-
-import android.app.ActionBar;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+import com.polites.android.GestureImageView;
 
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
@@ -22,13 +21,19 @@ import static info.linuxpl.abraham.rszczers.mfisearch.R.id.tabHost;
 
 
 public class MapActivity extends ActionBarActivity {
+    LayoutParams params;
+    GestureImageView level;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
 
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_map);
+
+        params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
         TabHost tabhost= (TabHost) findViewById(tabHost);
 
@@ -50,9 +55,35 @@ public class MapActivity extends ActionBarActivity {
         lev.setAdapter(adapter);
 
         lev.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int index= parent.getSelectedItemPosition(); // index zwraca wybraną pozycje
+                ViewGroup layout = (ViewGroup) findViewById(R.id.plan_viewer);
+                level = new GestureImageView(context);
+                switch(index) {
+                    case 0:
+
+                        break;
+                    case 1:
+                        layout.removeAllViewsInLayout();
+                        level.setImageResource(R.drawable.level1);
+                        level.setLayoutParams(params);
+                        level.setMinScale(0.1f);
+                        level.setMaxScale(2.0f);
+                        layout.addView(level);
+                        break;
+                    case 2:
+                        layout.removeAllViewsInLayout();
+                        level.setImageResource(R.drawable.level2);
+                        level.setLayoutParams(params);
+                        level.setMinScale(0.1f);
+                        level.setMaxScale(2.0f);
+                        layout.addView(level);
+                        break;
+                }
+
+
                 Toast.makeText(getBaseContext(), "Piętro "+levels[index], Toast.LENGTH_SHORT).show();
             }
 

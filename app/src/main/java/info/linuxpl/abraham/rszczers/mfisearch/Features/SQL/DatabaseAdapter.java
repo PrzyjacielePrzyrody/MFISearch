@@ -8,13 +8,20 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features.SQL;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.ExamPlaned;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 
 /**
@@ -53,6 +60,7 @@ public class DatabaseAdapter {
         return id;
     }
 
+
     /** DO SPRAWDZENIA
      * Dodaje do bazy dowolny obiekt PlanedActivity.
      * Trzeba tutaj napisać jakis parser
@@ -79,6 +87,23 @@ public class DatabaseAdapter {
      */
     public void delete(PlanedActivity product) {
         mfidb.delete(product.getTable(), product.id);
+    }
+
+
+    public Classroom getClassroom(String name){
+        SQLiteDatabase db=mfidb.getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String table="ROOMS";
+        String where="name LIKE '"+name+"'";
+        Cursor c=db.query(table, null, where, null, null, null, null, null );
+        c.moveToFirst();
+        int id= c.getInt(c.getColumnIndex("_id"));
+        int X = c.getInt(c.getColumnIndex("coor_x"));
+        int Y = c.getInt(c.getColumnIndex("coor_y"));
+        int[] coords={X, Y};
+        int level=c.getInt(c.getColumnIndex("level"));
+        db.close();
+        return new Classroom(id, name, coords , level);
     }
 
 
@@ -134,4 +159,53 @@ public class DatabaseAdapter {
         return output;
     }
 
+
+    //Daje plan zajęć dla podanej daty
+    public LinkedList<PlanedActivity> getDaySchedule(String date) {
+        LinkedList<PlanedActivity> dayShedule = new LinkedList<PlanedActivity>();
+        PlanedActivity pa;
+        ActivityFactory af = new ActivityFactory();
+
+        SQLiteDatabase db = mfidb.getReadableDatabase();
+       // SQLiteQueryBuilder sq = new SQLiteQueryBuilder();
+        String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
+        String day = date.substring(0, 10);
+        String selection = "date LIKE '" + day + "%'";
+        Cursor queries;
+        for (int i = 0; i < tables.length; i++) {
+            queries = db.query(tables[i], null, selection, null, null, null, null, null);
+            while (!queries.isAfterLast()) {
+                pa = af.get(tables[i], queries.getString(queries.getColumnIndex("date")),queries.getString(queries.getColumnIndex("name")), getClassroom(queries.getString(queries.getColumnIndex("room"))),
+                        queries.getInt(queries.getColumnIndex("duration")), queries.getString(queries.getColumnIndex("instructor")),
+                        queries.getString(queries.getColumnIndex("description")));
+                dayShedule.add(pa);
+                queries.moveToNext();
+            }
+        }
+                Collections.sort(dayShedule, new MyActivityComp());
+                return dayShedule;
+    }
+
+    public HashMap<String, LinkedList<PlanedActivity>> getSchedule(String date){
+
+        return null;
+    }
+
 }
+
+class MyActivityComp implements Comparator<PlanedActivity>{
+
+    @Override
+    public int compare(PlanedActivity p1, PlanedActivity p2) {
+        String n1= p1.getDate().replace(':', ' ').replace('-', ' ').trim();
+        String n2= p2.getDate().replace(':', ' ').replace('-', ' ').trim();
+        int c1= Integer.parseInt(n1);
+        int c2= Integer.parseInt(n2);
+        if(c1<c2){
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+}
+
