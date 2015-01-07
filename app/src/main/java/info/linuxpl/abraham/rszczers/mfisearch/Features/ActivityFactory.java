@@ -72,7 +72,7 @@ public class ActivityFactory {
      * @param description
      * @return
      */
-    public PlanedActivity get(String type, String name, String date, Classroom room, int duration, String instructor,
+    public PlanedActivity get(String type, String name, String date, Classroom room, String duration, String instructor,
                                String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
