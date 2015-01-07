@@ -1,6 +1,8 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
-import java.util.HashMap;
+import android.content.Context;
+
+
 
 /**
  * MFISearch
@@ -11,7 +13,7 @@ import java.util.HashMap;
 
 public class Schedule implements Faculty <PlanedActivity, String> {
     @Override
-    public PlanedActivity find(String pattern) {
+    public PlanedActivity find(String pattern, Context context) {
         return null;
     }
 
