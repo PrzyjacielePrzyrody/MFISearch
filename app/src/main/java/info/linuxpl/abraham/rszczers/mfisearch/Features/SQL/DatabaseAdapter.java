@@ -71,10 +71,8 @@ public class DatabaseAdapter {
 
         HashMap<String, String> hm=new HashMap<String, String>();
         hm.put("date", product.getDate());
-        hm.put("period", product.getPeriod());
         hm.put("room", product.getRoom().getName());
         hm.put("duration", product.getDuration());
-        hm.put("howLong", ""+product.getHowLong());
         hm.put("instructor",product.getInstructor());
         hm.put("description", product.getDescription());
 
@@ -175,14 +173,17 @@ public class DatabaseAdapter {
         for (int i = 0; i < tables.length; i++) {
             queries = db.query(tables[i], null, selection, null, null, null, null, null);
             while (!queries.isAfterLast()) {
-                pa = af.get(tables[i], queries.getString(queries.getColumnIndex("date")),queries.getString(queries.getColumnIndex("name")), getClassroom(queries.getString(queries.getColumnIndex("room"))),
-                        queries.getInt(queries.getColumnIndex("duration")), queries.getString(queries.getColumnIndex("instructor")),
+                pa =    af.get(tables[i],
+                        queries.getString(queries.getColumnIndex("date")),
+                        queries.getString(queries.getColumnIndex("name")),
+                        getClassroom(queries.getString(queries.getColumnIndex("room"))),
+                        queries.getString(queries.getColumnIndex("duration")),
+                        queries.getString(queries.getColumnIndex("instructor")),
                         queries.getString(queries.getColumnIndex("description")));
                 dayShedule.add(pa);
                 queries.moveToNext();
             }
         }
-                Collections.sort(dayShedule, new MyActivityComp());
                 return dayShedule;
     }
 
@@ -193,19 +194,5 @@ public class DatabaseAdapter {
 
 }
 
-class MyActivityComp implements Comparator<PlanedActivity>{
 
-    @Override
-    public int compare(PlanedActivity p1, PlanedActivity p2) {
-        String n1= p1.getDate().replace(':', ' ').replace('-', ' ').trim();
-        String n2= p2.getDate().replace(':', ' ').replace('-', ' ').trim();
-        int c1= Integer.parseInt(n1);
-        int c2= Integer.parseInt(n2);
-        if(c1<c2){
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-}
 

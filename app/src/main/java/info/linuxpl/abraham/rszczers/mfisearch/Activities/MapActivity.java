@@ -33,7 +33,7 @@ public class MapActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_map);
 
-        params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
         TabHost tabhost= (TabHost) findViewById(tabHost);
 
@@ -69,7 +69,7 @@ public class MapActivity extends ActionBarActivity {
                         layout.removeAllViewsInLayout();
                         level.setImageResource(R.drawable.level1);
                         level.setLayoutParams(params);
-                        level.setMinScale(0.1f);
+                        level.setMinScale(0.5f);
                         level.setMaxScale(2.0f);
                         layout.addView(level);
                         break;
@@ -77,7 +77,7 @@ public class MapActivity extends ActionBarActivity {
                         layout.removeAllViewsInLayout();
                         level.setImageResource(R.drawable.level2);
                         level.setLayoutParams(params);
-                        level.setMinScale(0.1f);
+                        level.setMinScale(0.5f);
                         level.setMaxScale(2.0f);
                         layout.addView(level);
                         break;

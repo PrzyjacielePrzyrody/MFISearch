@@ -29,7 +29,7 @@ public class ActivityFactory {
      * @param description
      * @return
      */
-    public PlanedActivity make(String type,String name, String date, Classroom room, int duration, String instructor,
+    public PlanedActivity make(String type, String name, String date, String howLong, int period, Classroom room, String duration, String instructor,
                               String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
@@ -39,7 +39,7 @@ public class ActivityFactory {
             //ustawia pole id w obiekcie po nadaniu go w bazie.
             product.setID(dbAdapter.getID(product));
         } else if(type.equals("EXERCISE")) {
-            product = new ExercisePlaned(date,name, room, duration, instructor, description);
+            product = new ExercisePlaned(date, name, room, duration, instructor, description);
             dbAdapter.add(product);
             //ustawia pole id w obiekcie po nadaniu go w bazie.
             product.setID(dbAdapter.getID(product));
@@ -72,7 +72,7 @@ public class ActivityFactory {
      * @param description
      * @return
      */
-    public PlanedActivity get(String type, String name, String date, Classroom room, int duration, String instructor,
+    public PlanedActivity get(String type, String name, String date, Classroom room, String duration, String instructor,
                                String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();

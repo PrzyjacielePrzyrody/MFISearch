@@ -29,10 +29,8 @@ public abstract class PlanedActivity {
     public int id;
     public String name;
     protected String date;
-    protected String period;
     protected Classroom room;
     protected String duration;
-    protected int howLong;
     protected String instructor;
     protected String description;
     private static final String TABLE = null;
@@ -50,7 +48,7 @@ public abstract class PlanedActivity {
         return this.date;
     }
 
-    public String getPeriod() { return this.period;}
+
 
     public Classroom getRoom() { return room; }
 
@@ -58,7 +56,7 @@ public abstract class PlanedActivity {
 
     public String getDescription() { return description;}
 
-    public int getHowLong() {  return howLong;}
+
 
     public String getInstructor() { return instructor; }
 
@@ -66,7 +64,7 @@ public abstract class PlanedActivity {
 
     public void setDate(String date) { this.date = date; }
 
-    public void setPeriod(String period) { this.period = period;}
+
 
     public void setRoom(Classroom room) {this.room = room;}
 
@@ -74,7 +72,7 @@ public abstract class PlanedActivity {
 
     public void setDescription(String description) {this.description = description;}
 
-    public void setHowLong(int howLong) {this.howLong = howLong; }
+
 
     public void setInstructor(String instructor) {this.instructor = instructor;}
 
