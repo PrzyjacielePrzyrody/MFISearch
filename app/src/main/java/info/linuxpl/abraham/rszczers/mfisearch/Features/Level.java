@@ -5,6 +5,8 @@ import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -31,12 +33,13 @@ public class Level {
     }
 
     public String markOn(Context context, int x, int y) {
-        Bitmap src = this.blueprint;
+        Bitmap src = getBlueprint();
         int w = src.getWidth();
         int h = src.getHeight();
         Bitmap result = Bitmap.createBitmap(w, h, src.getConfig());
         Canvas canvas = new Canvas(result);
-        canvas.setBitmap(src);
+        canvas.drawBitmap(src, 0, 0, null);
+
         Bitmap waterMark = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow);
         canvas.drawBitmap(waterMark, x, y, null);
 
@@ -46,7 +49,7 @@ public class Level {
     private String saveToInternalStorage(Bitmap bitmapImage, Context context){
         ContextWrapper cw = new ContextWrapper(context);
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        File mypath=new File(directory,"searchresult.png");
+        File mypath = new File(directory,"searchresult.png");
         FileOutputStream fos = null;
         try {
 
@@ -58,8 +61,15 @@ public class Level {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d("save", directory.getAbsolutePath());
         return directory.getAbsolutePath();
     }
 
+
+
     void read() {};
+
+    public Bitmap getBlueprint() {
+        return blueprint;
+    }
 }

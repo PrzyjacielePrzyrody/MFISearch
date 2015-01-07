@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.polites.android.GestureImageView;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Building;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 import static info.linuxpl.abraham.rszczers.mfisearch.R.id.tabHost;
@@ -73,8 +74,10 @@ public class MapActivity extends ActionBarActivity {
                         layout.addView(level);
                         break;
                     case 2:
+                        Building tmp = new Building(context);
                         layout.removeAllViewsInLayout();
-                        level.setImageResource(R.drawable.level2);
+                        level.setImageBitmap(tmp.find("F2", context));
+                        //level.setImageResource(R.drawable.level2);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
                         level.setMaxScale(2.0f);
