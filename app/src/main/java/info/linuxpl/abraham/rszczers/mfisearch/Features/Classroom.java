@@ -22,4 +22,12 @@ public class Classroom{
         this.coords=coords;
         this.level=level;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int[] getCoords() {
+        return coords;
+    }
 }

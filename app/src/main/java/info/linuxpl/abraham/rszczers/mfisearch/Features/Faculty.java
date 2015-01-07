@@ -1,5 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
+import android.content.Context;
+
 /**
  * MFISearch
  *
@@ -8,5 +10,5 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
  */
 
 public interface Faculty <T, E> {
-    T find(E pattern);
+    T find(E pattern, Context context);
 }
