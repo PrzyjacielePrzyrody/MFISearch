@@ -19,7 +19,6 @@ import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 import static info.linuxpl.abraham.rszczers.mfisearch.R.id.tabHost;
 
-
 public class MapActivity extends ActionBarActivity {
     LayoutParams params;
     GestureImageView level;
