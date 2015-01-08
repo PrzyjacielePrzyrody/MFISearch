@@ -13,7 +13,6 @@ import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 public class ActivityFactory {
     DatabaseAdapter dbAdapter;
 
-    public ActivityFactory(){}
 
     public ActivityFactory(Context context) {
         dbAdapter = new DatabaseAdapter(context);
@@ -29,7 +28,7 @@ public class ActivityFactory {
      * @param description
      * @return
      */
-    public void make(String type, String name, String date, String howLong, int period, Classroom room, String duration, String instructor,
+    public PlanedActivity make(String type, String name, String date, String howLong, int period, Classroom room, String duration, String instructor,
                               String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
@@ -56,9 +55,8 @@ public class ActivityFactory {
                 //ustawia pole id w obiekcie po nadaniu go w bazie.
                 product.setID(dbAdapter.getID(product));
             }
-           // date=date
-        //}
 
+        return product;
     }
 
     /**
@@ -82,16 +80,16 @@ public class ActivityFactory {
         type = type.toUpperCase();
 
 
-        if(type.equals("LECTURE")) {
+        if(type.equals("LECTURES")) {
             product = new LecturePlaned(date, name, room, duration, instructor, description);
             product.setID(dbAdapter.getID(product));
-        } else if(type.equals("EXERCISE")) {
+        } else if(type.equals("EXERCISES")) {
             product = new ExercisePlaned(date, name, room, duration, instructor, description);
             product.setID(dbAdapter.getID(product));
-        } else if(type.equals("EXAM")) {
+        } else if(type.equals("EXAMS")) {
             product = new ExamPlaned(date,name, room, duration, instructor, description);
             product.setID(dbAdapter.getID(product));
-        } else if(type.equals("OTHER")) {
+        } else if(type.equals("OTHERS")) {
             product = new OtherPlaned(date, name, room, duration, instructor, description);
             product.setID(dbAdapter.getID(product));
         }

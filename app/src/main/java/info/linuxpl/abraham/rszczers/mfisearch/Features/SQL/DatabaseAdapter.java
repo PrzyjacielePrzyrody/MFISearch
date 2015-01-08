@@ -93,17 +93,19 @@ public class DatabaseAdapter {
         SQLiteDatabase db=mfidb.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String table="ROOMS";
-        String where="name LIKE '"+name.trim()+"'";
-        String[] selection={"_id", "name", "coor_x", "coor_y", "level"};
-        Cursor c=db.query(table, selection , where, null, null, null, null, null );
-            c.moveToFirst();
-            int id= c.getInt(c.getColumnIndex("_id"));
-            int[] coords= this.getXY(name);
-            int level=c.getInt(c.getColumnIndex("level"));
-            db.close();
-            return new Classroom(id, name, coords , level);
 
-        }
+        String where="name LIKE '"+name+"'";
+        Cursor c=db.query(table, null, where, null, null, null, null, null );
+        c.moveToFirst();
+        int id= c.getInt(c.getColumnIndex("_id"));
+        int X = c.getInt(c.getColumnIndex("coor_x"));
+        int Y = c.getInt(c.getColumnIndex("coor_y"));
+        int[] coords={X, Y};
+        int level=c.getInt(c.getColumnIndex("level"));
+        db.close();
+        c.close();
+        return new Classroom(id, name, coords , level);
+    }
 
 
 
@@ -160,9 +162,9 @@ public class DatabaseAdapter {
     }
 
     /**
-     * Zwraca zajęcia dla podanej daty.
+     * Zwraca tablice kursorów, która zawiera wszystkie zajęcia dla podanej daty i typów zajęć.
      * @param date
-     *        tables - tables from with data are taken
+     * @param tables
      * @return
      */
 
