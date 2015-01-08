@@ -101,6 +101,7 @@ public class DatabaseAdapter {
         int[] coords={X, Y};
         int level=c.getInt(c.getColumnIndex("level"));
         db.close();
+        c.close();
         return new Classroom(id, name, coords , level);
     }
 
