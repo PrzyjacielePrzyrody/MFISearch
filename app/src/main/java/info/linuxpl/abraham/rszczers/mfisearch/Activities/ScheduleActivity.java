@@ -11,7 +11,7 @@ import android.widget.Button;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
-public class Schedule extends ActionBarActivity {
+public class ScheduleActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class Schedule extends ActionBarActivity {
         check_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_sched= new Intent(Schedule.this, ViewScheduleActivity.class);
+                Intent change_to_sched= new Intent(ScheduleActivity.this, ViewScheduleActivity.class);
                 startActivity(change_to_sched);
             }
         });
@@ -31,7 +31,7 @@ public class Schedule extends ActionBarActivity {
         edit_schedul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_edit_schedule= new Intent(Schedule.this, EditScheduleActivity.class);
+                Intent change_to_edit_schedule= new Intent(ScheduleActivity.this, EditScheduleActivity.class);
                 startActivity(change_to_edit_schedule);
             }
         });
@@ -40,7 +40,7 @@ public class Schedule extends ActionBarActivity {
         add_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_add_schedule= new Intent(Schedule.this, AddScheduleActivity.class);
+                Intent change_to_add_schedule= new Intent(ScheduleActivity.this, AddScheduleActivity.class);
                 startActivity(change_to_add_schedule);
             }
         });

@@ -1,6 +1,8 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -8,8 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import java.util.TreeMap;
+
+import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseHelper;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
@@ -18,6 +25,40 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       /* String st1="2014-10-09 11:14:34.5";
+        String st2="2014-11-09 11:14:32.6";
+        Log.d("Kolejnośc napisów", ""+st1.compareTo(st2));
+*/
+        DatabaseAdapter db=new DatabaseAdapter(this);
+        DatabaseHelper dh=new DatabaseHelper(this);
+        Cursor exam=dh.getExams();
+        String tekst="examsy: ";
+        String tee="";
+
+        Log.d("Nazwa classroma", db.getClassroom("F2").getName());
+
+        while (!exam.isAfterLast()){
+            tekst=tekst+exam.getString(exam.getColumnIndex("instructor"))+" : "+exam.getString(exam.getColumnIndex("date"))+", ";
+            exam.moveToNext();
+        }
+
+        Schedule s = new Schedule();
+
+        TreeMap<String, PlanedActivity> tree= s.getDaySchedule("2014-1-12 ", this);
+        PlanedActivity p;
+        String key;
+        while(!tree.isEmpty()){
+            key=tree.firstKey();
+            p=tree.get(key);
+            tee=tee+p.getDate()+p.getInstructor()+", ";
+        }
+
+        TextView t=(TextView) findViewById(R.id.text);
+        t.setText(tee);
+
+
+
 
         Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
         soon_class.setOnClickListener(new View.OnClickListener() {

@@ -20,8 +20,8 @@ public class ActivityFactory {
     }
 
     /**
-     * Metoda fabrykująca obiekty implementujące PlanedActivity
-     * @param type determinuje jaki rodzaj obiektu chcemy otrzymać; możliwe to: lecture, exercise, exam, other
+     * Metoda fabrykująca obiekty implementujące PlanedActivity.
+     * @param type determinuje jaki rodzaj obiektu chcemy otrzymać; możliwe to: lecture, exercise, exam, other.            .
      * @param date
      * @param room
      * @param duration
@@ -29,32 +29,36 @@ public class ActivityFactory {
      * @param description
      * @return
      */
-    public PlanedActivity make(String type, String name, String date, String howLong, int period, Classroom room, String duration, String instructor,
+    public void make(String type, String name, String date, String howLong, int period, Classroom room, String duration, String instructor,
                               String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
-        if(type.equals("LECTURE")) {
-            product = new LecturePlaned(date, name, room, duration, instructor, description);
-            dbAdapter.add(product);
-            //ustawia pole id w obiekcie po nadaniu go w bazie.
-            product.setID(dbAdapter.getID(product));
-        } else if(type.equals("EXERCISE")) {
-            product = new ExercisePlaned(date, name, room, duration, instructor, description);
-            dbAdapter.add(product);
-            //ustawia pole id w obiekcie po nadaniu go w bazie.
-            product.setID(dbAdapter.getID(product));
-        } else if(type.equals("EXAM")) {
-            product = new ExamPlaned(date,name, room, duration, instructor, description);
-            dbAdapter.add(product);
-            //ustawia pole id w obiekcie po nadaniu go w bazie.
-            product.setID(dbAdapter.getID(product));
-        } else if(type.equals("OTHER")) {
-            product = new OtherPlaned(date, name, room, duration, instructor, description);
-            dbAdapter.add(product);
-            //ustawia pole id w obiekcie po nadaniu go w bazie.
-            product.setID(dbAdapter.getID(product));
-        }
-        return product;
+        //while(date.compareTo(howLong)>0) {
+
+            if (type.equals("LECTURE")) {
+                product = new LecturePlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product);
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+            } else if (type.equals("EXERCISE")) {
+                product = new ExercisePlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product);
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+            } else if (type.equals("EXAM")) {
+                product = new ExamPlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product);
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+            } else if (type.equals("OTHER")) {
+                product = new OtherPlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product);
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+            }
+           // date=date
+        //}
+
     }
 
     /**
@@ -76,6 +80,8 @@ public class ActivityFactory {
                                String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
+
+
         if(type.equals("LECTURE")) {
             product = new LecturePlaned(date, name, room, duration, instructor, description);
             product.setID(dbAdapter.getID(product));

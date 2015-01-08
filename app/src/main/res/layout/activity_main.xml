@@ -20,7 +20,7 @@
         android:stretchColumns="*"
         android:id="@+id/tableLayout"
         android:gravity="bottom">
-    <!--pszemek-->
+
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -68,5 +68,14 @@
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

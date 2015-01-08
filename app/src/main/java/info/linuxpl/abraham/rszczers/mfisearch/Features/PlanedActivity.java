@@ -18,10 +18,10 @@ public abstract class PlanedActivity {
      * id  – unique id read from the db
      * name – a name of the activity
      * date – a date of the activity read from the db, YYYY-MM-DD HH:MM:SS.SSS format
-     * period – a date in format MM-DD if is repeated periodically
+     * period – how often activity is repeated, in days
      * room – a classroom corresponding to the activity
      * duration – duration of the activity expressed in format HH:MM
-     * howLong – how long the activity gonna last in days
+     * howLong – a date when activity is no longer current
      * instructor – an instructor's name
      * description – place for user's description and notes
      */

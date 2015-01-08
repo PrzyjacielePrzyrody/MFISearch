@@ -30,7 +30,7 @@
             android:label="@string/title_activity_show_soon_class" >
         </activity>
         <activity
-            android:name=".Activities.Schedule"
+            android:name=".Activities.ScheduleActivity"
             android:label="@string/title_activity_schedule" >
         </activity>
         <activity
