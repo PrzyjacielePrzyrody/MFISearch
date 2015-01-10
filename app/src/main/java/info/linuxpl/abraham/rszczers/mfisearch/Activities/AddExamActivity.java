@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -43,6 +44,7 @@ public class AddExamActivity extends ActionBarActivity {
     TimePickerDialog tp;
     Calendar calendar;
     TimePickerDialog.OnTimeSetListener timePickerListener;
+    Button saveExam;
 
     final CaldroidListener listener = new CaldroidListener() {
 
@@ -66,6 +68,7 @@ public class AddExamActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_exam);
 
+
         formatter = new SimpleDateFormat("dd MMM yyyy");
         nameField = (EditText) findViewById(R.id.name_add_exam_field);
 
@@ -77,7 +80,8 @@ public class AddExamActivity extends ActionBarActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getActionMasked();
                 if (action == MotionEvent.ACTION_DOWN) {
-                    dialogCaldroidFragment = CaldroidFragment.newInstance("Wybierz termin", 3, 2013);
+                    dialogCaldroidFragment = CaldroidFragment.newInstance("Wybierz termin",
+                            calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.YEAR));
                     dialogCaldroidFragment.setCaldroidListener(listener);
                     dialogCaldroidFragment.show(getSupportFragmentManager(), "TAG");
                 }
@@ -121,6 +125,16 @@ public class AddExamActivity extends ActionBarActivity {
                 new int[] {android.R.id.text1}, 0);
         sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roomPick.setAdapter(sca);
+
+        saveExam = (Button) findViewById(R.id.button_add_exam);
+        saveExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * Logika do wstawiania nowych egzaminów
+                 */
+            }
+        });
     }
 
 
