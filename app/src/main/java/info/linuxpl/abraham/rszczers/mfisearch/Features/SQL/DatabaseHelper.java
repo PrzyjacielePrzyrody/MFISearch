@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     public Cursor getExams() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String [] sqlSelect = {"0 _id", "date", "period", "room", "duration", "howLong", "instructor", "description"};
+        String [] sqlSelect = {"0 _id", "name", "date", "period", "room", "duration", "howLong", "instructor", "description"};
         String sqlTables = "EXAMS";
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null,
@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     public Cursor getExercises() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String [] sqlSelect = {"0 _id", "date", "period", "room", "duration", "howLong", "instructor", "description"};
+        String [] sqlSelect = {"0 _id", "name" ,"date", "period", "room", "duration", "howLong", "instructor", "description"};
         String sqlTables = "EXERCISES";
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null,
@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     public Cursor getLectures() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String [] sqlSelect = {"0 _id", "date", "period", "room", "duration", "howLong", "instructor", "description"};
+        String [] sqlSelect = {"0 _id", "name", "date", "period", "room", "duration", "howLong", "instructor", "description"};
         String sqlTables = "LECTURES";
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null,
@@ -86,7 +86,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     public Cursor getOther() {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String [] sqlSelect = {"0 _id", "date", "period", "room", "duration", "howLong", "instructor", "description"};
+        String [] sqlSelect = {"0 _id", "name" , "date", "period", "room", "duration", "howLong", "instructor", "description"};
         String sqlTables = "OTHER";
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null,

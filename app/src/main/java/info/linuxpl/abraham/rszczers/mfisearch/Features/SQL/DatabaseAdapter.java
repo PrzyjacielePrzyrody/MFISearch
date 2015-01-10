@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
@@ -92,6 +93,7 @@ public class DatabaseAdapter {
         SQLiteDatabase db=mfidb.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String table="ROOMS";
+
         String where="name LIKE '"+name+"'";
         Cursor c=db.query(table, null, where, null, null, null, null, null );
         c.moveToFirst();
@@ -101,8 +103,10 @@ public class DatabaseAdapter {
         int[] coords={X, Y};
         int level=c.getInt(c.getColumnIndex("level"));
         db.close();
+        c.close();
         return new Classroom(id, name, coords , level);
     }
+
 
 
     /** DO SPRAWDZENIA
@@ -114,7 +118,7 @@ public class DatabaseAdapter {
         SQLiteDatabase db=mfidb.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String table="ROOMS";
-        String where="name LIKE '"+name+"'";
+        String where="name LIKE '"+name.trim()+"'";
         String[] column={"coor_x", "coor_y"};
         Cursor c=db.query(table, column, where, null, null, null, null, null );
         c.moveToFirst();
@@ -146,7 +150,7 @@ public class DatabaseAdapter {
             c.moveToNext();
         }
         return output;
-    };
+    }
 
     /**
      * Daje haszmapę (nazwa_pokoju, współrzędne) dla każdego piętra;
@@ -157,40 +161,31 @@ public class DatabaseAdapter {
         return output;
     }
 
+    /**
+     * Zwraca tablice kursorów, która zawiera wszystkie zajęcia dla podanej daty i typów zajęć.
+     * @param date
+     * @param tables
+     * @return
+     */
 
-    //Daje plan zajęć dla podanej daty
-    public LinkedList<PlanedActivity> getDaySchedule(String date) {
-        LinkedList<PlanedActivity> dayShedule = new LinkedList<PlanedActivity>();
-        PlanedActivity pa;
-        ActivityFactory af = new ActivityFactory();
-
+    public Cursor[] getDayActivities(String date, String[] tables){
+        Cursor[] output=new Cursor[4];
         SQLiteDatabase db = mfidb.getReadableDatabase();
-       // SQLiteQueryBuilder sq = new SQLiteQueryBuilder();
-        String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
         String day = date.substring(0, 10);
         String selection = "date LIKE '" + day + "%'";
         Cursor queries;
         for (int i = 0; i < tables.length; i++) {
             queries = db.query(tables[i], null, selection, null, null, null, null, null);
-            while (!queries.isAfterLast()) {
-                pa =    af.get(tables[i],
-                        queries.getString(queries.getColumnIndex("date")),
-                        queries.getString(queries.getColumnIndex("name")),
-                        getClassroom(queries.getString(queries.getColumnIndex("room"))),
-                        queries.getString(queries.getColumnIndex("duration")),
-                        queries.getString(queries.getColumnIndex("instructor")),
-                        queries.getString(queries.getColumnIndex("description")));
-                dayShedule.add(pa);
-                queries.moveToNext();
-            }
+            queries.moveToFirst();
+            output[i]=queries;
         }
-                return dayShedule;
+        return output;
     }
 
-    public HashMap<String, LinkedList<PlanedActivity>> getSchedule(String date){
+    //Daje plan zajęć dla podanej daty w postaci TreeMap(data z godziną, PlanedActivity))
 
-        return null;
-    }
+
+
 
 }
 

@@ -23,6 +23,12 @@ public class Classroom{
         this.level=level;
     }
 
+    public Classroom(String name, int[] coords, int level){
+        this.name=name;
+        this.coords=coords;
+        this.level=level;
+    }
+
     public int getLevel() {
         return level;
     }

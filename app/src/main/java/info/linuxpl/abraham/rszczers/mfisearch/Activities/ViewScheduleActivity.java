@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -27,42 +28,46 @@ public class ViewScheduleActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_view_schedule);
+
+        TabHost tabhost= (TabHost) findViewById(R.id.dayOrWeek);
+
+        tabhost.setup();
+        TabHost.TabSpec find=tabhost.newTabSpec("Find");
+        find.setContent(R.id.day);
+        find.setIndicator(getString(R.string.viewDay));
+        tabhost.addTab(find);
 
 
-        TextView view=(TextView) findViewById(R.id.test);
-        DatabaseAdapter db= new DatabaseAdapter(this);
-        DatabaseHelper dh=new DatabaseHelper(this);
-        Classroom clas=db.getClassroom("1");
-        //PlanedActivity pa1=new ActivityFactory(this).make("LECTURE", "2014-10-09 12:00:00", clas, 2, "Szczerski", "" )
-       /* Cursor c=dh.getLectures();
-        String tekst= "";
-        while(!c.isAfterLast()){
-            tekst=tekst+", "+c.getString(c.getColumnIndex("name"));
-            c.moveToNext();
-        }
-        view.setText(tekst);
+        find=tabhost.newTabSpec("View");
+        find.setContent(R.id.week);
+        find.setIndicator(getString(R.string.viewWeek));
+        tabhost.addTab(find);
+
+
     }
-*/
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_view_schedule, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_view_schedule, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
