@@ -27,6 +27,7 @@ import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
 public class AddExamActivity extends ActionBarActivity {
+    DatabaseAdapter adapter;
     CaldroidFragment dialogCaldroidFragment;
     EditText nameField;
     EditText dateField;
@@ -111,6 +112,7 @@ public class AddExamActivity extends ActionBarActivity {
                             calendar.get(Calendar.HOUR_OF_DAY),
                             calendar.get(Calendar.MINUTE),
                             true);
+                    tp.setTitle("Wybierz godzinę");
                     tp.show();
                 }
                 return false;
@@ -119,7 +121,7 @@ public class AddExamActivity extends ActionBarActivity {
 
 
         roomPick = (Spinner) findViewById(R.id.room_add_exam_spinner);
-        DatabaseAdapter adapter = new DatabaseAdapter(getApplicationContext());
+        adapter = new DatabaseAdapter(getApplicationContext());
         SimpleCursorAdapter sca = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
                 adapter.getRoomNames(),
                 new String[] {"name"},
