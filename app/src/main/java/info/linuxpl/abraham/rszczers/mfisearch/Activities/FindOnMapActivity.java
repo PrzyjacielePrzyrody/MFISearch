@@ -1,21 +1,66 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Building;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import com.polites.android.GestureImageView;
 
 public class FindOnMapActivity extends ActionBarActivity {
+    Building mfi;
+    Context context;
+    String roomID;
+    GestureImageView view;
+    Bitmap gestureBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_on_map);
+
+        roomID = getIntent().getExtras().getString("roomID");
+        mfi = new Building(this);
+
+        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+        view = new GestureImageView(this);
+
+        gestureBitmap = mfi.find(roomID, this);
+        view.setImageBitmap(gestureBitmap);
+
+        view.setLayoutParams(params);
+        view.setMinScale(0.5f);
+        view.setMaxScale(3.0f);
+
+        ViewGroup layout = (ViewGroup) findViewById(R.id.find_on_map_layout);
+
+        layout.addView(view);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gestureBitmap = null;
+        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        gestureBitmap = null;
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -3,7 +3,11 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -28,6 +32,8 @@ public class Building implements Faculty <Bitmap, String>  {
         };
     }
 
+
+
     @Override
     /**
      * Metoda wyszukuje w bazie danych wzorca id
@@ -51,14 +57,15 @@ public class Building implements Faculty <Bitmap, String>  {
         {
             Log.d("Search error", "Counldn't load search data");
         }
-        if(b == null) {
-            Log.d("dupa", "dupa" + path);
-        }
 
         return b;
     }
 
+
     public Level getFloors(int i) {
         return this.floors[i];
     }
+
+
+
 }

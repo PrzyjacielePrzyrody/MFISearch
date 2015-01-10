@@ -3,7 +3,10 @@ package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 /**
@@ -14,6 +17,9 @@ import info.linuxpl.abraham.rszczers.mfisearch.R;
  */
 
 public class Splash extends Activity  {
+    LinearLayout layout;
+    Thread timer;
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -24,7 +30,11 @@ public class Splash extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        Thread timer = new Thread(){
+
+        layout = (LinearLayout) findViewById(R.id.splash_screen_layout);
+
+
+        timer = new Thread(){
             @Override
             public void run() {
                 try {
@@ -38,5 +48,14 @@ public class Splash extends Activity  {
             }
         };
         timer.start();
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.interrupt();
+//                Intent start = new Intent(Splash.this, MainActivity.class);
+//                startActivity(start);
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -35,7 +36,6 @@ public class MapActivity extends ActionBarActivity {
 
     Button searchButton;
     EditText searchField;
-    Building tmp;
 
     ViewGroup layout;
 
@@ -47,8 +47,6 @@ public class MapActivity extends ActionBarActivity {
         setContentView(R.layout.activity_map);
 
         dbAdapter = new DatabaseAdapter(this);
-
-        params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
         tabhost = (TabHost) findViewById(tabHost);
 
@@ -78,21 +76,10 @@ public class MapActivity extends ActionBarActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tabhost.setCurrentTab(1);
-                String searchFieldString = searchField.getText().toString();
-
-                int floor = dbAdapter.getClassroom(searchFieldString).getLevel();
-
-                lev.setSelection(floor);
-
-
-//                layout.removeAllViewsInLayout();
-//
-//                level.setImageBitmap(tmp.find(searchField.getText().toString(), context));
-//                level.setLayoutParams(params);
-//                level.setMinScale(0.5f);
-//                level.setMaxScale(2.0f);
-//                layout.addView(level);
+                Intent found = new Intent(context, FindOnMapActivity.class);
+                String tmp = searchField.getText().toString();
+                found.putExtra("roomID", tmp);
+                startActivity(found);
             }
         });
 
@@ -101,15 +88,27 @@ public class MapActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int index= parent.getSelectedItemPosition(); // index zwraca wybraną pozycje
                 layout = (ViewGroup) findViewById(R.id.plan_viewer);
-                level = new GestureImageView(context);
-                Building tmp = null;
-
+                params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                int childCount = 0;
                 switch (index) {
                     case 0:
-
+                        level = new GestureImageView(context);
+                        childCount = layout.getChildCount();
+                        if(childCount>0) {
+                            layout.removeAllViewsInLayout();
+                        }
+                        level.setImageResource(R.drawable.level1);
+                        level.setLayoutParams(params);
+                        level.setMinScale(0.5f);
+                        level.setMaxScale(2.0f);
+                        layout.addView(level);
                         break;
                     case 1:
-                        layout.removeAllViewsInLayout();
+                        level = new GestureImageView(context);
+                        childCount = layout.getChildCount();
+                        if(childCount>0) {
+                            layout.removeAllViewsInLayout();
+                        }
                         level.setImageResource(R.drawable.level1);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
@@ -117,7 +116,11 @@ public class MapActivity extends ActionBarActivity {
                         layout.addView(level);
                         break;
                     case 2:
-                        layout.removeAllViewsInLayout();
+                        level = new GestureImageView(context);
+                        childCount = layout.getChildCount();
+                        if(childCount>0) {
+                            layout.removeAllViewsInLayout();
+                        }
                         level.setImageResource(R.drawable.level2);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
@@ -128,8 +131,7 @@ public class MapActivity extends ActionBarActivity {
 //                        tmp = new Building(context);
 //                        level.setImageBitmap(tmp.find(searchField.getText().toString(), context));
 //                        level.setLayoutParams(params);
-//                        level.setMinScale(0.5f);
-//                        level.setMaxScale(2.0f);
+
 //                        layout.addView(level);
                         break;
                 }
@@ -168,4 +170,12 @@ public class MapActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+
 }
