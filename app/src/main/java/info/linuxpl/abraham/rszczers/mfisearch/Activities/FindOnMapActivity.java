@@ -13,6 +13,8 @@ import info.linuxpl.abraham.rszczers.mfisearch.Features.Building;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import com.polites.android.GestureImageView;
@@ -27,12 +29,15 @@ public class FindOnMapActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_find_on_map);
 
         roomID = getIntent().getExtras().getString("roomID");
         mfi = new Building(this);
 
-        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
         view = new GestureImageView(this);
 
