@@ -1,7 +1,10 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,8 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -22,7 +27,9 @@ import com.roomorama.caldroid.CaldroidListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
@@ -107,9 +114,13 @@ public class AddExamActivity extends ActionBarActivity {
 
 
         roomPick = (Spinner) findViewById(R.id.room_add_exam_spinner);
-        /**
-         * Tutaj idzie cała logika do populowania spinnera
-         */
+        DatabaseAdapter adapter = new DatabaseAdapter(getApplicationContext());
+        SimpleCursorAdapter sca = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
+                adapter.getRoomNames(),
+                new String[] {"name"},
+                new int[] {android.R.id.text1}, 0);
+        sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        roomPick.setAdapter(sca);
     }
 
 

@@ -40,27 +40,26 @@
         android:layout_marginRight="25dp"
         android:id="@+id/name_add_exam_field"
         android:inputType="text"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
 
             <TextView
-                android:text="Sala"
-                android:layout_width="match_parent"
+                android:text="Sala:"
+                android:layout_width="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"/>
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
                 android:id="@+id/room_add_exam_spinner"
-                android:layout_weight="1" />
-
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="10dp"/>
             </LinearLayout>
 
 
@@ -79,7 +78,7 @@
         android:layout_height="35dip"
         android:id="@+id/date_add_exam_field"
         android:inputType="datetime"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:text="Godzina"
@@ -96,7 +95,7 @@
         android:layout_height="35dip"
         android:id="@+id/time_add_exam_field"
         android:inputType="time"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:text="Prowadzący"
@@ -115,7 +114,7 @@
         android:layout_height="35dip"
         android:id="@+id/instructor_add_exam_field"
         android:inputType="text"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:text="Komentarz"

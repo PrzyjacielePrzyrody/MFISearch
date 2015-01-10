@@ -2,7 +2,9 @@ package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +38,7 @@ public class MapActivity extends ActionBarActivity {
 
     Button searchButton;
     EditText searchField;
+    Spinner searchPick;
 
     ViewGroup layout;
 
@@ -70,6 +73,7 @@ public class MapActivity extends ActionBarActivity {
         lev.setAdapter(adapter);
 
         // Obsługa pola wyszukiwania
+        searchPick = (Spinner) findViewById(R.id.search_spinner_on_map);
         searchField = (EditText) findViewById(R.id.search_on_map_edittext);
         searchButton = (Button) findViewById(R.id.search_on_map_button);
         layout = (ViewGroup)findViewById(R.id.plan_viewer);
@@ -78,10 +82,21 @@ public class MapActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent found = new Intent(context, FindOnMapActivity.class);
                 String tmp = searchField.getText().toString();
+                if(tmp.equals("")) {
+                    tmp = ((Cursor) searchPick.getSelectedItem()).getString(1);
+                }
                 found.putExtra("roomID", tmp);
                 startActivity(found);
             }
         });
+
+        DatabaseAdapter roomAdapter = new DatabaseAdapter(getApplicationContext());
+        SimpleCursorAdapter sca = new SimpleCursorAdapter(MapActivity.this, android.R.layout.simple_spinner_item,
+                roomAdapter.getRoomNames(),
+                new String[] {"name"},
+                new int[] {android.R.id.text1}, 0);
+        sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        searchPick.setAdapter(sca);
 
         lev.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -100,7 +115,7 @@ public class MapActivity extends ActionBarActivity {
                         level.setImageResource(R.drawable.level1);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
-                        level.setMaxScale(2.0f);
+                        level.setMaxScale(3.0f);
                         layout.addView(level);
                         break;
                     case 1:
@@ -112,7 +127,7 @@ public class MapActivity extends ActionBarActivity {
                         level.setImageResource(R.drawable.level1);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
-                        level.setMaxScale(2.0f);
+                        level.setMaxScale(3.0f);
                         layout.addView(level);
                         break;
                     case 2:
@@ -124,7 +139,7 @@ public class MapActivity extends ActionBarActivity {
                         level.setImageResource(R.drawable.level2);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
-                        level.setMaxScale(2.0f);
+                        level.setMaxScale(3.0f);
                         layout.addView(level);
                         //wyszukiwanie
 //                        layout.removeAllViewsInLayout();
@@ -135,7 +150,6 @@ public class MapActivity extends ActionBarActivity {
 //                        layout.addView(level);
                         break;
                 }
-
 
                 Toast.makeText(getBaseContext(), "Piętro "+levels[index], Toast.LENGTH_SHORT).show();
             }
