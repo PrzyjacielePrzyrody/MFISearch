@@ -21,7 +21,6 @@ import com.polites.android.GestureImageView;
 
 public class FindOnMapActivity extends ActionBarActivity {
     Building mfi;
-    Context context;
     String roomID;
     GestureImageView view;
     Bitmap gestureBitmap;
