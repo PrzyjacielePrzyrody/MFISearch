@@ -184,13 +184,7 @@ public class DatabaseAdapter {
 
     //Daje plan zajęć dla podanej daty w postaci TreeMap(data z godziną, PlanedActivity))
 
-    public Cursor getRoomNames() {
-        SQLiteDatabase db = mfidb.getReadableDatabase();
-        String sql = "select _id, name from ROOMS order by name ";
-        Cursor c = db.rawQuery(sql, null);
-        c.moveToFirst();
-        return c;
-    }
+
 
 
 }
