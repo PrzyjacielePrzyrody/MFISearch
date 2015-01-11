@@ -1,12 +1,139 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.AddExamActivity">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.AddExamActivity"
+    android:gravity="left">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <Button
+            android:layout_weight="2"
+            android:text="Zapisz egzamin"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/button_add_exam"/>
+    </LinearLayout>
 
-    <TextView android:text="Tu będzie można dodac nowy egzamin i dobrze, uczyć się!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+    <TextView
+        android:text="Przedmiot"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:id="@+id/name_add_exam_field"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:text="Sala:"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/room_add_exam_spinner"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+
+
+    <TextView
+        android:text="Termin"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="35dip"
+        android:id="@+id/date_add_exam_field"
+        android:inputType="datetime"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:text="Godzina"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="35dip"
+        android:id="@+id/time_add_exam_field"
+        android:inputType="time"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:text="Prowadzący"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="wrap_content"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="35dip"
+        android:id="@+id/instructor_add_exam_field"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:text="Komentarz"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="wrap_content"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:id="@+id/description_add_exam_field"
+        android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -14,10 +14,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -60,7 +58,6 @@ public class DatabaseAdapter {
              id = c.getInt(c.getColumnIndex("_id"));
         }
         db.close();
-        c.close();
         return id;
     }
 
@@ -74,7 +71,7 @@ public class DatabaseAdapter {
     public void add(PlanedActivity product) {
 
         HashMap<String, String> hm=new HashMap<String, String>();
-        hm.put("date", this.dateTimeToString(product.getDate()));
+        hm.put("date", product.getDate());
         hm.put("room", product.getRoom().getName());
         hm.put("duration", product.getDuration());
         hm.put("instructor",product.getInstructor());
@@ -127,7 +124,6 @@ public class DatabaseAdapter {
         c.moveToFirst();
         int X = c.getInt(c.getColumnIndex("coor_x"));
         int Y = c.getInt(c.getColumnIndex("coor_y"));
-        c.close();
         db.close();
         return new int[]{X, Y};
     }
@@ -153,8 +149,6 @@ public class DatabaseAdapter {
             output.put(name, getXY(name));
             c.moveToNext();
         }
-        db.close();
-        c.close();
         return output;
     }
 
@@ -177,7 +171,7 @@ public class DatabaseAdapter {
     public Cursor[] getDayActivities(String date, String[] tables){
         Cursor[] output=new Cursor[4];
         SQLiteDatabase db = mfidb.getReadableDatabase();
-        String day = this.dateToString(date);
+        String day = date.substring(0, 10);
         String selection = "date LIKE '" + day + "%'";
         Cursor queries;
         for (int i = 0; i < tables.length; i++) {
@@ -185,164 +179,15 @@ public class DatabaseAdapter {
             queries.moveToFirst();
             output[i]=queries;
         }
-        db.close();
         return output;
     }
 
-
-    /**
-     * Zwraca tablice zawierającą tablice DATE i TIME
-     * @param date
-     * @return
-     */
+    //Daje plan zajęć dla podanej daty w postaci TreeMap(data z godziną, PlanedActivity))
 
 
-    public int[][] getDateTime(String date){
 
-        int[] data=new int[3];
-        int[] tim=new int[3];
-        int[][] output =new int[2][];
-
-        if(date.contains(" ")){
-            String[] datetime=date.split(" ");
-            String[] dat= datetime[0].split("-");
-            String[] time=datetime[1].split(":");
-        for(int i=0; i<dat.length; i++){
-            data[i]=Integer.parseInt(dat[i]);
-        }
-        for(int i=0; i<time.length; i++){
-            tim[i]=Integer.parseInt(time[i]);
-        }
-
-        output[0]=data;
-        output[1]=tim;
-        }
-        else{
-            String[] dat= date.split("-");
-            int[] datee=new int[3];
-            for(int i=0; i<dat.length; i++){
-                datee[i]=Integer.parseInt(dat[i]);
-            }
-            output[0]=datee;
-            output[1]=null;
-        }
-
-        return output;
-
-    }
-
-    public int[] getDate(String date){
-        String[] dat= date.split("-");
-        int[] data=new int[3];
-        for(int i=0; i<dat.length; i++){
-            data[i]=Integer.parseInt(dat[i]);
-        }
-        return data;
-    }
-
-    /**
-     * Usuwa niepotrzebne zera przy podanej dacie (Data podana razem z godziną). (Jeszcze w sumie nie wiem czy to potrzebne)
-     * @param date
-     * @return
-     */
-
-    public String dateTimeToString(String date){
-        int[][] d=this.getDateTime(date);
-        String minutes;
-        String seconds;
-        if(d[1][1]<10){
-            minutes="0"+d[1][1];
-        }else{
-            minutes=""+d[1][1];
-        }
-        if(d[1][2]<10){
-           seconds="0"+d[1][2];
-        }else{
-            seconds=""+d[1][2];
-        }
-        String output=d[0][0]+"-"+d[0][1]+"-"+d[0][2]+" "+d[1][0]+":"+minutes+":"+seconds;
-        return output;
-
-    }
-
-    /**
-     * Usuwa niepotrzebne zera w samej dacie. Przyda się przy wyszukiwaniu.
-     * @param date
-     * @return
-     */
-    public String dateToString(String date){
-        String[] dat;
-        String output;
-        if(date.contains(" ")){
-            String[] datetime=date.split(" ");
-            dat= datetime[0].split("-");
-        }
-        else {
-            dat = date.split("-");
-        }
-        int[] d=new int[3];
-
-        for(int i=0; i<dat.length; i++){
-            d[i]=Integer.parseInt(dat[i]);
-        }
-
-        return output=d[0]+"-"+d[1]+"-"+d[2];
-
-    }
-
-    /**
-     * Tworzy Calendar z podanej daty.
-     * @param date
-     * @return
-     */
-    public Calendar stringToCalendar(String date){
-        GregorianCalendar calendar;
-        int[][] dt=new int[2][];
-        if(date.contains(" ")){
-            dt= this.getDateTime(date);
-            calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2], dt[1][0], dt[1][1], dt[1][2]);
-        }
-        else {
-
-            dt=this.getDateTime(date);
-            calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2]);
-
-        }
-
-        return calendar;
-    }
-
-    public String calendarToString(Calendar day){
-        int month=day.get(Calendar.MONTH)+1;
-        return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH);
-    }
-
-    /**
-     * Pobiera z bazy danych zajęcia odbywające się pomiędzy podanymi datami
-     * @param date1
-     * @param date2
-     * @param tables
-     * @return
-     */
-    public Cursor[] getWeek(String date1, String date2, String[] tables){
-        Cursor[] output=new Cursor[4];
-        SQLiteDatabase db = mfidb.getReadableDatabase();
-        String from = this.dateToString(date1);
-        String to=this.dateToString(date2);
-        String selection = "date BETWEEN '" + from + "' AND '"+ to+"'";
-        Cursor queries;
-        for (int i = 0; i < tables.length; i++) {
-            queries = db.query(tables[i], null, selection, null, null, null, null, null);
-            queries.moveToFirst();
-            output[i]=queries;
-        }
-        db.close();
-        return output;
-    }
 
 }
-
-
 
 
 

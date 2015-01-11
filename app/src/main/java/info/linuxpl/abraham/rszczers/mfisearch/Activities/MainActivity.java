@@ -14,9 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
 import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
@@ -31,6 +28,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
         soon_class.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_schedule= new Intent(MainActivity.this, ScheduleActivity.class);
+                Intent change_to_schedule= new Intent(MainActivity.this, Schedule.class);
                 startActivity(change_to_schedule);
             }
         });

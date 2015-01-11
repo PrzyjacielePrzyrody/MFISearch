@@ -14,7 +14,8 @@
         android:id="@+id/tabHost"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="false">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -69,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/plan_viewer"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_gravity="bottom">
                     </LinearLayout>
                 </LinearLayout>
@@ -77,32 +78,64 @@
 
                 <LinearLayout
                     android:id="@+id/tab1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:weightSum="1">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_weight="3">
+                        android:orientation="vertical">
 
-                        <EditText android:layout_weight="3"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                        <TextView
+                            android:text="Wyszukaj salę:"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_height="wrap_content"/>
+                        <EditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
                             android:inputType="text"
                             android:autoText="false"
                             android:textSize="15dp"
                             android:id="@+id/search_on_map_edittext"/>
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="50dp"
+                            android:layout_marginTop="30dp">
+                            <TextView
+                                android:text="lub wybierz salę z listy:"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginRight="25dp"
+                                android:layout_height="wrap_content"/>
+                            <Spinner
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/search_spinner_on_map"></Spinner>
+                        </LinearLayout>
+
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/search_on_map"
-                            android:id="@+id/search_on_map_button"
-                            android:layout_weight="1" />
+                            android:id="@+id/search_on_map_button"/>
+                        </LinearLayout>
                     </TableRow>
                 </LinearLayout>
 
