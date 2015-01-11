@@ -1,23 +1,16 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.database.Cursor;
-import android.support.v4.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -28,13 +21,13 @@ import com.roomorama.caldroid.CaldroidListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
 public class AddExamActivity extends ActionBarActivity {
+    DatabaseAdapter adapter;
     CaldroidFragment dialogCaldroidFragment;
     EditText nameField;
     EditText dateField;
@@ -94,7 +87,16 @@ public class AddExamActivity extends ActionBarActivity {
         timePickerListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                timeField.setText(hourOfDay + ":" + minute);
+                String h = Integer.toString(hourOfDay);
+                String m = Integer.toString(minute);
+
+                if(h.length()==1) {
+                    h = "0" + h;
+                }
+                if(m.length()==1) {
+                    m = "0" + m;
+                }
+                timeField.setText(h + ":" + m);
             }
         };
 
@@ -110,6 +112,7 @@ public class AddExamActivity extends ActionBarActivity {
                             calendar.get(Calendar.HOUR_OF_DAY),
                             calendar.get(Calendar.MINUTE),
                             true);
+                    tp.setTitle("Wybierz godzinę");
                     tp.show();
                 }
                 return false;
@@ -118,7 +121,7 @@ public class AddExamActivity extends ActionBarActivity {
 
 
         roomPick = (Spinner) findViewById(R.id.room_add_exam_spinner);
-        DatabaseAdapter adapter = new DatabaseAdapter(getApplicationContext());
+        adapter = new DatabaseAdapter(getApplicationContext());
         SimpleCursorAdapter sca = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
                 adapter.getRoomNames(),
                 new String[] {"name"},

@@ -1,12 +1,11 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
-import android.app.TabActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 
 import com.polites.android.GestureImageView;
 
-import info.linuxpl.abraham.rszczers.mfisearch.Features.Building;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
@@ -141,16 +139,8 @@ public class MapActivity extends ActionBarActivity {
                         level.setMinScale(0.5f);
                         level.setMaxScale(3.0f);
                         layout.addView(level);
-                        //wyszukiwanie
-//                        layout.removeAllViewsInLayout();
-//                        tmp = new Building(context);
-//                        level.setImageBitmap(tmp.find(searchField.getText().toString(), context));
-//                        level.setLayoutParams(params);
-
-//                        layout.addView(level);
                         break;
                 }
-
                 Toast.makeText(getBaseContext(), "Piętro "+levels[index], Toast.LENGTH_SHORT).show();
             }
 
