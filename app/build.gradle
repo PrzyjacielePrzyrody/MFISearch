@@ -4,6 +4,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
 
+
     defaultConfig {
         applicationId "info.linuxpl.abraham.rszczers.mfisearch"
         minSdkVersion 10
@@ -17,6 +18,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+    }
+
 }
 
 dependencies {
