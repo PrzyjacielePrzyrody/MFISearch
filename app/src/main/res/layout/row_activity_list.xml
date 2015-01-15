@@ -10,23 +10,31 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:weightSum="5"
-            android:layout_weight="0.10">
+            android:layout_height="80dp"
+            android:weightSum="8">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="tu będą godziny"
                 android:id="@+id/timeText"
-                android:layout_weight="1" />
-
+                android:layout_weight="3"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="5"
+    android:weightSum="5"
+    android:layout_margin="10px">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="4"
+                android:id="@+id/coKtoGdzie"
+                android:weightSum="2"
                 >
 
                 <TextView
@@ -59,8 +67,9 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Sala"
-                android:id="@+id/classroom"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:id="@+id/classroom" />
+        </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 

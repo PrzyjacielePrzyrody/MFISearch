@@ -309,6 +309,12 @@ public class DatabaseAdapter {
         return calendar;
     }
 
+    public String getClassesTime(String date){
+        int[][] dateTime=this.getDateTime(date);
+        String time=dateTime[2][0]+":"+dateTime[2][1]+":"+dateTime[2][2];
+        return time;
+    }
+
     public String calendarToString(Calendar day){
         int month=day.get(Calendar.MONTH)+1;
         return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH);

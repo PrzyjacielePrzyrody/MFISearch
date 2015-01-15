@@ -2,9 +2,6 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Queue;
@@ -130,4 +127,17 @@ public class Schedule implements Faculty <PlanedActivity, String> {
 
         return weekTable;
     }
+
+   /* public ArrayList<PlanedActivity> treeToArray(TreeMap<Calendar, PlanedActivity>){
+        PlanedActivity p;
+        Calendar key;
+        ArrayList<PlanedActivity> list=new ArrayList<PlanedActivity>();
+        while(!tree.isEmpty()){
+            key=tree.firstKey();
+            p=tree.remove(key);
+            list.add(p);
+
+        }
+    }*/
+
 }

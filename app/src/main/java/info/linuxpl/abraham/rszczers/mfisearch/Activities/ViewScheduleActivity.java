@@ -1,23 +1,31 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseHelper;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
@@ -45,6 +53,21 @@ public class ViewScheduleActivity extends ActionBarActivity {
         find.setIndicator(getString(R.string.viewWeek));
         tabhost.addTab(find);
 
+
+        Schedule pl= new Schedule();
+        TreeMap<Calendar, PlanedActivity> tree= pl.getDaySchedule("2014-1-12 ", this);
+        PlanedActivity p;
+        Calendar key;
+        ArrayList<PlanedActivity> list=new ArrayList<PlanedActivity>();
+        while(!tree.isEmpty()){
+            key=tree.firstKey();
+            p=tree.remove(key);
+            list.add(p);
+
+        }
+        ActivityRowAdapter adapter=new ActivityRowAdapter(this, R.layout.row_activity_list, list);
+        ListView lv=(ListView) findViewById(R.id.activitiesListView);
+        lv.setAdapter(adapter);
 
     }
 

@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_schedule= new Intent(MainActivity.this, Schedule.class);
+                Intent change_to_schedule= new Intent(MainActivity.this, ScheduleActivity.class);
                 startActivity(change_to_schedule);
             }
         });
