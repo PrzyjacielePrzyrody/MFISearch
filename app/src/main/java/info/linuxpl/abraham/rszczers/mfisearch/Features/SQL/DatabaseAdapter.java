@@ -320,6 +320,26 @@ public class DatabaseAdapter {
         return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH);
     }
 
+    public String weekDayName(Calendar cal){
+        String name="";
+        switch (cal.get(Calendar.DAY_OF_WEEK)) {
+            case 1: name="Niedziela";
+                    break;
+            case 2:name="Poniedziałek";
+                    break;
+            case  3: name= "Wtorek";
+                    break;
+            case 4: name="Środa";
+                break;
+            case 5 :name="Czwartek";
+                break;
+            case  6: name= "Piątek";
+                break;
+            case 7:name="Sobota";
+        }
+        return name;
+    }
+
     /**
      * Pobiera z bazy danych zajęcia odbywające się pomiędzy podanymi datami
      * @param date1

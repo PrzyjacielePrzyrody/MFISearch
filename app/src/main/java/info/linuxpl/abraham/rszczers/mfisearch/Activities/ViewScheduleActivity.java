@@ -1,6 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
@@ -33,38 +36,62 @@ public class ViewScheduleActivity extends ActionBarActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_schedule);
 
-        TabHost tabhost= (TabHost) findViewById(R.id.dayOrWeek);
+        final DatabaseAdapter db = new DatabaseAdapter(this);
+        Intent i=getIntent();
+        String data;
 
-        tabhost.setup();
-        TabHost.TabSpec find=tabhost.newTabSpec("Find");
-        find.setContent(R.id.day);
-        find.setIndicator(getString(R.string.viewDay));
-        tabhost.addTab(find);
+        if(i.getStringExtra("date")!=null){
+            data=i.getStringExtra("date");
+        }else{
+            Calendar current=Calendar.getInstance();
+            data=db.calendarToString(current);
+        }
 
+        LinearLayout dayLayout= (LinearLayout) findViewById(R.id.dateLayout);
+        final TextView datString=(TextView) dayLayout.findViewById(R.id.dayOfWeek);
+        final TextView datWeekDay=(TextView) dayLayout.findViewById(R.id.textViewDayName);
 
-        find=tabhost.newTabSpec("View");
-        find.setContent(R.id.week);
-        find.setIndicator(getString(R.string.viewWeek));
-        tabhost.addTab(find);
+        Button next= (Button) findViewById(R.id.btnNext);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar dat=db.stringToCalendar((String) datString.getText());
+                dat.add(Calendar.DATE, 1);
+                Intent update= new Intent(ViewScheduleActivity.this, ViewScheduleActivity.class);
+                update.putExtra("date", db.calendarToString(dat));
+                finish();
+                startActivity(update);
+            }
+        });
 
+        Button previous= (Button) findViewById(R.id.btnPrevious);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar dat = db.stringToCalendar((String) datString.getText());
+                dat.add(Calendar.DATE, -1);
+                Intent update= new Intent(ViewScheduleActivity.this, ViewScheduleActivity.class);
+                update.putExtra("date", db.calendarToString(dat));
+                finish();
+                startActivity(update);
+            }
+        });
 
         Schedule pl= new Schedule();
-        TreeMap<Calendar, PlanedActivity> tree= pl.getDaySchedule("2014-1-12 ", this);
-        PlanedActivity p;
-        Calendar key;
-        ArrayList<PlanedActivity> list=new ArrayList<PlanedActivity>();
-        while(!tree.isEmpty()){
-            key=tree.firstKey();
-            p=tree.remove(key);
-            list.add(p);
+        datString.setText(data);
+        datWeekDay.setText(db.weekDayName(db.stringToCalendar(data)));
 
-        }
+
+        TreeMap<Calendar, PlanedActivity> tree= pl.getDaySchedule(data, this);
+
+        ArrayList<PlanedActivity> list= pl.treeToArray(tree);
+
         ActivityRowAdapter adapter=new ActivityRowAdapter(this, R.layout.row_activity_list, list);
         ListView lv=(ListView) findViewById(R.id.activitiesListView);
         lv.setAdapter(adapter);

@@ -49,14 +49,7 @@ public class ScheduleActivity extends ActionBarActivity {
             }
         });
 
-        Button add_schedule=(Button) findViewById(R.id.add_schedule_button);
-        add_schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent change_to_add_schedule= new Intent(ScheduleActivity.this, AddScheduleActivity.class);
-                startActivity(change_to_add_schedule);
-            }
-        });
+
     }
 
 

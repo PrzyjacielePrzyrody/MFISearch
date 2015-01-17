@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Queue;
 import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
@@ -128,16 +127,16 @@ public class Schedule implements Faculty <PlanedActivity, String> {
         return weekTable;
     }
 
-   /* public ArrayList<PlanedActivity> treeToArray(TreeMap<Calendar, PlanedActivity>){
+    public ArrayList<PlanedActivity> treeToArray(TreeMap<Calendar, PlanedActivity> sched) {
         PlanedActivity p;
         Calendar key;
-        ArrayList<PlanedActivity> list=new ArrayList<PlanedActivity>();
-        while(!tree.isEmpty()){
-            key=tree.firstKey();
-            p=tree.remove(key);
+        ArrayList<PlanedActivity> list = new ArrayList<PlanedActivity>();
+        while (!sched.isEmpty()) {
+            key = sched.firstKey();
+            p = sched.remove(key);
             list.add(p);
-
         }
-    }*/
+        return list;
+    }
 
 }
