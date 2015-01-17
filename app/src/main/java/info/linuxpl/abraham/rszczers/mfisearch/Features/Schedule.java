@@ -2,6 +2,8 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
@@ -137,6 +139,29 @@ public class Schedule implements Faculty <PlanedActivity, String> {
             list.add(p);
         }
         return list;
+    }
+
+    public PlanedActivity findNextClasses(Context context){
+        Calendar cal=Calendar.getInstance();
+        DatabaseAdapter db=new DatabaseAdapter(context);
+        String[] date=db.calendarToString(cal).split(" ");
+        TreeMap<Calendar, PlanedActivity> day=getDaySchedule(date[0], context);
+        Calendar key;
+        PlanedActivity pa=null;
+        String bef="2014-01-01 00:00:00";
+        while(db.stringToCalendar(bef).before(cal)) {
+
+            if (!day.isEmpty()) {
+                key = day.firstKey();
+                pa = day.remove(key);
+                bef = pa.getDate();
+            } else {
+                cal.add(Calendar.DATE, 1);
+                date = db.calendarToString(cal).split(" ");
+                day = getDaySchedule(date[0], context);
+            }
+        }
+       return pa;
     }
 
 }

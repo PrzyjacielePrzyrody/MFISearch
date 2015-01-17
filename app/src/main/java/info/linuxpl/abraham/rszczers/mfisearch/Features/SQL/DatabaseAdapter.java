@@ -301,10 +301,8 @@ public class DatabaseAdapter {
             calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2], dt[1][0], dt[1][1], dt[1][2]);
         }
         else {
-
             dt=this.getDateTime(date);
             calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2]);
-
         }
 
         return calendar;

@@ -27,6 +27,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActivityFactory af=new ActivityFactory(this);
+        DatabaseAdapter db=new DatabaseAdapter(this);
+
         Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
         soon_class.setOnClickListener(new View.OnClickListener() {
             @Override
