@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -118,7 +119,6 @@ public class AddExamActivity extends ActionBarActivity {
                 return false;
             }
         });
-
 
         roomPick = (Spinner) findViewById(R.id.room_add_exam_spinner);
         adapter = new DatabaseAdapter(getApplicationContext());
