@@ -80,6 +80,7 @@ public class DatabaseAdapter {
         hm.put("description", product.getDescription());
 
         mfidb.put(product.getTable(), hm);
+        mfidb.close();
     }
 
     /** DO UZUPEŁNIENIA
@@ -294,7 +295,7 @@ public class DatabaseAdapter {
      */
     public Calendar stringToCalendar(String date){
         GregorianCalendar calendar;
-        int[][] dt=new int[2][];
+        int[][] dt;//=new int[2][];
         if(date.contains(" ")){
             dt= this.getDateTime(date);
             calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2], dt[1][0], dt[1][1], dt[1][2]);
@@ -317,7 +318,10 @@ public class DatabaseAdapter {
 
     public String calendarToString(Calendar day){
         int month=day.get(Calendar.MONTH)+1;
-        return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH);
+        String tekst;
+
+
+        return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH)+" "+day.get(Calendar.HOUR)+":"+day.get(Calendar.MINUTE)+":"+day.get(Calendar.SECOND);
     }
 
     public String weekDayName(Calendar cal){

@@ -40,7 +40,7 @@ public class ActivityRowAdapter extends ArrayAdapter<PlanedActivity> {
 
             holder=new PlanedActivityHolder();
             LinearLayout dane=(LinearLayout) row.findViewById(R.id.coKtoGdzie);
-            holder.name = (TextView)dane.findViewById(R.id.activityName);
+            holder.name = (TextView)dane.findViewById(R.id.activityName); //coś nie działa z name
             holder.time = (TextView)row.findViewById(R.id.timeText);
             holder.room = (TextView)row.findViewById(R.id.classroom);
             holder.instructor = (TextView)dane.findViewById(R.id.lector);

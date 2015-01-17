@@ -1,6 +1,9 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 import android.content.Context;
+import android.util.Log;
+
+import java.util.Calendar;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 
@@ -32,8 +35,8 @@ public class ActivityFactory {
                               String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
-        //while(date.compareTo(howLong)>0) {
 
+        while (this.dbAdapter.stringToCalendar(date).before(dbAdapter.stringToCalendar(howLong))) {
             if (type.equals("LECTURE")) {
                 product = new LecturePlaned(date, name, room, duration, instructor, description);
                 dbAdapter.add(product);
@@ -55,7 +58,17 @@ public class ActivityFactory {
                 //ustawia pole id w obiekcie po nadaniu go w bazie.
                 product.setID(dbAdapter.getID(product));
             }
+        Log.d("Tworze pierwsze zajęcie", ""+product.getDate());
 
+            Calendar when=this.dbAdapter.stringToCalendar(date);
+            when.add(Calendar.DATE, period);
+            date=dbAdapter.calendarToString(when);
+
+              // PlanedActivity product2=make(type, name, date, howLong, period, room, duration, instructor, description);
+               // Log.d("Tworze zajęcie", ""+product.getDate());
+
+
+        }
         return product;
     }
 
