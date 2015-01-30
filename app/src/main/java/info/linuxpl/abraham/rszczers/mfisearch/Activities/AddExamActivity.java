@@ -1,9 +1,11 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -22,7 +25,11 @@ import com.roomorama.caldroid.CaldroidListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
@@ -33,18 +40,27 @@ public class AddExamActivity extends ActionBarActivity {
     EditText nameField;
     EditText dateField;
     EditText timeField;
+    EditText lectorField;
+    EditText descField;
+    EditText duration;
     SimpleDateFormat formatter;
+    SimpleDateFormat form;
     Spinner roomPick;
     TimePickerDialog tp;
     Calendar calendar;
     TimePickerDialog.OnTimeSetListener timePickerListener;
     Button saveExam;
+    private Context context;
+    String dat;
+    int period=1; //mówi, że egzamin się nie powtarza
+
 
     final CaldroidListener listener = new CaldroidListener() {
 
         @Override
         public void onSelectDate(Date date, View view) {
             dateField.setText(formatter.format(date));
+            dat=form.format(date);
             dialogCaldroidFragment.dismiss();
         }
 
@@ -62,9 +78,11 @@ public class AddExamActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_exam);
 
-
+        context=this;
+        form=new SimpleDateFormat("yyyy-MM-dd");
         formatter = new SimpleDateFormat("dd MMM yyyy");
         nameField = (EditText) findViewById(R.id.name_add_exam_field);
+        duration = (EditText) findViewById(R.id.duration_add_exam);
 
         dateField = (EditText) findViewById(R.id.date_add_exam_field);
         dateField.setInputType(InputType.TYPE_NULL);
@@ -129,13 +147,28 @@ public class AddExamActivity extends ActionBarActivity {
         sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roomPick.setAdapter(sca);
 
+        lectorField =(EditText) findViewById(R.id.instructor_add_exam_field);
+        descField = (EditText) findViewById(R.id.description_add_exam_field);
+
         saveExam = (Button) findViewById(R.id.button_add_exam);
+
         saveExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  * Logika do wstawiania nowych egzaminów
                  */
+                ActivityFactory af=new ActivityFactory(context);
+                String time=""+dat+" "+timeField.getText()+":00";
+                String howLong=""+dat+" "+timeField.getText()+":50";
+
+                Log.d("wybrana sala", roomPick.getSelectedItem().toString());
+                //Nie potrafie pobrać wybranej wartości ze spinnera.
+
+               // af.make("EXAMS", nameField.getText().toString(), time, howLong, period,
+                      //  adapter.getClassroom(roomPick.getSelectedItem().toString()), duration.getText().toString(),
+                      //  lectorField.getText().toString(), descField.getText().toString());
+
             }
         });
     }

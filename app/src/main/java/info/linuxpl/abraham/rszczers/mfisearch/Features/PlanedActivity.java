@@ -27,7 +27,7 @@ public abstract class PlanedActivity {
      */
 
     public int id;
-    public String name;
+    protected String name;
     protected String date;
     protected Classroom room;
     protected String duration;

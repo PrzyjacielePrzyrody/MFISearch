@@ -6,7 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
@@ -18,6 +20,7 @@ public class ShowSoonClass extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_soon_class);
 
+        DatabaseAdapter db=new DatabaseAdapter(this);
         Schedule s=new Schedule();
         PlanedActivity pa=s.findNextClasses(this);
         TextView name=(TextView) findViewById(R.id.soonActName);
@@ -25,9 +28,14 @@ public class ShowSoonClass extends ActionBarActivity {
         TextView room=(TextView) findViewById(R.id.actRoom);
         TextView free=(TextView) findViewById(R.id.lateOrBefore);
 
-        name.setText(pa.getName());
-        time.setText(pa.getDate());
-        room.setText(pa.getRoom().getName());
+        if(pa!=null) {
+            name.setText(pa.getName());
+            time.setText(pa.getDate());
+            room.setText(pa.getRoom().getName());
+            free.setText(Dates.timeBetween(pa));
+        }else{
+            name.setText("Nie masz najbliższy zajęć w tym miesiącu");
+        }
 
     }
 

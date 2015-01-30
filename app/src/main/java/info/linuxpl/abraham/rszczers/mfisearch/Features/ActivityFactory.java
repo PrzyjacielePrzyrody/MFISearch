@@ -36,7 +36,7 @@ public class ActivityFactory {
         PlanedActivity product = null;
         type = type.toUpperCase();
 
-        while (this.dbAdapter.stringToCalendar(date).before(dbAdapter.stringToCalendar(howLong))) {
+        while (Dates.stringToCalendar(date).before(Dates.stringToCalendar(howLong))) {
             if (type.equals("LECTURE")) {
                 product = new LecturePlaned(date, name, room, duration, instructor, description);
                 dbAdapter.add(product);
@@ -60,9 +60,9 @@ public class ActivityFactory {
             }
         Log.d("Tworze pierwsze zajęcie", ""+product.getDate());
 
-            Calendar when=this.dbAdapter.stringToCalendar(date);
+            Calendar when=Dates.stringToCalendar(date);
             when.add(Calendar.DATE, period);
-            date=dbAdapter.calendarToString(when);
+            date=Dates.calendarToString(when);
 
               // PlanedActivity product2=make(type, name, date, howLong, period, room, duration, instructor, description);
                // Log.d("Tworze zajęcie", ""+product.getDate());

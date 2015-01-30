@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +27,7 @@ import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseHelper;
@@ -50,7 +53,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
             data=i.getStringExtra("date");
         }else{
             Calendar current=Calendar.getInstance();
-            data=db.calendarToString(current);
+            data= Dates.calendarToString(current);
         }
 
         LinearLayout dayLayout= (LinearLayout) findViewById(R.id.dateLayout);
@@ -61,10 +64,10 @@ public class ViewScheduleActivity extends ActionBarActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar dat=db.stringToCalendar((String) datString.getText());
+                Calendar dat=Dates.stringToCalendar((String) datString.getText());
                 dat.add(Calendar.DATE, 1);
                 Intent update= new Intent(ViewScheduleActivity.this, ViewScheduleActivity.class);
-                update.putExtra("date", db.calendarToString(dat));
+                update.putExtra("date", Dates.calendarToString(dat));
                 finish();
                 startActivity(update);
             }
@@ -74,18 +77,18 @@ public class ViewScheduleActivity extends ActionBarActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar dat = db.stringToCalendar((String) datString.getText());
+                Calendar dat = Dates.stringToCalendar((String) datString.getText());
                 dat.add(Calendar.DATE, -1);
                 Intent update= new Intent(ViewScheduleActivity.this, ViewScheduleActivity.class);
-                update.putExtra("date", db.calendarToString(dat));
+                update.putExtra("date", Dates.calendarToString(dat));
                 finish();
                 startActivity(update);
             }
         });
 
         Schedule pl= new Schedule();
-        datString.setText(data);
-        datWeekDay.setText(db.weekDayName(db.stringToCalendar(data)));
+        datString.setText(data.split(" ")[0]);
+        datWeekDay.setText(Dates.weekDayName(Dates.stringToCalendar(data)));
 
 
         TreeMap<Calendar, PlanedActivity> tree= pl.getDaySchedule(data, this);
@@ -93,8 +96,18 @@ public class ViewScheduleActivity extends ActionBarActivity {
         ArrayList<PlanedActivity> list= pl.treeToArray(tree);
 
         ActivityRowAdapter adapter=new ActivityRowAdapter(this, R.layout.row_activity_list, list);
-        ListView lv=(ListView) findViewById(R.id.activitiesListView);
+        final ListView lv=(ListView) findViewById(R.id.activitiesListView);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PlanedActivity s=(PlanedActivity) lv.getItemAtPosition(position);
+                Toast.makeText(getBaseContext(), "Wybrałeś z listy"+s.getDescription(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
 
     }
 

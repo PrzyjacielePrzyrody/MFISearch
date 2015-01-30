@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:weightSum="8"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/school"
     android:tileMode="repeat"
-    >
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="100dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:weightSum="8">
+    android:id="@+id/rowLayout">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,7 +22,8 @@
     android:layout_height="fill_parent"
     android:layout_weight="5"
     android:weightSum="5"
-    android:layout_margin="10px">
+    android:layout_margin="10px"
+    android:id="@+id/rowRoomInfo">
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
@@ -74,7 +66,6 @@
                 android:layout_weight="2"
                 android:id="@+id/classroom" />
         </LinearLayout>
-        </LinearLayout>
-    </FrameLayout>
+
 
 </LinearLayout>

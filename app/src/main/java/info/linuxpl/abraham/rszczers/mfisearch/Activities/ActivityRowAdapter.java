@@ -53,8 +53,8 @@ public class ActivityRowAdapter extends ArrayAdapter<PlanedActivity> {
         }
 
         PlanedActivity act=activities.get(position);
-        holder.name.setText(act.getDescription());
-        holder.time.setText(act.getDate()); //brakuje funkcji żeby pobierac godzinę
+        holder.name.setText(act.getName());
+        holder.time.setText(act.getDate());
         holder.room.setText(act.getRoom().getName());
         holder.instructor.setText(act.getInstructor());
         holder.description.setText(act.getDescription());
