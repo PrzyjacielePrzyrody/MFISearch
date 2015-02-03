@@ -91,6 +91,7 @@ public class DatabaseAdapter {
      */
     public void delete(PlanedActivity product) {
         mfidb.delete(product.getTable(), product.id);
+        mfidb.close();
     }
 
 

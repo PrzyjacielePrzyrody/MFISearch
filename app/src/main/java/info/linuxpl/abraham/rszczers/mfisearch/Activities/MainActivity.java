@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
         DatabaseAdapter db=new DatabaseAdapter(this);
         ActivityFactory af=new ActivityFactory(this);
 
-
         Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
         soon_class.setOnClickListener(new View.OnClickListener() {
             @Override

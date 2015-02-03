@@ -44,6 +44,10 @@ public abstract class PlanedActivity {
 
     public String getName() { return this.name;}
 
+    public int getID(){
+        return this.id;
+    }
+
     public String getDate(){ return this.date;}
 
     public Classroom getRoom() { return room; }

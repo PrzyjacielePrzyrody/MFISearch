@@ -146,7 +146,7 @@ public class Dates {
 
     public static String getClassesTime(String date){
         int[][] dateTime=Dates.getDateTime(date);
-        String time=dateTime[2][0]+":"+dateTime[2][1]+":"+dateTime[2][2];
+        String time=dateTime[1][0]+":"+dateTime[1][1]+":"+dateTime[1][2];
         return time;
     }
 
@@ -210,5 +210,14 @@ public class Dates {
             output=null;
         }
         return output;
+    }
+
+    public static String fromToTime(String from, String minutesDuration){
+        Calendar cal=Dates.stringToCalendar(from);
+        int duration=Integer.parseInt(minutesDuration);
+        cal.add(Calendar.MINUTE, duration);
+        String fromTime=Dates.getClassesTime(from);
+        String toTime=Dates.getClassesTime(Dates.calendarToString(cal));
+        return fromTime+"-"+toTime;
     }
 }
