@@ -2,6 +2,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -29,6 +31,7 @@ import java.util.HashMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
@@ -77,6 +80,8 @@ public class AddExamActivity extends ActionBarActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_exam);
+
+
 
         context=this;
         form=new SimpleDateFormat("yyyy-MM-dd");
@@ -162,13 +167,13 @@ public class AddExamActivity extends ActionBarActivity {
                 String time=""+dat+" "+timeField.getText()+":00";
                 String howLong=""+dat+" "+timeField.getText()+":50";
 
-                Log.d("wybrana sala", roomPick.getSelectedItem().toString());
-                //Nie potrafie pobrać wybranej wartości ze spinnera.
+                Log.d("times", time+"      "+howLong);
+                Cursor cur=(Cursor) roomPick.getSelectedItem();
+                String room= cur.getString(cur.getColumnIndex("name"));
 
-               // af.make("EXAMS", nameField.getText().toString(), time, howLong, period,
-                      //  adapter.getClassroom(roomPick.getSelectedItem().toString()), duration.getText().toString(),
-                      //  lectorField.getText().toString(), descField.getText().toString());
-
+                PlanedActivity pa= af.make("EXAM", nameField.getText().toString(), time, howLong, period,
+                        adapter.getClassroom(room), duration.getText().toString(),
+                        lectorField.getText().toString(), descField.getText().toString());
             }
         });
     }

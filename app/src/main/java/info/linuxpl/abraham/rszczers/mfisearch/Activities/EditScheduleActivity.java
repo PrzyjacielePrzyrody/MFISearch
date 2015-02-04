@@ -1,19 +1,143 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import android.app.TimePickerDialog;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 
+import com.roomorama.caldroid.CaldroidFragment;
+import com.roomorama.caldroid.CaldroidListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
 public class EditScheduleActivity extends ActionBarActivity {
 
+    DatabaseAdapter adapter;
+    CaldroidFragment dialogCaldroidFragment;
+    EditText nameField;
+    EditText dateField;
+    EditText timeField;
+    SimpleDateFormat formatter;
+    Spinner roomPick;
+    TimePickerDialog tp;
+    Calendar calendar;
+    TimePickerDialog.OnTimeSetListener timePickerListener;
+    Button saveExam;
+
+    final CaldroidListener listener = new CaldroidListener() {
+
+        @Override
+        public void onSelectDate(Date date, View view) {
+            dateField.setText(formatter.format(date));
+            dialogCaldroidFragment.dismiss();
+        }
+
+        @Override
+        public void onCaldroidViewCreated() {
+        }
+
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_schedule);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_add_activity);
+
+        formatter = new SimpleDateFormat("dd MMM yyyy");
+        nameField = (EditText) findViewById(R.id.name_add_activity_field);
+
+        dateField = (EditText) findViewById(R.id.date_add_activity_field);
+        dateField.setInputType(InputType.TYPE_NULL);
+
+        dateField.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    dialogCaldroidFragment = CaldroidFragment.newInstance("Wybierz termin",
+                            calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.YEAR));
+                    dialogCaldroidFragment.setCaldroidListener(listener);
+                    dialogCaldroidFragment.show(getSupportFragmentManager(), "TAG");
+                }
+                return false;
+            }
+        });
+
+        calendar = Calendar.getInstance();
+
+        timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String h = Integer.toString(hourOfDay);
+                String m = Integer.toString(minute);
+
+                if(h.length()==1) {
+                    h = "0" + h;
+                }
+                if(m.length()==1) {
+                    m = "0" + m;
+                }
+                timeField.setText(h + ":" + m);
+            }
+        };
+
+        timeField = (EditText) findViewById(R.id.time_add_activity_field);
+        timeField.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    tp = new TimePickerDialog(EditScheduleActivity.this,
+                            TimePickerDialog.THEME_DEVICE_DEFAULT_DARK,
+                            timePickerListener,
+                            calendar.get(Calendar.HOUR_OF_DAY),
+                            calendar.get(Calendar.MINUTE),
+                            true);
+                    tp.setTitle("Wybierz godzinę");
+                    tp.show();
+                }
+                return false;
+            }
+        });
+
+        roomPick = (Spinner) findViewById(R.id.room_add_activity_spinner);
+        adapter = new DatabaseAdapter(getApplicationContext());
+        SimpleCursorAdapter sca = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
+                adapter.getRoomNames(),
+                new String[] {"name"},
+                new int[] {android.R.id.text1}, 0);
+        sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        roomPick.setAdapter(sca);
+
+        saveExam = (Button) findViewById(R.id.button_add_activity);
+        saveExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * Logika do wstawiania nowych egzaminów
+                 */
+            }
+        });
     }
 
 

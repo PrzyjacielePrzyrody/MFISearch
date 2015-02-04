@@ -77,10 +77,16 @@ public class Schedule implements Faculty <PlanedActivity, String> {
 
         DatabaseAdapter db = new DatabaseAdapter(context);
         TreeMap<Calendar, PlanedActivity> dayShedule = new TreeMap<Calendar, PlanedActivity>();
-        PlanedActivity pa;
         ActivityFactory af = new ActivityFactory(context);
         String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
+        //Cursor[] activities=db.getEverything();
         Cursor[] activities = db.getDayActivities(date, tables);
+        int o=0;
+        for(int i=0; i<activities.length;i++){
+            o=o+activities[i].getCount();
+
+        }
+
         dayShedule = getActivitiesTree(activities, tables, context);
 
         return dayShedule;

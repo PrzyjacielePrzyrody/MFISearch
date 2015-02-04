@@ -58,7 +58,7 @@ public class ActivityFactory {
                 //ustawia pole id w obiekcie po nadaniu go w bazie.
                 product.setID(dbAdapter.getID(product));
             }
-        Log.d("Tworze pierwsze zajęcie", ""+product.getDate());
+      //  Log.d("Tworze pierwsze zajęcie", ""+product.getDate());
 
             Calendar when=Dates.stringToCalendar(date);
             when.add(Calendar.DATE, period);

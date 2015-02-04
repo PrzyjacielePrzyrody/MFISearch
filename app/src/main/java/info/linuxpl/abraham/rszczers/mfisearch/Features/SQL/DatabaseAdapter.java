@@ -75,7 +75,7 @@ public class DatabaseAdapter {
 
         HashMap<String, String> hm=new HashMap<String, String>();
         hm.put("name", product.getName());
-        hm.put("date", product.getDate());
+        hm.put("date", Dates.dateTimeToString(product.getDate()));
         hm.put("room", product.getRoom().getName());
         hm.put("duration", product.getDuration());
         hm.put("instructor",product.getInstructor());
@@ -220,7 +220,23 @@ public class DatabaseAdapter {
         String sql = "select _id, name from ROOMS order by name ";
         Cursor c = db.rawQuery(sql, null);
         c.moveToFirst();
+        db.close();
         return c;
+    }
+
+    public Cursor[] getEverything(){
+        Cursor[] output=new Cursor[4];
+        SQLiteDatabase db = mfidb.getReadableDatabase();
+        String[] tables= {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
+
+        Cursor queries;
+        for (int i = 0; i < tables.length; i++) {
+            queries = db.query(tables[i], null, null, null, null, null, null, null);
+            queries.moveToFirst();
+            output[i]=queries;
+        }
+        db.close();
+        return output;
     }
 }
 

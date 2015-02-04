@@ -85,7 +85,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
         datWeekDay.setText(Dates.weekDayName(Dates.stringToCalendar(data)));
 
 
-        TreeMap<Calendar, PlanedActivity> tree = pl.getDaySchedule(data, this);
+        TreeMap<Calendar, PlanedActivity> tree = pl.getDaySchedule(Dates.dateToString(data), this);
 
         list = pl.treeToArray(tree);
 
@@ -97,8 +97,6 @@ public class ViewScheduleActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PlanedActivity s = (PlanedActivity) lv.getItemAtPosition(position);
                 Toast.makeText(getBaseContext(), "Wybrałeś z listy " + s.getID(), Toast.LENGTH_SHORT).show();
-
-                //chcę tu zrobić menu
             }
 
         });
