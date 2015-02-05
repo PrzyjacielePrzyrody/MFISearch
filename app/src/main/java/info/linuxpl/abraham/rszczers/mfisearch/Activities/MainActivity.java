@@ -1,8 +1,5 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
-import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
-import info.linuxpl.abraham.rszczers.mfisearch.Features.ExamPlaned;
-import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,13 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.TreeMap;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
-import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseHelper;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
@@ -28,6 +27,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        DatabaseAdapter db=new DatabaseAdapter(this);
+        ActivityFactory af=new ActivityFactory(this);
 
 
         Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
@@ -43,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_schedule= new Intent(MainActivity.this, Schedule.class);
+                Intent change_to_schedule= new Intent(MainActivity.this, ScheduleActivity.class);
                 startActivity(change_to_schedule);
             }
         });

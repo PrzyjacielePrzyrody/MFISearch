@@ -36,6 +36,7 @@
     <string name="choose_lev">Wybierz piętro</string>
     <string name="viewDay">Dzień</string>
     <string name="viewWeek">Tydzień</string>
+    <string name="period_add_act">Powtarzalność (w dniach)</string>
 
     <string-array name="levels">
         <item>0</item>

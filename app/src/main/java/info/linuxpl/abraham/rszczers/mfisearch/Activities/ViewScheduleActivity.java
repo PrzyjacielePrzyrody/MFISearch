@@ -1,53 +1,137 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TabHost;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TreeMap;
 
-import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
-import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
-import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseHelper;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
 public class ViewScheduleActivity extends ActionBarActivity {
 
+    private ArrayList<PlanedActivity> list;
+    private ActivityRowAdapter adapter;
+   //
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_schedule);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_schedule);
 
-        TabHost tabhost= (TabHost) findViewById(R.id.dayOrWeek);
 
-        tabhost.setup();
-        TabHost.TabSpec find=tabhost.newTabSpec("Find");
-        find.setContent(R.id.day);
-        find.setIndicator(getString(R.string.viewDay));
-        tabhost.addTab(find);
+        Intent i = getIntent();
+        String data;
+
+        if (i.getStringExtra("date") != null) {
+            data = i.getStringExtra("date");
+        } else {
+            Calendar current = Calendar.getInstance();
+            data = Dates.calendarToString(current);
+        }
+
+        LinearLayout dayLayout = (LinearLayout) findViewById(R.id.dateLayout);
+        final TextView datString = (TextView) dayLayout.findViewById(R.id.dayOfWeek);
+        final TextView datWeekDay = (TextView) dayLayout.findViewById(R.id.textViewDayName);
+
+        Button next = (Button) findViewById(R.id.btnNext);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar dat = Dates.stringToCalendar((String) datString.getText());
+                dat.add(Calendar.DATE, 1);
+                Intent update = new Intent(ViewScheduleActivity.this, ViewScheduleActivity.class);
+                update.putExtra("date", Dates.calendarToString(dat));
+                finish();
+                startActivity(update);
+            }
+        });
+
+        Button previous = (Button) findViewById(R.id.btnPrevious);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar dat = Dates.stringToCalendar((String) datString.getText());
+                dat.add(Calendar.DATE, -1);
+                Intent update = new Intent(ViewScheduleActivity.this, ViewScheduleActivity.class);
+                update.putExtra("date", Dates.calendarToString(dat));
+                finish();
+                startActivity(update);
+            }
+        });
+
+        Schedule pl = new Schedule();
+        datString.setText(data.split(" ")[0]);
+        datWeekDay.setText(Dates.weekDayName(Dates.stringToCalendar(data)));
 
 
-        find=tabhost.newTabSpec("View");
-        find.setContent(R.id.week);
-        find.setIndicator(getString(R.string.viewWeek));
-        tabhost.addTab(find);
+        TreeMap<Calendar, PlanedActivity> tree = pl.getDaySchedule(Dates.dateToString(data), this);
 
+        list = pl.treeToArray(tree);
 
+        adapter = new ActivityRowAdapter(this, R.layout.row_activity_list, list);
+        final ListView lv = (ListView) findViewById(R.id.activitiesListView);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PlanedActivity s = (PlanedActivity) lv.getItemAtPosition(position);
+                Toast.makeText(getBaseContext(), "Wybrałeś z listy " + s.getID(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        registerForContextMenu(lv);
     }
 
+        @Override
+        public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo
+        menuInfo){
+            super.onCreateContextMenu(menu, v, menuInfo);
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.schedule_menu, menu);
+        }
+
+        @Override
+        public boolean onContextItemSelected (MenuItem item){
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            switch (item.getItemId()) {
+                case R.id.find_map_menu:
+                   Toast.makeText(this, "Rafałku, to dla Ciebie", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.delete_from_shedule:
+                    PlanedActivity s = (PlanedActivity) list.get(info.position);
+                    Toast.makeText(getBaseContext(), "Wybrałeś z listy" + s.getID(), Toast.LENGTH_SHORT).show();
+                    final DatabaseAdapter db = new DatabaseAdapter(this);
+                    db.delete(s);
+                    list.remove(info.position);
+                    adapter.notifyDataSetChanged();
+
+                    return true;
+                default:
+                    return super.onContextItemSelected(item);
+            }
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

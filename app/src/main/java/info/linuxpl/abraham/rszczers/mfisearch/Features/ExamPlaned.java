@@ -11,7 +11,7 @@ public class ExamPlaned extends PlanedActivity {
 
     public ExamPlaned(String date, String name, Classroom room, String duration, String instructor,
                               String description){
-        this.name=name;
+        this.setName(name);
         this.setDate(date);
         this.setRoom(room);
         this.setDuration(""+duration);

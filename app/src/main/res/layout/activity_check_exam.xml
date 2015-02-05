@@ -4,7 +4,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.CheckExamActivity">
+    tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.CheckExamActivity"
+    android:background="@drawable/school"
+    android:tileMode="repeat">
 
     <TextView android:text="Tu będzie spis egzamin↓w, terminy i inne rzeczy" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
