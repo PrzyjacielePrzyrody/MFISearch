@@ -16,7 +16,7 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_exams">ExamsActivity</string>
     <string name="see_schedule">Przeglądaj plan zajęć</string>
-    <string name="edit_schedule">Edytuj plan zajęć</string>
+    <string name="edit_schedule">Dodaj zajęcie</string>
     <string name="add_schedule">Dodaj plan zajęć</string>
     <string name="title_activity_view_schedule_actity">ViewScheduleActity</string>
     <string name="title_activity_view_schedule">ViewScheduleActivity</string>

@@ -63,7 +63,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pozostały czas"/>
+                    android:text="Pozostały czas"
+                    android:id="@+id/lateOrBe"/>
                 <TextView
                     android:textColor="@color/caldroid_black"
                     android:layout_width="wrap_content"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
@@ -73,19 +74,19 @@ public class Schedule implements Faculty <PlanedActivity, String> {
      * @return
      */
 
-    public TreeMap<Calendar, PlanedActivity> getDaySchedule(String date, Context context) {
+    public TreeMap<Calendar, PlanedActivity> getDaySchedule(String date, Context context, String[] tables) {
 
         DatabaseAdapter db = new DatabaseAdapter(context);
         TreeMap<Calendar, PlanedActivity> dayShedule = new TreeMap<Calendar, PlanedActivity>();
-        ActivityFactory af = new ActivityFactory(context);
-        String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
+        //ActivityFactory af = new ActivityFactory(context);
+        //String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
         //Cursor[] activities=db.getEverything();
         Cursor[] activities = db.getDayActivities(date, tables);
-        int o=0;
-        for(int i=0; i<activities.length;i++){
-            o=o+activities[i].getCount();
+       // int o=0;
+        //for(int i=0; i<activities.length;i++){
+         //   o=o+activities[i].getCount();
 
-        }
+        //}
 
         dayShedule = getActivitiesTree(activities, tables, context);
 
@@ -149,23 +150,27 @@ public class Schedule implements Faculty <PlanedActivity, String> {
 
     public PlanedActivity findNextClasses(Context context){
         Calendar cal=Calendar.getInstance();
-        DatabaseAdapter db=new DatabaseAdapter(context);
         String[] date=Dates.calendarToString(cal).split(" ");
-        TreeMap<Calendar, PlanedActivity> day=getDaySchedule(date[0], context);
+        TreeMap<Calendar, PlanedActivity> day=getDaySchedule(date[0], context, new String[]{"EXAMS", "EXERCISES", "LECTURES", "OTHER"});
         Calendar key;
         PlanedActivity pa=null;
-        String bef="2014-01-01 00:00:00";
+        Calendar bef=Calendar.getInstance();
+        bef.add(Calendar.MINUTE, -15);
         int i=1;
-        while(Dates.stringToCalendar(bef).before(cal) && i<30) {
+
+        while(bef.before(cal) && i<30) {
 
             if (!day.isEmpty()) {
                 key = day.firstKey();
                 pa = day.remove(key);
-                bef = pa.getDate();
-            } else {
-                cal.add(Calendar.DATE, 1);
+                bef = Dates.stringToCalendar(pa.getDate());
+                bef.add(Calendar.MINUTE, 15);
+               // cal = Dates.stringToCalendar(pa.getDate());
+                Log.d("jestem w if", pa.getDate()+"    a cal to "+Dates.calendarToString(cal));
+            }else {
+                cal.add(Calendar.DAY_OF_MONTH, 1);
                 date = Dates.calendarToString(cal).split(" ");
-                day = getDaySchedule(date[0], context);
+                day = getDaySchedule(date[0], context, new String[]{"EXAMS", "EXERCISES", "LECTURES", "OTHER"});
                 i++;
             }
         }

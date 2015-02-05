@@ -13,19 +13,31 @@ import java.util.GregorianCalendar;
  */
 public class Dates {
 
-    public static String timeBetween(PlanedActivity pa) {
+    public static String[] timeBetween(PlanedActivity pa) {
 
         Calendar start = Dates.stringToCalendar(pa.getDate());
         Calendar now = Calendar.getInstance();
+        Date date1;
+        Date date2 ;
+        String info;
+    if(now.after(start)){
+         date1 = Dates.calendarToSimpledateFormat(start);
+         date2 = Dates.calendarToSimpledateFormat(now);
+        info="Spóźnienie";
 
-        Date date1 = Dates.calendarToSimpledateFormat(now);
-        Date date2 = Dates.calendarToSimpledateFormat(start);
-        Log.d("daty w simple format",""+date1.toString()+"        "+date2.toString());
+    }else {
+
+         date1 = Dates.calendarToSimpledateFormat(now);
+         date2 = Dates.calendarToSimpledateFormat(start);
+        info="Pozostały czas";
+    }
 
             Interval interval =
                     new Interval(date1.getTime(), date2.getTime());
             Period period = interval.toPeriod();
-             String output = period.getDays() +"dni"+ period.getHours()+"godzin "+ period.getMinutes()+"minut ";
+            String[] output=new String[2];
+             output[0] = period.getMonths()+"miesięcy"+period.getDays() +"dni"+ period.getHours()+"godzin "+ period.getMinutes()+"minut ";
+             output[1]=info;
         return output;
     }
 
@@ -152,9 +164,6 @@ public class Dates {
 
     public static String calendarToString(Calendar day){
         int month=day.get(Calendar.MONTH)+1;
-        String tekst;
-
-
         return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH)+" "+day.get(Calendar.HOUR_OF_DAY)+":"+day.get(Calendar.MINUTE)+":"+day.get(Calendar.SECOND);
     }
 
