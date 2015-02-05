@@ -3,6 +3,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -115,18 +116,27 @@ public class ViewScheduleActivity extends ActionBarActivity {
         @Override
         public boolean onContextItemSelected (MenuItem item){
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            PlanedActivity s = (PlanedActivity) list.get(info.position);
             switch (item.getItemId()) {
                 case R.id.find_map_menu:
                    Toast.makeText(this, "Rafałku, to dla Ciebie", Toast.LENGTH_SHORT).show();
                     return true;
+
                 case R.id.delete_from_shedule:
-                    PlanedActivity s = (PlanedActivity) list.get(info.position);
+
                     Toast.makeText(getBaseContext(), "Wybrałeś z listy" + s.getID(), Toast.LENGTH_SHORT).show();
                     final DatabaseAdapter db = new DatabaseAdapter(this);
                     db.delete(s);
                     list.remove(info.position);
                     adapter.notifyDataSetChanged();
+                    return true;
 
+                case R.id.edit_schedule_menu:
+                    Intent update = new Intent(ViewScheduleActivity.this, EditScheduleActivity.class);
+                    Log.d("id przed inteenetm", ""+s.getID());
+                    update.putExtra("id", ""+s.getID());
+                    update.putExtra("table", s.getTable());
+                    startActivity(update);
                     return true;
                 default:
                     return super.onContextItemSelected(item);

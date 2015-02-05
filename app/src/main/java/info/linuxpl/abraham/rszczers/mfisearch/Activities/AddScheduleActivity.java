@@ -144,13 +144,6 @@ public class AddScheduleActivity extends ActionBarActivity {
         sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roomPick.setAdapter(sca);
 
-        //boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-
-
-
-
         lectorField =(EditText) findViewById(R.id.instructor_add_activity_field);
         descField = (EditText) findViewById(R.id.description_add_activity_field);
         period=(EditText) findViewById(R.id.period_add_activity_field);
@@ -168,7 +161,7 @@ public class AddScheduleActivity extends ActionBarActivity {
                 String howLong="2015-05-03 12:00:50";
                 int per=Integer.parseInt(period.getText().toString());
 
-                Log.d("times", time + "      " + howLong);
+              //  Log.d("times", time + "      " + howLong);
                 Cursor cur=(Cursor) roomPick.getSelectedItem();
                 String room= cur.getString(cur.getColumnIndex("name"));
                 int selectedId=activityTypes.getCheckedRadioButtonId();
@@ -184,7 +177,7 @@ public class AddScheduleActivity extends ActionBarActivity {
                         napi="other";
                         break;
                 }
-                Log.d("wybrałeś: ", napi);
+
                 PlanedActivity pa= af.make(napi, nameField.getText().toString(), time, howLong, per,
                         adapter.getClassroom(room), duration.getText().toString(),
                         lectorField.getText().toString(), descField.getText().toString());

@@ -95,6 +95,15 @@ public class DatabaseAdapter {
     }
 
 
+    public Cursor getActivity(String table, int id){
+        SQLiteDatabase db=mfidb.getReadableDatabase();
+        String where="_id="+id;
+        Cursor c=db.query(table, null, where, null, null, null, null, null );
+        c.moveToFirst();
+        db.close();
+        return c;
+    }
+
     public Classroom getClassroom(String name){
         SQLiteDatabase db=mfidb.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
