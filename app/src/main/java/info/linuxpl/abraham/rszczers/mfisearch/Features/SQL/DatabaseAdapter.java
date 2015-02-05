@@ -95,6 +95,15 @@ public class DatabaseAdapter {
     }
 
 
+    public Cursor getActivity(String table, int id){
+        SQLiteDatabase db=mfidb.getReadableDatabase();
+        String where="_id="+id;
+        Cursor c=db.query(table, null, where, null, null, null, null, null );
+        c.moveToFirst();
+        db.close();
+        return c;
+    }
+
     public Classroom getClassroom(String name){
         SQLiteDatabase db=mfidb.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -176,7 +185,7 @@ public class DatabaseAdapter {
      */
 
     public Cursor[] getDayActivities(String date, String[] tables){
-        Cursor[] output=new Cursor[4];
+        Cursor[] output=new Cursor[tables.length];
         SQLiteDatabase db = mfidb.getReadableDatabase();
         String day = Dates.dateToString(date);
         String selection = "date LIKE '" + day + "%'";

@@ -33,7 +33,7 @@ public class ScheduleActivity extends ActionBarActivity {
         edit_schedul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent change_to_edit_schedule= new Intent(ScheduleActivity.this, EditScheduleActivity.class);
+                Intent change_to_edit_schedule= new Intent(ScheduleActivity.this, AddScheduleActivity.class);
                 startActivity(change_to_edit_schedule);
             }
         });
