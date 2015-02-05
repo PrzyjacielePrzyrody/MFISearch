@@ -176,7 +176,7 @@ public class DatabaseAdapter {
      */
 
     public Cursor[] getDayActivities(String date, String[] tables){
-        Cursor[] output=new Cursor[4];
+        Cursor[] output=new Cursor[tables.length];
         SQLiteDatabase db = mfidb.getReadableDatabase();
         String day = Dates.dateToString(date);
         String selection = "date LIKE '" + day + "%'";

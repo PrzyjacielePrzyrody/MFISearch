@@ -85,7 +85,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
         datWeekDay.setText(Dates.weekDayName(Dates.stringToCalendar(data)));
 
 
-        TreeMap<Calendar, PlanedActivity> tree = pl.getDaySchedule(Dates.dateToString(data), this);
+        TreeMap<Calendar, PlanedActivity> tree = pl.getDaySchedule(Dates.dateToString(data), this, new String[]{"EXAMS", "EXERCISES", "LECTURES", "OTHER"});
 
         list = pl.treeToArray(tree);
 
