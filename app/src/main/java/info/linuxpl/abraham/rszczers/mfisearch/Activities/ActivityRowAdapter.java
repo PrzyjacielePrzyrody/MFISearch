@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
@@ -45,6 +46,7 @@ public class ActivityRowAdapter extends ArrayAdapter<PlanedActivity> {
             holder.room = (TextView)row.findViewById(R.id.classroom);
             holder.instructor = (TextView)dane.findViewById(R.id.lector);
             holder.description=(TextView)dane.findViewById(R.id.activityDescription);
+            holder.id=(TextView) row.findViewById(R.id.id_planed_activity);
 
             row.setTag(holder);
 
@@ -54,10 +56,11 @@ public class ActivityRowAdapter extends ArrayAdapter<PlanedActivity> {
 
         PlanedActivity act=activities.get(position);
         holder.name.setText(act.getName());
-        holder.time.setText(act.getDate()); //brakuje funkcji żeby pobierac godzinę
+        holder.time.setText(Dates.fromToTime(act.getDate(), act.getDuration()));
         holder.room.setText(act.getRoom().getName());
         holder.instructor.setText(act.getInstructor());
         holder.description.setText(act.getDescription());
+        holder.id.setText(""+act.getID());
 
         return row;
 
@@ -69,6 +72,7 @@ public class ActivityRowAdapter extends ArrayAdapter<PlanedActivity> {
         protected TextView room;
         protected TextView instructor;
         protected  TextView description;
+        protected TextView id;
 
     }
 }

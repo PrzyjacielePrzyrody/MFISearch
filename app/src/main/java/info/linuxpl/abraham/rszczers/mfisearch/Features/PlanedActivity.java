@@ -27,7 +27,7 @@ public abstract class PlanedActivity {
      */
 
     public int id;
-    public String name;
+    protected String name;
     protected String date;
     protected Classroom room;
     protected String duration;
@@ -42,21 +42,19 @@ public abstract class PlanedActivity {
      */
     public abstract void edit();
 
-    public String getName() { return name;}
+    public String getName() { return this.name;}
 
-    public String getDate(){
-        return this.date;
+    public int getID(){
+        return this.id;
     }
 
-
+    public String getDate(){ return this.date;}
 
     public Classroom getRoom() { return room; }
 
     public String getDuration() { return duration; }
 
     public String getDescription() { return description;}
-
-
 
     public String getInstructor() { return instructor; }
 

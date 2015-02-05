@@ -2,6 +2,8 @@ package info.linuxpl.abraham.rszczers.mfisearch.Features;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
@@ -53,7 +55,7 @@ public class Schedule implements Faculty <PlanedActivity, String> {
                     instructor = query.getString(query.getColumnIndex("instructor"));
 
                     pa = af.get(tables[i], name, dateA, room, duration, instructor, description);
-                    tree.put(db.stringToCalendar(pa.getDate()), pa);
+                    tree.put(Dates.stringToCalendar(pa.getDate()), pa);
                     query.moveToNext();
                 }
             }
@@ -75,10 +77,16 @@ public class Schedule implements Faculty <PlanedActivity, String> {
 
         DatabaseAdapter db = new DatabaseAdapter(context);
         TreeMap<Calendar, PlanedActivity> dayShedule = new TreeMap<Calendar, PlanedActivity>();
-        PlanedActivity pa;
         ActivityFactory af = new ActivityFactory(context);
         String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
+        //Cursor[] activities=db.getEverything();
         Cursor[] activities = db.getDayActivities(date, tables);
+        int o=0;
+        for(int i=0; i<activities.length;i++){
+            o=o+activities[i].getCount();
+
+        }
+
         dayShedule = getActivitiesTree(activities, tables, context);
 
         return dayShedule;
@@ -93,11 +101,11 @@ public class Schedule implements Faculty <PlanedActivity, String> {
      */
     public ArrayList<PlanedActivity>[] getWeekSchedule(String date, Context context) {
         DatabaseAdapter db = new DatabaseAdapter(context);
-        Calendar day = db.stringToCalendar(date);
+        Calendar day = Dates.stringToCalendar(date);
         day.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        String from = db.calendarToString(day);
+        String from = Dates.calendarToString(day);
         day.add(Calendar.DAY_OF_MONTH, 7);
-        String to = db.calendarToString(day);
+        String to = Dates.calendarToString(day);
         ActivityFactory af = new ActivityFactory(context);
         PlanedActivity pa;
 
@@ -137,6 +145,31 @@ public class Schedule implements Faculty <PlanedActivity, String> {
             list.add(p);
         }
         return list;
+    }
+
+    public PlanedActivity findNextClasses(Context context){
+        Calendar cal=Calendar.getInstance();
+        DatabaseAdapter db=new DatabaseAdapter(context);
+        String[] date=Dates.calendarToString(cal).split(" ");
+        TreeMap<Calendar, PlanedActivity> day=getDaySchedule(date[0], context);
+        Calendar key;
+        PlanedActivity pa=null;
+        String bef="2014-01-01 00:00:00";
+        int i=1;
+        while(Dates.stringToCalendar(bef).before(cal) && i<30) {
+
+            if (!day.isEmpty()) {
+                key = day.firstKey();
+                pa = day.remove(key);
+                bef = pa.getDate();
+            } else {
+                cal.add(Calendar.DATE, 1);
+                date = Dates.calendarToString(cal).split(" ");
+                day = getDaySchedule(date[0], context);
+                i++;
+            }
+        }
+       return pa;
     }
 
 }

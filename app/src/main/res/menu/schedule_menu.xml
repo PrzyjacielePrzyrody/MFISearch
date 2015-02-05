@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/find_map_menu"
+        android:title="Znajdź na planie"/>
+    <item
+        android:id="@+id/edit_schedule_menu"
+        android:title="Edytuj"/>
+    <item
+        android:id="@+id/delete_from_shedule"
+        android:title="Usuń" />
+</menu>

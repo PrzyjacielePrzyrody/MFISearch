@@ -24,6 +24,7 @@ import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Classroom;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ExamPlaned;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 
@@ -73,7 +74,8 @@ public class DatabaseAdapter {
     public void add(PlanedActivity product) {
 
         HashMap<String, String> hm=new HashMap<String, String>();
-        hm.put("date", product.getDate());
+        hm.put("name", product.getName());
+        hm.put("date", Dates.dateTimeToString(product.getDate()));
         hm.put("room", product.getRoom().getName());
         hm.put("duration", product.getDuration());
         hm.put("instructor",product.getInstructor());
@@ -89,6 +91,7 @@ public class DatabaseAdapter {
      */
     public void delete(PlanedActivity product) {
         mfidb.delete(product.getTable(), product.id);
+        mfidb.close();
     }
 
 
@@ -175,7 +178,7 @@ public class DatabaseAdapter {
     public Cursor[] getDayActivities(String date, String[] tables){
         Cursor[] output=new Cursor[4];
         SQLiteDatabase db = mfidb.getReadableDatabase();
-        String day = this.dateToString(date);
+        String day = Dates.dateToString(date);
         String selection = "date LIKE '" + day + "%'";
         Cursor queries;
         for (int i = 0; i < tables.length; i++) {
@@ -189,162 +192,6 @@ public class DatabaseAdapter {
 
 
     /**
-     * Zwraca tablice zawierającą tablice DATE i TIME
-     * @param date
-     * @return
-     */
-
-
-    public int[][] getDateTime(String date){
-
-        int[] data=new int[3];
-        int[] tim=new int[3];
-        int[][] output =new int[2][];
-
-        if(date.contains(" ")){
-            String[] datetime=date.split(" ");
-            String[] dat= datetime[0].split("-");
-            String[] time=datetime[1].split(":");
-            for(int i=0; i<dat.length; i++){
-                data[i]=Integer.parseInt(dat[i]);
-            }
-            for(int i=0; i<time.length; i++){
-                tim[i]=Integer.parseInt(time[i]);
-            }
-
-            output[0]=data;
-            output[1]=tim;
-        }
-        else{
-            String[] dat= date.split("-");
-            int[] datee=new int[3];
-            for(int i=0; i<dat.length; i++){
-                datee[i]=Integer.parseInt(dat[i]);
-            }
-            output[0]=datee;
-            output[1]=null;
-        }
-
-        return output;
-
-    }
-
-    public int[] getDate(String date){
-        String[] dat= date.split("-");
-        int[] data=new int[3];
-        for(int i=0; i<dat.length; i++){
-            data[i]=Integer.parseInt(dat[i]);
-        }
-        return data;
-    }
-
-    /**
-     * Usuwa niepotrzebne zera przy podanej dacie (Data podana razem z godziną). (Jeszcze w sumie nie wiem czy to potrzebne)
-     * @param date
-     * @return
-     */
-
-    public String dateTimeToString(String date){
-        int[][] d=this.getDateTime(date);
-        String minutes;
-        String seconds;
-        if(d[1][1]<10){
-            minutes="0"+d[1][1];
-        }else{
-            minutes=""+d[1][1];
-        }
-        if(d[1][2]<10){
-            seconds="0"+d[1][2];
-        }else{
-            seconds=""+d[1][2];
-        }
-        String output=d[0][0]+"-"+d[0][1]+"-"+d[0][2]+" "+d[1][0]+":"+minutes+":"+seconds;
-        return output;
-
-    }
-
-    /**
-     * Usuwa niepotrzebne zera w samej dacie. Przyda się przy wyszukiwaniu.
-     * @param date
-     * @return
-     */
-    public String dateToString(String date){
-        String[] dat;
-        String output;
-        if(date.contains(" ")){
-            String[] datetime=date.split(" ");
-            dat= datetime[0].split("-");
-        }
-        else {
-            dat = date.split("-");
-        }
-        int[] d=new int[3];
-
-        for(int i=0; i<dat.length; i++){
-            d[i]=Integer.parseInt(dat[i]);
-        }
-
-        return output=d[0]+"-"+d[1]+"-"+d[2];
-
-    }
-
-    /**
-     * Tworzy Calendar z podanej daty.
-     * @param date
-     * @return
-     */
-    public Calendar stringToCalendar(String date){
-        GregorianCalendar calendar;
-        int[][] dt;//=new int[2][];
-        if(date.contains(" ")){
-            dt= this.getDateTime(date);
-            calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2], dt[1][0], dt[1][1], dt[1][2]);
-        }
-        else {
-
-            dt=this.getDateTime(date);
-            calendar=new GregorianCalendar(dt[0][0], dt[0][1]-1, dt[0][2]);
-
-        }
-
-        return calendar;
-    }
-
-    public String getClassesTime(String date){
-        int[][] dateTime=this.getDateTime(date);
-        String time=dateTime[2][0]+":"+dateTime[2][1]+":"+dateTime[2][2];
-        return time;
-    }
-
-    public String calendarToString(Calendar day){
-        int month=day.get(Calendar.MONTH)+1;
-        String tekst;
-
-
-        return ""+day.get(Calendar.YEAR)+"-"+month+"-"+day.get(Calendar.DAY_OF_MONTH)+" "+day.get(Calendar.HOUR)+":"+day.get(Calendar.MINUTE)+":"+day.get(Calendar.SECOND);
-    }
-
-    public String weekDayName(Calendar cal){
-        String name="";
-        switch (cal.get(Calendar.DAY_OF_WEEK)) {
-            case 1: name="Niedziela";
-                    break;
-            case 2:name="Poniedziałek";
-                    break;
-            case  3: name= "Wtorek";
-                    break;
-            case 4: name="Środa";
-                break;
-            case 5 :name="Czwartek";
-                break;
-            case  6: name= "Piątek";
-                break;
-            case 7:name="Sobota";
-        }
-        return name;
-    }
-
-    /**
      * Pobiera z bazy danych zajęcia odbywające się pomiędzy podanymi datami
      * @param date1
      * @param date2
@@ -354,8 +201,8 @@ public class DatabaseAdapter {
     public Cursor[] getWeek(String date1, String date2, String[] tables){
         Cursor[] output=new Cursor[4];
         SQLiteDatabase db = mfidb.getReadableDatabase();
-        String from = this.dateToString(date1);
-        String to=this.dateToString(date2);
+        String from = Dates.dateToString(date1);
+        String to=Dates.dateToString(date2);
         String selection = "date BETWEEN '" + from + "' AND '"+ to+"'";
         Cursor queries;
         for (int i = 0; i < tables.length; i++) {
@@ -373,7 +220,23 @@ public class DatabaseAdapter {
         String sql = "select _id, name from ROOMS order by name ";
         Cursor c = db.rawQuery(sql, null);
         c.moveToFirst();
+        db.close();
         return c;
+    }
+
+    public Cursor[] getEverything(){
+        Cursor[] output=new Cursor[4];
+        SQLiteDatabase db = mfidb.getReadableDatabase();
+        String[] tables= {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
+
+        Cursor queries;
+        for (int i = 0; i < tables.length; i++) {
+            queries = db.query(tables[i], null, null, null, null, null, null, null);
+            queries.moveToFirst();
+            output[i]=queries;
+        }
+        db.close();
+        return output;
     }
 }
 
