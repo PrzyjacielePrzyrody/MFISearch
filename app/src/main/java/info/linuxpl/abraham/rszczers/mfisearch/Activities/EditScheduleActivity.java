@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,7 +66,7 @@ public class EditScheduleActivity extends ActionBarActivity {
         @Override
         public void onSelectDate(Date date, View view) {
             dateField.setText(formatter.format(date));
-            dat=form.format(date);
+            dat = form.format(date);
             dialogCaldroidFragment.dismiss();
         }
 
@@ -83,8 +84,9 @@ public class EditScheduleActivity extends ActionBarActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_activity);
-        context=this;
-        form=new SimpleDateFormat("yyyy-MM-dd");
+
+        context = this;
+        form = new SimpleDateFormat("yyyy-MM-dd");
         formatter = new SimpleDateFormat("dd MMM yyyy");
         nameField = (EditText) findViewById(R.id.name_add_activity_field);
 
@@ -169,6 +171,23 @@ public class EditScheduleActivity extends ActionBarActivity {
         descField.setText(cur.getString(cur.getColumnIndex("description")));
         period.setText(""+cur.getInt(cur.getColumnIndex("period")));
         duration.setText(cur.getString(cur.getColumnIndex("duration")));
+
+        // Time and date setting for specified Exam
+        // String -> SimpleDateFormat
+        // yyyy-mm-dd hh:mm:ss
+
+        String tmp = cur.getString(cur.getColumnIndex("date"));
+        SimpleDateFormat dateExamSetter = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        try {
+            String examDate = dateExamSetter.parse(tmp).toString();
+            String[] parseArr = examDate.split(" ");
+            examDate = parseArr[2] + " " + parseArr[1] + " " + parseArr[parseArr.length - 1];
+            parseArr = parseArr[3].split(":");
+            dateField.setText(examDate);
+            timeField.setText(parseArr[0]+":"+parseArr[1]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         typeExercise=(RadioButton) findViewById(R.id.radio_type_exercise);
         typeLectures=(RadioButton) findViewById(R.id.radio_type_lecture);
