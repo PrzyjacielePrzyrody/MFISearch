@@ -64,7 +64,6 @@ public class EditExamActivity extends ActionBarActivity {
 
        Intent i=this.getIntent();
 
-
         formatter = new SimpleDateFormat("dd MMM yyyy");
         nameField = (EditText) findViewById(R.id.name_add_exam_field);
 

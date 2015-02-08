@@ -36,10 +36,10 @@ public class ShowSoonClass extends ActionBarActivity {
             labelFree.setText(Dates.timeBetween(pa)[1]);
             free.setText(Dates.timeBetween(pa)[0]);
 
-        }else{
+        } else {
             name.setText("Nie masz zaplanowanych zajęć w ciągu najbliższych 30 dni");
-        }
 
+        }
     }
 
 

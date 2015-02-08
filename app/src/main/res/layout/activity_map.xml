@@ -6,9 +6,8 @@
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.MapActivity"
     android:id="@+id/mapAc"
     android:padding="0dp"
-    android:background="@drawable/school"
+    android:background="@drawable/stardust"
     android:tileMode="repeat">
-
 
     <TabHost
         android:layout_width="fill_parent"
@@ -25,6 +24,7 @@
             android:orientation="vertical">
 
             <TabWidget
+                android:background="@color/bright_foreground_disabled_material_light"
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -34,11 +34,13 @@
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
+
                 <LinearLayout
                     android:id="@+id/tab2"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -58,6 +60,7 @@
                             android:gravity="center_vertical|center_horizontal" />
 
                         <Spinner
+                            style="@style/School"
                             android:layout_width="wrap_content"
                             android:layout_height="45dp"
                             android:id="@+id/choose_level"
@@ -105,6 +108,7 @@
                             android:layout_marginTop="15dp"
                             android:layout_height="wrap_content"/>
                         <EditText
+                            style="@style/School"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="25dp"
@@ -121,7 +125,8 @@
                             android:layout_marginBottom="50dp"
                             android:layout_marginTop="30dp">
                             <TextView
-                                android:text="lub wybierz salę z listy:"
+                                style="@style/School"
+                                android:text="@string/alternative_map_activity"
                                 android:layout_width="match_parent"
                                 android:layout_marginLeft="25dp"
                                 android:layout_marginRight="25dp"
