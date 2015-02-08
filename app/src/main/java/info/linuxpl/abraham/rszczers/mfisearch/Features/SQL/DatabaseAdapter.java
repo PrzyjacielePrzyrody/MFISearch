@@ -40,7 +40,7 @@ public class DatabaseAdapter {
         this.mfidb = new DatabaseHelper(context);
     }
 
-    /** DO SPRAWDZENIA – BARDZO WAŻNA FUNKCJA!
+    /**
      * W tej funkcji chodzi o to, że podczas tworzenia nowego obiektu klasy PlanedActivity
      * nie jest od razu ustawiane pole id. Pole id obiektu MUSI odpowiadać wartości klucza głównego
      * w tabeli. Dlatego po stworzeniu obiektu i dodaniu go do bazy trzeba przeczytać jego numer id
@@ -73,7 +73,7 @@ public class DatabaseAdapter {
      */
     public void add(PlanedActivity product) {
 
-        HashMap<String, String> hm=new HashMap<String, String>();
+        HashMap<String, String> hm = new HashMap<String, String>();
         hm.put("name", product.getName());
         hm.put("date", Dates.dateTimeToString(product.getDate()));
         hm.put("room", product.getRoom().getName());
@@ -85,7 +85,7 @@ public class DatabaseAdapter {
         mfidb.close();
     }
 
-    /** DO UZUPEŁNIENIA
+    /**
      * Usuwa z wpis odpowiadający obiektowi PlanedActivity
      * @param product
      */

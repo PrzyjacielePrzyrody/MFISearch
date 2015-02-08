@@ -6,6 +6,5 @@
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.FindOnMapActivity"
     android:orientation="vertical"
     android:id="@+id/find_on_map_layout"
-    android:background="@drawable/stardust"
-    android:tileMode="repeat">
+    android:background="@drawable/backrepeat">
 </LinearLayout>

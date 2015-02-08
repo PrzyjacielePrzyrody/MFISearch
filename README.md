@@ -8,6 +8,6 @@ UMCS math faculty class finder app for Android 2.3.3 Gingerbread and above.
 
 Requirements
 --------
-Android Studio 0.8.14
 
-Gradle 0.12.1
+Android Studio 1.1 Beta 3 
+Gradle 1.0.1

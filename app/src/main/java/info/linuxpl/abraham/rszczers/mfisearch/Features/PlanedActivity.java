@@ -42,7 +42,7 @@ public abstract class PlanedActivity {
      */
     public abstract void edit();
 
-    public String getName() { return this.name;}
+    public String getName() { return this.name ;}
 
     public int getID(){
         return this.id;
@@ -58,7 +58,7 @@ public abstract class PlanedActivity {
 
     public String getInstructor() { return instructor; }
 
-    public void setName(String name){ this.name=name;}
+    public void setName(String name){ this.name = name; }
 
     public void setDate(String date) { this.date = date; }
 

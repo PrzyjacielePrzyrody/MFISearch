@@ -5,8 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.ExamsActivity"
-    android:background="@drawable/stardust"
-    android:tileMode="repeat">
+    android:background="@drawable/backrepeat">
 
     <TableLayout
         android:layout_width="fill_parent"

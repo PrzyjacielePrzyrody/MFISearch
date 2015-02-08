@@ -1,11 +1,14 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -23,28 +26,33 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
-public class EditExamActivity extends ActionBarActivity {
-    DatabaseAdapter adapter;
-    EditText nameField;
-    EditText dateField;
-    EditText timeField;
-    Spinner roomPick;
+public class SettingsActivity extends ActionBarActivity {
     CaldroidFragment dialogCaldroidFragment;
+    EditText dateField;
     SimpleDateFormat formatter;
+    SimpleDateFormat form;
     TimePickerDialog tp;
     Calendar calendar;
-    TimePickerDialog.OnTimeSetListener timePickerListener;
-    Button saveExam;
+    SharedPreferences.Editor editor;
+    private Context context;
 
     final CaldroidListener listener = new CaldroidListener() {
 
         @Override
         public void onSelectDate(Date date, View view) {
-            dateField.setText(formatter.format(date));
+            String selectedDay = formatter.format(date);
+            String[] explodeDate = selectedDay.split(" ");
+            selectedDay = explodeDate[2] + "-" + explodeDate[1] + "-" + explodeDate[0];
+            dateField.setText(selectedDay);
+            editor.putString("semesterEnd", selectedDay);
+            editor.commit();
             dialogCaldroidFragment.dismiss();
         }
 
@@ -60,15 +68,21 @@ public class EditExamActivity extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_add_exam);
+        setContentView(R.layout.activity_settings);
 
-        Intent i = this.getIntent();
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("MFISettings", MODE_PRIVATE);
+        editor = settings.edit();
 
-        formatter = new SimpleDateFormat("dd MMM yyyy");
-        nameField = (EditText) findViewById(R.id.name_add_exam_field);
+        context=this;
+        calendar = Calendar.getInstance();
+        form=new SimpleDateFormat("yyyy-MM-dd");
+        formatter = new SimpleDateFormat("dd MM yyyy");
 
-        dateField = (EditText) findViewById(R.id.date_add_exam_field);
+        dateField = (EditText) findViewById(R.id.semester_end_date_field);
         dateField.setInputType(InputType.TYPE_NULL);
+
+        String CurrentSemesterEnd = settings.getString("semesterEnd", Dates.calendarToString(calendar));
+        dateField.setText(CurrentSemesterEnd);
 
         dateField.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -84,61 +98,6 @@ public class EditExamActivity extends ActionBarActivity {
             }
         });
 
-        calendar = Calendar.getInstance();
-
-        timePickerListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String h = Integer.toString(hourOfDay);
-                String m = Integer.toString(minute);
-
-                if(h.length()==1) {
-                    h = "0" + h;
-                }
-                if(m.length()==1) {
-                    m = "0" + m;
-                }
-                timeField.setText(h + ":" + m);
-            }
-        };
-
-        timeField = (EditText) findViewById(R.id.time_add_exam_field);
-        timeField.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getActionMasked();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    tp = new TimePickerDialog(EditExamActivity.this,
-                            TimePickerDialog.THEME_DEVICE_DEFAULT_DARK,
-                            timePickerListener,
-                            calendar.get(Calendar.HOUR_OF_DAY),
-                            calendar.get(Calendar.MINUTE),
-                            true);
-                    tp.setTitle("Wybierz godzinę");
-                    tp.show();
-                }
-                return false;
-            }
-        });
-
-        roomPick = (Spinner) findViewById(R.id.room_add_exam_spinner);
-        adapter = new DatabaseAdapter(getApplicationContext());
-        SimpleCursorAdapter sca = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
-                adapter.getRoomNames(),
-                new String[] {"name"},
-                new int[] {android.R.id.text1}, 0);
-        sca.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        roomPick.setAdapter(sca);
-
-        saveExam = (Button) findViewById(R.id.button_add_exam);
-        saveExam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /**
-                 * Logika do wstawiania nowych egzaminów
-                 */
-            }
-        });
     }
 
 

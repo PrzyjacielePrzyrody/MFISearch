@@ -8,9 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/backrepeat"
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.ShowSoonClass"
-    android:background="@drawable/stardust"
-    android:tileMode="repeat"
     >
 
     <ScrollView
@@ -31,7 +30,6 @@
                     android:text="Nazwa: "/>
                 <TextView
                     android:textColor="@color/caldroid_black"
-                    android:text="Dłóga nazwa"
                     android:layout_marginLeft="30dp"
                     android:id="@+id/soonActName"
                     android:layout_width="wrap_content"
@@ -94,7 +92,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Znajdź na planie wydziału"/>
+                android:text="Znajdź na planie wydziału"
+                android:layout_gravity="bottom|center"
+                android:id="@+id/button_find_on_plan"
+                android:layout_marginTop="50dp"
+                />
 
             </LinearLayout>
         </ScrollView>

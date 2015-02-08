@@ -1,6 +1,8 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +22,8 @@ import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Schedule;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
 
+import static android.app.PendingIntent.getActivity;
+
 
 public class MainActivity extends ActionBarActivity {
     @Override
@@ -29,8 +33,8 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        DatabaseAdapter db=new DatabaseAdapter(this);
-        ActivityFactory af=new ActivityFactory(this);
+        DatabaseAdapter db = new DatabaseAdapter(this);
+        ActivityFactory af = new ActivityFactory(this);
 
 
         Button soon_class= (Button) findViewById(R.id.soonclasse_bottom);
@@ -66,6 +70,15 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent change_to_exam = new Intent(MainActivity.this, ExamsActivity.class);
                 startActivity(change_to_exam);
+            }
+        });
+
+        Button settings = (Button) findViewById(R.id.settings_button);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change_to_settings = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(change_to_settings);
             }
         });
     }
