@@ -43,13 +43,43 @@ public class CheckExamActivity extends ActionBarActivity {
 
     private ArrayList<PlanedActivity> list;
     private ActivityRowAdapter adapter;
+    CaldroidFragment dialogCaldroidFragment;
+    Calendar calendar;
+    SimpleDateFormat formatter;
+    LinearLayout dayLayout;
+    TextView datString;
+    TextView datWeekDay;
+
+    final CaldroidListener listener = new CaldroidListener() {
+        @Override
+        public void onSelectDate(Date date, View view) {
+            String selectedDay = formatter.format(date);
+            String[] explodeDate = selectedDay.split(" ");
+            selectedDay = explodeDate[2] + "-" + explodeDate[1] + "-" + explodeDate[0];
+            Calendar tmp = Dates.stringToCalendar(selectedDay);
+            String dayOfWeek = Dates.weekDayName(tmp);
+            datString.setText(selectedDay);
+            datWeekDay.setText(dayOfWeek);
+            dialogCaldroidFragment.dismiss();
+        }
+        @Override
+        public void onCaldroidViewCreated() {
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_view_schedule);
+        setContentView(R.layout.activity_view_exams);
+
+        calendar = Calendar.getInstance();
+        dayLayout = (LinearLayout) findViewById(R.id.dateLayout);
+        datString = (TextView) dayLayout.findViewById(R.id.dayOfWeek);
+        datWeekDay = (TextView) dayLayout.findViewById(R.id.textViewDayName);
+
 
         Intent i = getIntent();
         String data;
@@ -113,6 +143,23 @@ public class CheckExamActivity extends ActionBarActivity {
         });
 
         registerForContextMenu(lv);
+
+
+        formatter = new SimpleDateFormat("dd MM yyyy");
+
+        dayLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    dialogCaldroidFragment = CaldroidFragment.newInstance("Wybierz termin",
+                            calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.YEAR));
+                    dialogCaldroidFragment.setCaldroidListener(listener);
+                    dialogCaldroidFragment.show(getSupportFragmentManager(), "TAG");
+                }
+                return false;
+            }
+        });
     }
 
     @Override

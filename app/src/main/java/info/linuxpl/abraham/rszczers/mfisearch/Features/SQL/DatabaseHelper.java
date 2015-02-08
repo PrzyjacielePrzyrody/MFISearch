@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         return c;
     }
 
-    /** DO SPRAWDZENIA
+    /**
      * Wpisuje wiersze do odpowiedniej tabeli. Na razie ustawiłem, że wpisują tylko Stringi.
      * W tabeli ustawione są inne typy (nie String, ale np. INTEGER). Trzeba sprawdzić czy da się
      * w ten sposób wpisać dowolną wartość do bazy, a jeśli nie, to odpowiednio zrzutować dane

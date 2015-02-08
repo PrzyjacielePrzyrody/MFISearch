@@ -40,7 +40,6 @@ public class ViewScheduleActivity extends ActionBarActivity {
     private ArrayList<PlanedActivity> list;
     private ActivityRowAdapter adapter;
     CaldroidFragment dialogCaldroidFragment;
-    TimePickerDialog tp;
     Calendar calendar;
     SimpleDateFormat formatter;
     LinearLayout dayLayout;

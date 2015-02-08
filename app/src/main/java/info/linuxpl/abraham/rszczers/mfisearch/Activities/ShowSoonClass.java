@@ -1,11 +1,15 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.roomorama.caldroid.CaldroidListener;
@@ -31,18 +35,20 @@ public class ShowSoonClass extends ActionBarActivity {
     TextView room;
     TextView free;
     TextView labelFree;
+    Button findButton;
+    Context context;
+    TextView actroom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_soon_class);
-
-        ShowSoonClass context = this;
+        context = this;
         form = new SimpleDateFormat("yyyy-MM-dd");
         formatter = new SimpleDateFormat("dd MMM yyyy");
 
         s = new Schedule();
-        pa=s.findNextClasses(this);
+        pa = s.findNextClasses(this);
         name = (TextView) findViewById(R.id.soonActName);
         time = (TextView) findViewById(R.id.actTime);
         room = (TextView) findViewById(R.id.actRoom);
@@ -59,6 +65,19 @@ public class ShowSoonClass extends ActionBarActivity {
         } else {
             name.setText("Nie masz najbliższy zajęć w tym miesiącu");
         }
+
+        findButton = (Button) findViewById(R.id.button_find_on_plan);
+        actroom = (TextView) findViewById(R.id.actRoom);
+
+        findButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent found = new Intent(context, FindOnMapActivity.class);
+                String tmp = actroom.getText().toString();
+                found.putExtra("roomID", tmp);
+                startActivity(found);
+            }
+        });
 
     }
 
