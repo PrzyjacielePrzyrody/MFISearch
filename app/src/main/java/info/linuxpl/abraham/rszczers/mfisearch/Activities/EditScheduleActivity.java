@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -244,6 +245,7 @@ public class EditScheduleActivity extends ActionBarActivity {
                 af.make(type, nameField.getText().toString(), time, howLong, per,
                         adapter.getClassroom(room), duration.getText().toString(),
                         lectorField.getText().toString(), descField.getText().toString());
+                Toast.makeText(context, "Zajęcie zostało zmienione", Toast.LENGTH_SHORT).show();;
             }
         });
     }

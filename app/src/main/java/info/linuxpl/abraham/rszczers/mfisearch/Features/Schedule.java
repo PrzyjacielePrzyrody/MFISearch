@@ -77,7 +77,7 @@ public class Schedule implements Faculty <PlanedActivity, String> {
     public TreeMap<Calendar, PlanedActivity> getDaySchedule(String date, Context context, String[] tables) {
 
         DatabaseAdapter db = new DatabaseAdapter(context);
-        TreeMap<Calendar, PlanedActivity> dayShedule = new TreeMap<Calendar, PlanedActivity>();
+        TreeMap<Calendar, PlanedActivity> dayShedule ;
         //ActivityFactory af = new ActivityFactory(context);
         //String[] tables = {"EXAMS", "EXERCISES", "LECTURES", "OTHER"};
         //Cursor[] activities=db.getEverything();

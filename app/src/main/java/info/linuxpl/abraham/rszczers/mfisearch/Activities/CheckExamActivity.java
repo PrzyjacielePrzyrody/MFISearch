@@ -49,7 +49,7 @@ public class CheckExamActivity extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_view_schedule);
+        setContentView(R.layout.activity_check_exam);
 
         Intent i = getIntent();
         String data;
@@ -101,7 +101,7 @@ public class CheckExamActivity extends ActionBarActivity {
         list = pl.treeToArray(tree);
 
         adapter = new ActivityRowAdapter(this, R.layout.row_activity_list, list);
-        final ListView lv = (ListView) findViewById(R.id.activitiesListView);
+        final ListView lv = (ListView) findViewById(R.id.activitiesListView2);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

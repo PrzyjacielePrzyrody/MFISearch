@@ -174,6 +174,7 @@ public class AddExamActivity extends ActionBarActivity {
                 PlanedActivity pa= af.make("EXAM", nameField.getText().toString(), time, howLong, period,
                         adapter.getClassroom(room), duration.getText().toString(),
                         lectorField.getText().toString(), descField.getText().toString());
+                Toast.makeText(context, "Dodano egzamin", Toast.LENGTH_SHORT).show();
             }
         });
     }
