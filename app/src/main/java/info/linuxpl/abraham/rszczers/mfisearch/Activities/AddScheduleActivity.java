@@ -2,6 +2,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
@@ -28,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
@@ -75,6 +77,8 @@ public class AddScheduleActivity extends ActionBarActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_activity);
+
+
         context=this;
         form=new SimpleDateFormat("yyyy-MM-dd");
         formatter = new SimpleDateFormat("dd MMM yyyy");
@@ -99,6 +103,9 @@ public class AddScheduleActivity extends ActionBarActivity {
         });
 
         calendar = Calendar.getInstance();
+
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("MFISettings", MODE_PRIVATE);
+        final String endOfSemester = settings.getString("semesterEnd", Dates.calendarToString(calendar));
 
         timePickerListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -158,7 +165,11 @@ public class AddScheduleActivity extends ActionBarActivity {
 
                 ActivityFactory af=new ActivityFactory(context);
                 String time=""+dat+" "+timeField.getText()+":00";
-                String howLong="2015-05-03 12:00:50";
+
+
+
+//                String howLong="2015-05-03 12:00:50";
+                String howLong = endOfSemester;
                 int per=Integer.parseInt(period.getText().toString());
 
               //  Log.d("times", time + "      " + howLong);

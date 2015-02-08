@@ -3,6 +3,7 @@ package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
@@ -30,6 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.ActivityFactory;
+import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.SQL.DatabaseAdapter;
 import info.linuxpl.abraham.rszczers.mfisearch.R;
@@ -109,6 +111,9 @@ public class EditScheduleActivity extends ActionBarActivity {
         });
 
         calendar = Calendar.getInstance();
+
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("MFISettings", MODE_PRIVATE);
+        final String endOfSemester = settings.getString("semesterEnd", Dates.calendarToString(calendar));
 
         timePickerListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -219,7 +224,7 @@ public class EditScheduleActivity extends ActionBarActivity {
             public void onClick(View v) {
 
                 String time = dat+ " " + timeField.getText() + ":00";
-                String howLong = "2015-05-03 12:00:50"; //co z howLongiem?
+                String howLong = endOfSemester;
 
                 adapter.delete(pa);
                 int per = Integer.parseInt(period.getText().toString());

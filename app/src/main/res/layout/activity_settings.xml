@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.AddExamActivity"
+    android:gravity="left"
+    android:background="@drawable/backrepeat"
+    android:tileMode="repeat">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <Button
+            android:layout_weight="2"
+            android:text="Zapisz ustawienia"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/button_save_settings"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:text="Koniec semestru"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="35dip"
+        android:id="@+id/semester_end_date_field"
+        android:inputType="datetime"
+        android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+</LinearLayout>
