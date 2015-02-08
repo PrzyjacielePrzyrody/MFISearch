@@ -73,7 +73,7 @@ public class DatabaseAdapter {
      */
     public void add(PlanedActivity product) {
 
-        HashMap<String, String> hm=new HashMap<String, String>();
+        HashMap<String, String> hm = new HashMap<String, String>();
         hm.put("name", product.getName());
         hm.put("date", Dates.dateTimeToString(product.getDate()));
         hm.put("room", product.getRoom().getName());

@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.ViewScheduleActivity"
-    android:background="@drawable/stardust"
-    android:tileMode="repeat">
+    android:background="@drawable/backrepeat">
 
     <LinearLayout
         android:layout_width="match_parent"

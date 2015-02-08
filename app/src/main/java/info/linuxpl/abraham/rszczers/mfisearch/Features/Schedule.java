@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TreeMap;
@@ -26,7 +25,6 @@ public class Schedule implements Faculty <PlanedActivity, String> {
     }
 
     public Schedule() {
-
     }
 
     public TreeMap<Calendar, PlanedActivity> getActivitiesTree(Cursor[] cursor,
@@ -152,8 +150,10 @@ public class Schedule implements Faculty <PlanedActivity, String> {
     public PlanedActivity findNextClasses(Context context){
         Calendar cal = Calendar.getInstance();
         String[] date = Dates.calendarToString(cal).split(" ");
+
         TreeMap<Calendar, PlanedActivity> day = this.getDaySchedule(date[0],
                 context, new String[]{"EXAMS", "EXERCISES", "LECTURES", "OTHER"});
+
         Calendar key;
         PlanedActivity pa = null;
         Calendar bef = Calendar.getInstance();
@@ -166,8 +166,6 @@ public class Schedule implements Faculty <PlanedActivity, String> {
                 pa = day.remove(key);
                 bef = Dates.stringToCalendar(pa.getDate());
                 bef.add(Calendar.MINUTE, 15);
-               // cal = Dates.stringToCalendar(pa.getDate());
-                Log.d("chomik", pa.getName());
             } else {
                 cal.add(Calendar.DAY_OF_MONTH, 1);
                 date = Dates.calendarToString(cal).split(" ");

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.AddScheduleActivity"
-    android:background="@drawable/stardust"
+    android:background="@drawable/backrepeat"
     android:tileMode="repeat"
     android:gravity="left"
 

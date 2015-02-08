@@ -6,8 +6,7 @@
     tools:context="info.linuxpl.abraham.rszczers.mfisearch.Activities.MapActivity"
     android:id="@+id/mapAc"
     android:padding="0dp"
-    android:background="@drawable/stardust"
-    android:tileMode="repeat">
+    android:background="@drawable/backrepeat">
 
     <TabHost
         android:layout_width="fill_parent"

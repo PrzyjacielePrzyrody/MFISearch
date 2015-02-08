@@ -106,6 +106,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     public void put(String TABLE, HashMap<String, String> queryValues) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put("name", queryValues.get("name"));
         values.put("date", queryValues.get("date"));
         values.put("period", queryValues.get("period"));
         values.put("room", queryValues.get("room"));

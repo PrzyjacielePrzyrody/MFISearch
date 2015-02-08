@@ -34,8 +34,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:id="@+id/coKtoGdzie"
-                android:weightSum="2"
-                >
+                android:weightSum="2">
 
                 <TextView
                     android:layout_width="match_parent"
