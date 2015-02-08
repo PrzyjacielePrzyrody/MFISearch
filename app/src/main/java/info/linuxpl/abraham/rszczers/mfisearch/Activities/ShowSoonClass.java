@@ -35,8 +35,8 @@ public class ShowSoonClass extends ActionBarActivity {
             room.setText(pa.getRoom().getName());
             labelFree.setText(Dates.timeBetween(pa)[1]);
             free.setText(Dates.timeBetween(pa)[0]);
-            Log.d("data w soon class", pa.getDate());
-        }else{
+//            Log.d("data w soon class", pa.getDate());
+        } else {
             name.setText("Nie masz najbliższy zajęć w tym miesiącu");
         }
 

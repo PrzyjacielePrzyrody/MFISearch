@@ -37,6 +37,7 @@
     <string name="viewDay">Dzień</string>
     <string name="viewWeek">Tydzień</string>
     <string name="period_add_act">Powtarzalność (w dniach)</string>
+    <string name="alternative_map_activity"><![CDATA[lub wybierz salę z listy:]]></string>
 
     <string-array name="levels">
         <item>0</item>
