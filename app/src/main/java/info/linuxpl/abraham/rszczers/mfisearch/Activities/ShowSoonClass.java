@@ -5,7 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+
+import com.roomorama.caldroid.CaldroidListener;
+
+import java.util.Date;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
 import info.linuxpl.abraham.rszczers.mfisearch.Features.PlanedActivity;
@@ -15,6 +20,22 @@ import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
 public class ShowSoonClass extends ActionBarActivity {
+
+    final CaldroidListener listener = new CaldroidListener() {
+
+        @Override
+        public void onSelectDate(Date date, View view) {
+            dateField.setText(formatter.format(date));
+            dat = form.format(date);
+            dialogCaldroidFragment.dismiss();
+        }
+
+        @Override
+        public void onCaldroidViewCreated() {
+        }
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
