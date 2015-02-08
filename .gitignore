@@ -9,3 +9,7 @@ gradle.proporties
 gradlew.bat
 local.proporties
 settings.gradle
+gradle.build
+./gradle.build
+./app/gradle.build
+./build

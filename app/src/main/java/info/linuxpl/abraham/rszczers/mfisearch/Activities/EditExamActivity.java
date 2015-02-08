@@ -29,12 +29,12 @@ import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 public class EditExamActivity extends ActionBarActivity {
     DatabaseAdapter adapter;
-    CaldroidFragment dialogCaldroidFragment;
     EditText nameField;
     EditText dateField;
     EditText timeField;
-    SimpleDateFormat formatter;
     Spinner roomPick;
+    CaldroidFragment dialogCaldroidFragment;
+    SimpleDateFormat formatter;
     TimePickerDialog tp;
     Calendar calendar;
     TimePickerDialog.OnTimeSetListener timePickerListener;
@@ -62,7 +62,7 @@ public class EditExamActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_exam);
 
-       Intent i=this.getIntent();
+        Intent i = this.getIntent();
 
         formatter = new SimpleDateFormat("dd MMM yyyy");
         nameField = (EditText) findViewById(R.id.name_add_exam_field);

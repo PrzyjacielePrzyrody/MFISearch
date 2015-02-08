@@ -1,5 +1,6 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,16 +9,23 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.roomorama.caldroid.CaldroidFragment;
+import com.roomorama.caldroid.CaldroidListener;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TreeMap;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
@@ -31,7 +39,31 @@ public class ViewScheduleActivity extends ActionBarActivity {
 
     private ArrayList<PlanedActivity> list;
     private ActivityRowAdapter adapter;
-   //
+    CaldroidFragment dialogCaldroidFragment;
+    TimePickerDialog tp;
+    Calendar calendar;
+    SimpleDateFormat formatter;
+    LinearLayout dayLayout;
+    TextView datString;
+    TextView datWeekDay;
+
+
+    final CaldroidListener listener = new CaldroidListener() {
+        @Override
+        public void onSelectDate(Date date, View view) {
+            String selectedDay = formatter.format(date);
+            String[] explodeDate = selectedDay.split(" ");
+            selectedDay = explodeDate[2] + "-" + explodeDate[1] + "-" + explodeDate[0];
+            Calendar tmp = Dates.stringToCalendar(selectedDay);
+            String dayOfWeek = Dates.weekDayName(tmp);
+            datString.setText(selectedDay);
+            datWeekDay.setText(dayOfWeek);
+            dialogCaldroidFragment.dismiss();
+        }
+        @Override
+        public void onCaldroidViewCreated() {
+        }
+    };
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,8 +71,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
         setContentView(R.layout.activity_view_schedule);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_schedule);
-
-
+        calendar = Calendar.getInstance();
         Intent i = getIntent();
         String data;
 
@@ -51,9 +82,9 @@ public class ViewScheduleActivity extends ActionBarActivity {
             data = Dates.calendarToString(current);
         }
 
-        LinearLayout dayLayout = (LinearLayout) findViewById(R.id.dateLayout);
-        final TextView datString = (TextView) dayLayout.findViewById(R.id.dayOfWeek);
-        final TextView datWeekDay = (TextView) dayLayout.findViewById(R.id.textViewDayName);
+         dayLayout = (LinearLayout) findViewById(R.id.dateLayout);
+         datString = (TextView) dayLayout.findViewById(R.id.dayOfWeek);
+         datWeekDay = (TextView) dayLayout.findViewById(R.id.textViewDayName);
 
         Button next = (Button) findViewById(R.id.btnNext);
         next.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +134,23 @@ public class ViewScheduleActivity extends ActionBarActivity {
         });
 
         registerForContextMenu(lv);
+
+        formatter = new SimpleDateFormat("dd MM yyyy");
+
+        dayLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    dialogCaldroidFragment = CaldroidFragment.newInstance("Wybierz termin",
+                            calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.YEAR));
+                    dialogCaldroidFragment.setCaldroidListener(listener);
+                    dialogCaldroidFragment.show(getSupportFragmentManager(), "TAG");
+                }
+                return false;
+            }
+        });
+
     }
 
         @Override
@@ -123,7 +171,6 @@ public class ViewScheduleActivity extends ActionBarActivity {
                     return true;
 
                 case R.id.delete_from_shedule:
-
                     Toast.makeText(getBaseContext(), "Wybrałeś z listy" + s.getID(), Toast.LENGTH_SHORT).show();
                     final DatabaseAdapter db = new DatabaseAdapter(this);
                     db.delete(s);

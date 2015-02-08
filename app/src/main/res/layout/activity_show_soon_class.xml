@@ -31,7 +31,6 @@
                     android:text="Nazwa: "/>
                 <TextView
                     android:textColor="@color/caldroid_black"
-                    android:text="Dłóga nazwa"
                     android:layout_marginLeft="30dp"
                     android:id="@+id/soonActName"
                     android:layout_width="wrap_content"

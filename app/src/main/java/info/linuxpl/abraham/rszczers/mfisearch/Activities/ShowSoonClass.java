@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import info.linuxpl.abraham.rszczers.mfisearch.Features.Dates;
@@ -20,35 +21,33 @@ import info.linuxpl.abraham.rszczers.mfisearch.R;
 
 
 public class ShowSoonClass extends ActionBarActivity {
+    private SimpleDateFormat form;
+    private SimpleDateFormat formatter;
 
-    final CaldroidListener listener = new CaldroidListener() {
-
-        @Override
-        public void onSelectDate(Date date, View view) {
-            dateField.setText(formatter.format(date));
-            dat = form.format(date);
-            dialogCaldroidFragment.dismiss();
-        }
-
-        @Override
-        public void onCaldroidViewCreated() {
-        }
-
-    };
-
+    Schedule s=new Schedule();
+    PlanedActivity pa;
+    TextView name;
+    TextView time;
+    TextView room;
+    TextView free;
+    TextView labelFree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_soon_class);
 
-        Schedule s=new Schedule();
-        PlanedActivity pa=s.findNextClasses(this);
-        TextView name=(TextView) findViewById(R.id.soonActName);
-        TextView time=(TextView) findViewById(R.id.actTime);
-        TextView room=(TextView) findViewById(R.id.actRoom);
-        TextView free=(TextView) findViewById(R.id.lateOrBefore);
-        TextView labelFree=(TextView) findViewById(R.id.lateOrBe);
+        ShowSoonClass context = this;
+        form = new SimpleDateFormat("yyyy-MM-dd");
+        formatter = new SimpleDateFormat("dd MMM yyyy");
+
+        s = new Schedule();
+        pa=s.findNextClasses(this);
+        name = (TextView) findViewById(R.id.soonActName);
+        time = (TextView) findViewById(R.id.actTime);
+        room = (TextView) findViewById(R.id.actRoom);
+        free = (TextView) findViewById(R.id.lateOrBefore);
+        labelFree = (TextView) findViewById(R.id.lateOrBe);
 
         if(pa!=null) {
             name.setText(pa.getName());
