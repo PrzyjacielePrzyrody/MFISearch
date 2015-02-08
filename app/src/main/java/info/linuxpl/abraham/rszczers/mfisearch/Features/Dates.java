@@ -36,7 +36,7 @@ public class Dates {
                     new Interval(date1.getTime(), date2.getTime());
             Period period = interval.toPeriod();
             String[] output=new String[2];
-             output[0] = period.getMonths()+"miesięcy"+period.getDays() +"dni"+ period.getHours()+"godzin "+ period.getMinutes()+"minut ";
+             output[0] = period.getDays() +" dni \n"+ period.getHours()+" godzin \n "+ period.getMinutes()+" minut";
              output[1]=info;
         return output;
     }

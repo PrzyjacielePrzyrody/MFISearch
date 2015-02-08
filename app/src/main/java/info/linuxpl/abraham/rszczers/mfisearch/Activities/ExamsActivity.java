@@ -27,15 +27,6 @@ public class ExamsActivity extends ActionBarActivity {
             }
         });
 
-        Button edit_exam= (Button) findViewById(R.id.edit_exam_button);
-        edit_exam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent change_to_edit_exam= new Intent(ExamsActivity.this, EditExamActivity.class);
-                startActivity(change_to_edit_exam);
-            }
-        });
-
         Button add_exam= (Button) findViewById(R.id.add_exam_butoon);
         add_exam.setOnClickListener(new View.OnClickListener() {
             @Override

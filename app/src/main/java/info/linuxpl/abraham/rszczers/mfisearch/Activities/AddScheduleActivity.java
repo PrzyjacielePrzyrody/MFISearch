@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -43,6 +44,7 @@ public class AddScheduleActivity extends ActionBarActivity {
     EditText descField;
     EditText duration;
     EditText period;
+    EditText lastData;
     RadioGroup activityTypes;
     SimpleDateFormat formatter;
     SimpleDateFormat form;
@@ -148,7 +150,7 @@ public class AddScheduleActivity extends ActionBarActivity {
         descField = (EditText) findViewById(R.id.description_add_activity_field);
         period=(EditText) findViewById(R.id.period_add_activity_field);
         activityTypes=(RadioGroup) findViewById(R.id.radio_group_types);
-
+        lastData= (EditText) findViewById(R.id.last_date_activity_field);
 
         saveExam = (Button) findViewById(R.id.button_add_activity);
 
@@ -161,7 +163,7 @@ public class AddScheduleActivity extends ActionBarActivity {
                 String howLong="2015-05-03 12:00:50";
                 int per=Integer.parseInt(period.getText().toString());
 
-              //  Log.d("times", time + "      " + howLong);
+
                 Cursor cur=(Cursor) roomPick.getSelectedItem();
                 String room= cur.getString(cur.getColumnIndex("name"));
                 int selectedId=activityTypes.getCheckedRadioButtonId();
@@ -181,6 +183,7 @@ public class AddScheduleActivity extends ActionBarActivity {
                 PlanedActivity pa= af.make(napi, nameField.getText().toString(), time, howLong, per,
                         adapter.getClassroom(room), duration.getText().toString(),
                         lectorField.getText().toString(), descField.getText().toString());
+                Toast.makeText(context, "Dodano zajęcie", Toast.LENGTH_SHORT).show();
             }
         });
     }

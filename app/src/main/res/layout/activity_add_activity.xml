@@ -105,6 +105,24 @@
                 android:inputType="time"
                 android:layout_marginBottom="10dp"/>
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_height="wrap_content"
+                android:text="Data ostatnich zajęć"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_height="35dp"
+                android:id="@+id/last_date_activity_field"
+                android:inputType="datetime"
+                android:layout_marginBottom="10dp"/>
+
             <TextView
                 android:text="Czas trwania"
                 android:layout_width="match_parent"
