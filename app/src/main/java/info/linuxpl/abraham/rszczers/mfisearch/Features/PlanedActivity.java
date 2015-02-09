@@ -58,6 +58,8 @@ public abstract class PlanedActivity {
 
     public String getInstructor() { return instructor; }
 
+//    public int getPeriod(){ return period; }
+
     public void setName(String name){ this.name = name; }
 
     public void setDate(String date) { this.date = date; }

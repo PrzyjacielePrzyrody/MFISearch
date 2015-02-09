@@ -18,58 +18,66 @@ public class ActivityFactory {
 
 
     public ActivityFactory(Context context) {
-        dbAdapter = new DatabaseAdapter(context);
+        this.dbAdapter = new DatabaseAdapter(context);
     }
 
     /**
      * Metoda fabrykująca obiekty implementujące PlanedActivity.
      * @param type determinuje jaki rodzaj obiektu chcemy otrzymać; możliwe to: lecture, exercise, exam, other.            .
-     * @param date
      * @param room
      * @param duration
      * @param instructor
      * @param description
      * @return
      */
-    public PlanedActivity make(String type, String name, String date, String howLong, int period, Classroom room, String duration, String instructor,
-                              String description) {
+    public void make(String type, String name, String date, String howLong,
+                               int period, Classroom room, String duration, String instructor,
+                               String description) {
         PlanedActivity product = null;
         type = type.toUpperCase();
+        Calendar when = Dates.stringToCalendar(date);
 
-        while (Dates.stringToCalendar(date).before(Dates.stringToCalendar(howLong))) {
-            if (type.equals("LECTURE")) {
+        if (type.equals("LECTURE")) {
+            while (Dates.stringToCalendar(date).before(Dates.stringToCalendar(howLong))) {
                 product = new LecturePlaned(date, name, room, duration, instructor, description);
-                dbAdapter.add(product);
+                dbAdapter.add(product, period);
+
                 //ustawia pole id w obiekcie po nadaniu go w bazie.
                 product.setID(dbAdapter.getID(product));
-            } else if (type.equals("EXERCISE")) {
-                product = new ExercisePlaned(date, name, room, duration, instructor, description);
-                dbAdapter.add(product);
-                //ustawia pole id w obiekcie po nadaniu go w bazie.
-                product.setID(dbAdapter.getID(product));
-            } else if (type.equals("EXAM")) {
-                product = new ExamPlaned(date, name, room, duration, instructor, description);
-                dbAdapter.add(product);
-                //ustawia pole id w obiekcie po nadaniu go w bazie.
-                product.setID(dbAdapter.getID(product));
-            } else if (type.equals("OTHER")) {
-                product = new OtherPlaned(date, name, room, duration, instructor, description);
-                dbAdapter.add(product);
-                //ustawia pole id w obiekcie po nadaniu go w bazie.
-                product.setID(dbAdapter.getID(product));
+                when.add(Calendar.DAY_OF_MONTH, period);
+                date = Dates.calendarToString(when);
             }
-      //  Log.d("Tworze pierwsze zajęcie", ""+product.getDate());
+        } else if (type.equals("EXERCISE")) {
+            while (Dates.stringToCalendar(date).before(Dates.stringToCalendar(howLong))) {
+                product = new ExercisePlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product, period);
 
-            Calendar when=Dates.stringToCalendar(date);
-            when.add(Calendar.DATE, period);
-            date=Dates.calendarToString(when);
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+                when.add(Calendar.DAY_OF_MONTH, period);
+                date = Dates.calendarToString(when);
+            }
+        } else if (type.equals("EXAM")) {
+            while (Dates.stringToCalendar(date).before(Dates.stringToCalendar(howLong))) {
+                product = new ExamPlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product, period);
 
-              // PlanedActivity product2=make(type, name, date, howLong, period, room, duration, instructor, description);
-               // Log.d("Tworze zajęcie", ""+product.getDate());
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+                when.add(Calendar.DAY_OF_MONTH, period);
+                date = Dates.calendarToString(when);
+            }
+        } else if (type.equals("OTHER")) {
+            while (Dates.stringToCalendar(date).before(Dates.stringToCalendar(howLong))) {
+                product = new OtherPlaned(date, name, room, duration, instructor, description);
+                dbAdapter.add(product, period);
 
-
+                //ustawia pole id w obiekcie po nadaniu go w bazie.
+                product.setID(dbAdapter.getID(product));
+                when.add(Calendar.DAY_OF_MONTH, period);
+                date = Dates.calendarToString(when);
+            }
         }
-        return product;
     }
 
     /**
