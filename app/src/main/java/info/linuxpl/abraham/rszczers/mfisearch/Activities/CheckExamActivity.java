@@ -1,6 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -49,6 +50,7 @@ public class CheckExamActivity extends ActionBarActivity {
     LinearLayout dayLayout;
     TextView datString;
     TextView datWeekDay;
+    Context context;
 
     final CaldroidListener listener = new CaldroidListener() {
         @Override
@@ -74,7 +76,7 @@ public class CheckExamActivity extends ActionBarActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_exams);
-
+        context = this;
         calendar = Calendar.getInstance();
         dayLayout = (LinearLayout) findViewById(R.id.dateLayout);
         datString = (TextView) dayLayout.findViewById(R.id.dayOfWeek);
@@ -173,12 +175,15 @@ public class CheckExamActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected (MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        PlanedActivity s = (PlanedActivity) list.get(info.position);
         switch (item.getItemId()) {
             case R.id.find_map_menu:
-                Toast.makeText(this, "Rafałku, to dla Ciebie", Toast.LENGTH_SHORT).show();
+                Intent found = new Intent(context, FindOnMapActivity.class);
+                String tmp = s.getRoom().getName();
+                found.putExtra("roomID", tmp);
+                startActivity(found);
                 return true;
             case R.id.delete_from_shedule:
-                PlanedActivity s = (PlanedActivity) list.get(info.position);
                 Toast.makeText(getBaseContext(), "Wybrałeś z listy" + s.getID(), Toast.LENGTH_SHORT).show();
                 final DatabaseAdapter db = new DatabaseAdapter(this);
                 db.delete(s);

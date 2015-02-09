@@ -75,7 +75,7 @@ public class SettingsActivity extends ActionBarActivity {
 
         context=this;
         calendar = Calendar.getInstance();
-        form=new SimpleDateFormat("yyyy-MM-dd");
+        form = new SimpleDateFormat("yyyy-MM-dd");
         formatter = new SimpleDateFormat("dd MM yyyy");
 
         dateField = (EditText) findViewById(R.id.semester_end_date_field);
