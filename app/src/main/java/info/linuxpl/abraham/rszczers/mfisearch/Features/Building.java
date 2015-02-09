@@ -27,6 +27,7 @@ public class Building implements Faculty <Bitmap, String>  {
 
     public Building(Context context) {
         this.floors = new Level[]{
+            new Level(0, context),
             new Level(1, context),
             new Level(2, context),
         };
@@ -44,7 +45,7 @@ public class Building implements Faculty <Bitmap, String>  {
         int[] roomCoords = roomToFind.getCoords();
         // Nested functions at it's finest!
         // Tutaj generuje się plan ze strzałką skierowaną na wyszukiwaną salę
-        String path = getFloors(roomToFind.getLevel()-1).markOn(context, roomCoords[0], roomCoords[1]);
+        String path = getFloors(roomToFind.getLevel()).markOn(context, roomCoords[0], roomCoords[1]);
 
         Bitmap b = null;
         //tutaj odczytuje się Bitmapa z pamięci wewnętrznej
