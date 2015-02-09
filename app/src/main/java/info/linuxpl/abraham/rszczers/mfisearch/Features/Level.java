@@ -23,6 +23,9 @@ public class Level {
 
     public Level(int floor, Context context) {
         switch(floor) {
+            case 0:
+                this.blueprint = BitmapFactory.decodeResource(context.getResources(), R.drawable.level0);
+                break;
             case 1:
                 this.blueprint = BitmapFactory.decodeResource(context.getResources(), R.drawable.level1);
                 break;

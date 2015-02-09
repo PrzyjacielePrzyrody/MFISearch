@@ -110,7 +110,7 @@ public class MapActivity extends ActionBarActivity {
                         if(childCount>0) {
                             layout.removeAllViewsInLayout();
                         }
-                        level.setImageResource(R.drawable.level1);
+                        level.setImageResource(R.drawable.level0);
                         level.setLayoutParams(params);
                         level.setMinScale(0.5f);
                         level.setMaxScale(3.0f);
