@@ -73,8 +73,9 @@ public class SettingsActivity extends ActionBarActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("MFISettings", MODE_PRIVATE);
         editor = settings.edit();
 
-        context=this;
+        context = this;
         calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, 1);
         form = new SimpleDateFormat("yyyy-MM-dd");
         formatter = new SimpleDateFormat("dd MM yyyy");
 
