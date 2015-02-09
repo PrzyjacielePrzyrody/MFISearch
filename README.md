@@ -5,7 +5,8 @@ MFISearch
 
 --------
 UMCS math faculty class finder app for Android 2.3.3 Gingerbread and above
-[presentation]: https://rszczers.abraham.linuxpl.info/animation.gif "MFISearch presentation"
+
+[logo]: http://rszczers.abraham.linuxpl.info/animation.gif "MFISearch presentation"
 
 Requirements
 --------
