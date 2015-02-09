@@ -163,15 +163,14 @@ public class AddExamActivity extends ActionBarActivity {
                 /**
                  * Logika do wstawiania nowych egzaminów
                  */
-                ActivityFactory af=new ActivityFactory(context);
-                String time=""+dat+" "+timeField.getText()+":00";
-                String howLong=""+dat+" "+timeField.getText()+":50";
+                ActivityFactory af = new ActivityFactory(context);
+                String time = ""+dat+" "+timeField.getText()+":00";
+                String howLong = ""+dat+" "+timeField.getText()+":50";
 
-                Log.d("times", time+"      "+howLong);
-                Cursor cur=(Cursor) roomPick.getSelectedItem();
-                String room= cur.getString(cur.getColumnIndex("name"));
+                Cursor cur = (Cursor)roomPick.getSelectedItem();
+                String room = cur.getString(cur.getColumnIndex("name"));
 
-                PlanedActivity pa= af.make("EXAM", nameField.getText().toString(), time, howLong, period,
+                af.make("EXAM", nameField.getText().toString(), time, howLong, period,
                         adapter.getClassroom(room), duration.getText().toString(),
                         lectorField.getText().toString(), descField.getText().toString());
             }

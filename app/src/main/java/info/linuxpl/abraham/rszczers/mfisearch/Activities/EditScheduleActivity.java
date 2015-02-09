@@ -161,7 +161,7 @@ public class EditScheduleActivity extends ActionBarActivity {
 
         lectorField =(EditText) findViewById(R.id.instructor_add_activity_field);
         descField = (EditText) findViewById(R.id.description_add_activity_field);
-        period=(EditText) findViewById(R.id.period_add_activity_field);
+        period = (EditText) findViewById(R.id.period_add_activity_field);
         duration=(EditText) findViewById(R.id.duration_add_activity);
         activityTypes=(RadioGroup) findViewById(R.id.radio_group_types);
         activityTypes=(RadioGroup) findViewById(R.id.radio_group_types);
@@ -174,7 +174,11 @@ public class EditScheduleActivity extends ActionBarActivity {
 
         lectorField.setText(cur.getString(cur.getColumnIndex("instructor")));
         descField.setText(cur.getString(cur.getColumnIndex("description")));
+        /**
+         * Zawsze 0
+         */
         period.setText(""+cur.getInt(cur.getColumnIndex("period")));
+
         duration.setText(cur.getString(cur.getColumnIndex("duration")));
 
         // Time and date setting for specified Exam

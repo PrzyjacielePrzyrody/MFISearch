@@ -153,7 +153,7 @@ public class AddScheduleActivity extends ActionBarActivity {
 
         lectorField =(EditText) findViewById(R.id.instructor_add_activity_field);
         descField = (EditText) findViewById(R.id.description_add_activity_field);
-        period=(EditText) findViewById(R.id.period_add_activity_field);
+        period = (EditText) findViewById(R.id.period_add_activity_field);
         activityTypes=(RadioGroup) findViewById(R.id.radio_group_types);
 
 
@@ -189,7 +189,7 @@ public class AddScheduleActivity extends ActionBarActivity {
                         break;
                 }
 
-                PlanedActivity pa= af.make(napi, nameField.getText().toString(), time, howLong, per,
+                af.make(napi, nameField.getText().toString(), time, howLong, per,
                         adapter.getClassroom(room), duration.getText().toString(),
                         lectorField.getText().toString(), descField.getText().toString());
             }

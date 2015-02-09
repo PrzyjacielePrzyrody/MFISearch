@@ -16,7 +16,7 @@ public class ExercisePlaned extends PlanedActivity {
         this.setRoom(room);
         this.setDuration(""+duration);
         this.setInstructor(instructor);
-        setDescription(description);
+        this.setDescription(description);
 
     }
     @Override

@@ -1,6 +1,7 @@
 package info.linuxpl.abraham.rszczers.mfisearch.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
     LinearLayout dayLayout;
     TextView datString;
     TextView datWeekDay;
+    Context context;
 
 
     final CaldroidListener listener = new CaldroidListener() {
@@ -73,7 +75,7 @@ public class ViewScheduleActivity extends ActionBarActivity {
         calendar = Calendar.getInstance();
         Intent i = getIntent();
         String data;
-
+        context = this;
         if (i.getStringExtra("date") != null) {
             data = i.getStringExtra("date");
         } else {
@@ -166,7 +168,10 @@ public class ViewScheduleActivity extends ActionBarActivity {
             PlanedActivity s = (PlanedActivity) list.get(info.position);
             switch (item.getItemId()) {
                 case R.id.find_map_menu:
-                   Toast.makeText(this, "Rafałku, to dla Ciebie", Toast.LENGTH_SHORT).show();
+                    Intent found = new Intent(context, FindOnMapActivity.class);
+                    String tmp = s.getRoom().getName();
+                    found.putExtra("roomID", tmp);
+                    startActivity(found);
                     return true;
 
                 case R.id.delete_from_shedule:

@@ -71,11 +71,12 @@ public class DatabaseAdapter {
      * PlanedActivity -> HashMap; tam gdzie null powinien być HashMap
      * @param product
      */
-    public void add(PlanedActivity product) {
+    public void add(PlanedActivity product, int period) {
 
         HashMap<String, String> hm = new HashMap<String, String>();
         hm.put("name", product.getName());
         hm.put("date", Dates.dateTimeToString(product.getDate()));
+        hm.put("period", Integer.toString(period));
         hm.put("room", product.getRoom().getName());
         hm.put("duration", product.getDuration());
         hm.put("instructor",product.getInstructor());
@@ -105,7 +106,7 @@ public class DatabaseAdapter {
     }
 
     public Classroom getClassroom(String name){
-        SQLiteDatabase db=mfidb.getReadableDatabase();
+        SQLiteDatabase db = mfidb.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String table="ROOMS";
 
