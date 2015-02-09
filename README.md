@@ -1,4 +1,4 @@
-MFISearch
+![presentation](app/src/main/res/drawable-mdpi/ic_launcher.png) MFISearch
 =========
 
 [![Stories in Ready](https://badge.waffle.io/PrzyjacielePrzyrody/MFISearch.png?label=ready&title=Ready)](http://waffle.io/PrzyjacielePrzyrody/MFISearch)
