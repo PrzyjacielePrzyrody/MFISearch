@@ -6,7 +6,7 @@
 #About
 UMCS MFI class organiser for Android 2.3.3 Gingerbread and above.
 
-![presentation](http://rszczers.abraham.linuxpl.info/animation.gif)
+![presentation](./github/animation.gif)
 
 #Documentation
 Available at https://github.com/rszczers/Diagram
